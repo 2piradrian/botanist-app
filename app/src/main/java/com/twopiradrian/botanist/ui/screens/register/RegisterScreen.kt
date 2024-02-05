@@ -1,11 +1,9 @@
 package com.twopiradrian.botanist.ui.screens.register
 
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
-import com.twopiradrian.botanist.ui.components.title.Title
+import com.twopiradrian.botanist.ui.components.title.TitleMedium
 import com.twopiradrian.botanist.ui.layout.AppLayout
 
 @Composable
@@ -19,5 +17,5 @@ fun RegisterScreen(
 
 @Composable
 fun Body(){
-    Title(text = R.string.register_title)
+    TitleMedium(text = R.string.register_title)
 }
