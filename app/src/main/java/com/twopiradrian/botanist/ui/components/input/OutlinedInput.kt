@@ -12,9 +12,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Email
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -27,10 +30,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -47,6 +52,7 @@ fun OutlinedInput(
     @StringRes placeholder: Int,
     onValueChange: (String) -> Unit,
     isLastField: Boolean = false,
+    icon: ImageVector?,
 ) {
     val keyboardOptions = KeyboardOptions(
         keyboardType = when (inputType) {
@@ -66,10 +72,14 @@ fun OutlinedInput(
     val focusManager = LocalFocusManager.current
 
     Column(
-        modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
     ) {
         Text(
-            text = stringResource(label), modifier = Modifier.padding(start = 8.dp, bottom = 4.dp)
+            text = stringResource(label),
+            modifier = Modifier.padding(start = 16.dp, bottom = 4.dp),
+            style = MaterialTheme.typography.labelLarge
         )
         TextField(
             value = state.state,
@@ -84,7 +94,21 @@ fun OutlinedInput(
                 else focusManager.moveFocus(FocusDirection.Down)
             }),
             //
-            placeholder = { Text(text = stringResource(placeholder)) },
+            placeholder = {
+                Text(
+                    text = stringResource(placeholder),
+                    style = MaterialTheme.typography.labelMedium
+                )
+            },
+            trailingIcon = {
+                if (icon != null) {
+                    Icon(
+                        icon,
+                        contentDescription = null,
+                        tint = if (state.isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary
+                    )
+                }
+            },
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = MaterialTheme.colorScheme.surface,
                 focusedIndicatorColor = Color.Transparent,
@@ -92,17 +116,22 @@ fun OutlinedInput(
                 disabledIndicatorColor = Color.Transparent,
                 cursorColor = MaterialTheme.colorScheme.primary
             ),
-            modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(16.dp)).border(
-                width = 1.dp,
-                color = if (state.isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.secondary,
-                shape = RoundedCornerShape(16.dp)
-            ).shadow(1.dp, RoundedCornerShape(10.dp)),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(22.dp))
+                .border(
+                    width = 2.dp,
+                    color = if (state.isError) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary,
+                    shape = RoundedCornerShape(22.dp)
+                )
+                .shadow(1.dp, RoundedCornerShape(22.dp)),
         )
         AnimatedVisibility(visible = state.isError) {
             Text(
                 text = if (state.isError) stringResource(state.errorState) else "",
                 color = MaterialTheme.colorScheme.error,
-                modifier = Modifier.padding(start = 8.dp)
+                modifier = Modifier.padding(start = 16.dp),
+                style = MaterialTheme.typography.labelSmall
             )
         }
     }

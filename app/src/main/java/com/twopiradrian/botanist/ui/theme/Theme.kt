@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.twopiradrian.botanist.ui.theme.LightColors.Companion.error
+import com.twopiradrian.botanist.ui.theme.LightColors.Companion.onPrimary
 import com.twopiradrian.botanist.ui.theme.LightColors.Companion.primary
 import com.twopiradrian.botanist.ui.theme.LightColors.Companion.secondary
 import com.twopiradrian.botanist.ui.theme.LightColors.Companion.tertiary
@@ -23,9 +24,10 @@ private val DarkColorScheme = darkColorScheme()
 
 private val LightColorScheme = lightColorScheme(
     primary = primary,
-    onPrimary = text,
+    onPrimary = onPrimary,
     secondary = secondary,
     tertiary = tertiary,
+    onBackground = text,
     error = error
 )
 

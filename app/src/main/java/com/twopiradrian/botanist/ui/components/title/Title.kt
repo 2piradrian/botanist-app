@@ -25,7 +25,7 @@ fun TitleMedium(
     Text(
         text = stringResource(id = text),
         style = MaterialTheme.typography.titleMedium.copy(
-            color = MaterialTheme.colorScheme.onPrimary
+            color = MaterialTheme.colorScheme.onBackground
         )
     )
 }

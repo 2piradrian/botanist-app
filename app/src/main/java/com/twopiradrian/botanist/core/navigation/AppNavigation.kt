@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.twopiradrian.botanist.ui.screens.login.LoginScreen
 import com.twopiradrian.botanist.ui.screens.register.RegisterScreen
+import com.twopiradrian.botanist.ui.screens.register.RegisterViewModel
 
 @Composable
 fun AppNavigation() {
@@ -16,7 +17,7 @@ fun AppNavigation() {
             LoginScreen()
         }
         composable(AppScreens.Register.route) {
-            RegisterScreen(navController = navController)
+            RegisterScreen(navController = navController, viewModel = RegisterViewModel())
         }
     }
 }

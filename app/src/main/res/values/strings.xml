@@ -3,4 +3,20 @@
 
     // Register Activity
     <string name="register_title">¡Creemos una cuenta!</string>
+    <string name="register_button">Registrarse</string>
+
+    // Inputs
+    <string name="email_label">Correo electrónico</string>
+    <string name="email_placeholder">rodriguezcadr@gmail.com</string>
+    <string name="username_label">Nombre de usuario</string>
+    <string name="username_placeholder">2piradrian</string>
+    <string name="password_label">Contraseña</string>
+    <string name="password_placeholder">* * * * * * * *</string>
+
+    // Validators
+    <string name="error_invalid_email">Correo electrónico inválido</string>
+    <string name="error_required_field">Campo requerido</string>
+    <string name="error_invalid_password">La contraseña debe tener al menos 8 caracteres</string>
+    <string name="error_invalid_username">Nombre de usuario inválido</string>
+
 </resources>
