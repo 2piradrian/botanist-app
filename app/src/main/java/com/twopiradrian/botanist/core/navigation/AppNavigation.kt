@@ -11,12 +11,12 @@ import com.twopiradrian.botanist.ui.screens.register.RegisterScreen
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = AppScreens.Login.route) {
+    NavHost(navController = navController, startDestination = AppScreens.Register.route) {
         composable(AppScreens.Login.route) {
             LoginScreen()
         }
         composable(AppScreens.Register.route) {
-            RegisterScreen()
+            RegisterScreen(navController = navController)
         }
     }
 }
