@@ -15,6 +15,9 @@
     <string name="login_button">Iniciar sesión</string>
     <string name="login_register">¿No tienes una cuenta?</string>
 
+    // Home Activity
+    <string name="home_title">Botanist</string>
+
     // Inputs
     <string name="email_label">Correo electrónico</string>
     <string name="email_placeholder">rodriguezcadr@gmail.com</string>

@@ -13,7 +13,7 @@ fun TitleLarge(
     Text(
         text = stringResource(id = text),
         style = MaterialTheme.typography.titleLarge.copy(
-            color = MaterialTheme.colorScheme.onPrimary
+            color = MaterialTheme.colorScheme.onBackground
         )
     )
 }

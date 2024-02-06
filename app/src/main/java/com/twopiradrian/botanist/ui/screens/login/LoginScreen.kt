@@ -37,6 +37,7 @@ fun LoginScreen(
     AppLayout(
         modifier = Modifier.widthIn(max = MAX_WIDTH),
         navController = navController,
+        adaptiveWidth = false,
         withNavigationBar = false,
     ) {
         Body(

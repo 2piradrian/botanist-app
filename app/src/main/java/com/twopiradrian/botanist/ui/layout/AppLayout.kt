@@ -42,7 +42,6 @@ fun AppLayout(
                 verticalArrangement = Arrangement.Center
             ) {
                 content()
-
             }
         }
     }
