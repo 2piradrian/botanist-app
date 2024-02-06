@@ -5,6 +5,11 @@
     <string name="register_title">¡Creemos una cuenta!</string>
     <string name="register_button">Registrarse</string>
 
+    // Login Activity
+    <string name="login_title">¡Que gusto verte!</string>
+    <string name="login_button">Iniciar sesión</string>
+    <string name="login_register">¿No tienes una cuenta?</string>
+
     // Inputs
     <string name="email_label">Correo electrónico</string>
     <string name="email_placeholder">rodriguezcadr@gmail.com</string>

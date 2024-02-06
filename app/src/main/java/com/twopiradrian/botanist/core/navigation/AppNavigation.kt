@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.twopiradrian.botanist.ui.screens.login.LoginScreen
+import com.twopiradrian.botanist.ui.screens.login.LoginViewModel
 import com.twopiradrian.botanist.ui.screens.register.RegisterScreen
 import com.twopiradrian.botanist.ui.screens.register.RegisterViewModel
 
@@ -12,9 +13,9 @@ import com.twopiradrian.botanist.ui.screens.register.RegisterViewModel
 fun AppNavigation() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = AppScreens.Register.route) {
+    NavHost(navController = navController, startDestination = AppScreens.Login.route) {
         composable(AppScreens.Login.route) {
-            LoginScreen()
+            LoginScreen(navController = navController, viewModel = LoginViewModel())
         }
         composable(AppScreens.Register.route) {
             RegisterScreen(navController = navController, viewModel = RegisterViewModel())

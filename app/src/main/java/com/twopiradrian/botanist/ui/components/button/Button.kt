@@ -13,6 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.TextButton
 
 @Composable
 fun MainButton(
@@ -36,6 +39,19 @@ fun MainButton(
             style = MaterialTheme.typography.bodyMedium.copy(
                 color = MaterialTheme.colorScheme.onPrimary
             ),
+        )
+    }
+}
+
+@Composable
+fun PlainButton(
+    modifier: Modifier = Modifier, @StringRes text: Int, onClick: () -> Unit
+) {
+    TextButton(onClick = onClick, modifier = modifier.padding(PaddingValues(vertical = 12.dp))) {
+        Text(
+            text = stringResource(id = text),
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.bodyMedium,
         )
     }
 }

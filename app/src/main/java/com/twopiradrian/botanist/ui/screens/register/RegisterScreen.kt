@@ -4,14 +4,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -23,7 +21,6 @@ import com.twopiradrian.botanist.ui.components.button.MainButton
 import com.twopiradrian.botanist.ui.components.input.InputData
 import com.twopiradrian.botanist.ui.components.input.InputType
 import com.twopiradrian.botanist.ui.components.input.OutlinedInput
-import com.twopiradrian.botanist.ui.components.input.rememberImeState
 import com.twopiradrian.botanist.ui.components.title.TitleMedium
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
@@ -33,15 +30,6 @@ fun RegisterScreen(
     navController: NavController,
     viewModel: RegisterViewModel
 ) {
-
-    val imeState = rememberImeState()
-    val scrollState = rememberScrollState()
-
-    LaunchedEffect(imeState.value) {
-        if (imeState.value) {
-            scrollState.scrollTo(scrollState.maxValue)
-        }
-    }
 
     val emailInput by viewModel.emailInput.collectAsState()
     val passwordInput by viewModel.passwordInput.collectAsState()
