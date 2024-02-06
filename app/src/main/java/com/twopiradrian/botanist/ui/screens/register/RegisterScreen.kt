@@ -3,6 +3,7 @@ package com.twopiradrian.botanist.ui.screens.register
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.core.app.Constants.Companion.MAX_WIDTH
 import com.twopiradrian.botanist.ui.components.button.MainButton
 import com.twopiradrian.botanist.ui.components.input.InputData
 import com.twopiradrian.botanist.ui.components.input.InputType
@@ -35,8 +37,8 @@ fun RegisterScreen(
     val imeState = rememberImeState()
     val scrollState = rememberScrollState()
 
-    LaunchedEffect(imeState.value){
-        if (imeState.value){
+    LaunchedEffect(imeState.value) {
+        if (imeState.value) {
             scrollState.scrollTo(scrollState.maxValue)
         }
     }
@@ -45,7 +47,10 @@ fun RegisterScreen(
     val passwordInput by viewModel.passwordInput.collectAsState()
     val usernameInput by viewModel.usernameInput.collectAsState()
 
-    AppLayout(navController = navController) {
+    AppLayout(
+        navController = navController,
+        modifier = Modifier.widthIn(max = MAX_WIDTH)
+    ) {
         Body(
             viewModel = viewModel,
             emailInput = emailInput,
