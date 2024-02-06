@@ -13,3 +13,6 @@ fun HomeScreen(
 
     }
 }
+
+@Composable
+fun Body(){}

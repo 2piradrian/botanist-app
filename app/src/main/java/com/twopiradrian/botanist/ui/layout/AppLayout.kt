@@ -18,6 +18,7 @@ fun AppLayout(
     modifier: Modifier = Modifier,
     navController: NavController,
     withNavigationBar: Boolean = true,
+    adaptiveWidth: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     Scaffold(

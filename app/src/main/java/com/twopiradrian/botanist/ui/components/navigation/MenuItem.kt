@@ -8,6 +8,7 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material3.NavigationRailItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -31,19 +32,19 @@ sealed class MenuItem(val route: String, val icon: Int, val label: Int ) {
     )
 
     data object Explore: MenuItem(
-        AppScreens.Home.route,
+        AppScreens.Login.route,
         R.drawable.ic_search,
         R.string.nav_home,
     )
 
     data object Favorites: MenuItem(
-        AppScreens.Home.route,
+        AppScreens.Login.route,
         R.drawable.ic_favorite,
         R.string.nav_home,
     )
 
     data object Settings: MenuItem(
-        AppScreens.Home.route,
+        AppScreens.Login.route,
         R.drawable.ic_account,
         R.string.nav_home,
     )
@@ -53,10 +54,14 @@ sealed class MenuItem(val route: String, val icon: Int, val label: Int ) {
 @Composable
 fun BottomNavigationBar(navController: NavController) {
     BottomNavigation(
-        modifier = Modifier.height(56.dp).clip(shape = RoundedCornerShape(
-            topStart = 22.dp,
-            topEnd = 22.dp
-        )),
+        modifier = Modifier
+            .height(56.dp)
+            .clip(
+                shape = RoundedCornerShape(
+                    topStart = 22.dp,
+                    topEnd = 22.dp
+                )
+            ),
         backgroundColor = MaterialTheme.colorScheme.primary
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -79,5 +84,35 @@ fun BottomNavigationBar(navController: NavController) {
                 },
             )
         }
+    }
+}
+
+@Composable
+fun NavigationRail(navController: NavController){
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+    val items = listOf(
+        MenuItem.Home,
+        MenuItem.Explore,
+        MenuItem.Favorites,
+        MenuItem.Settings
+    )
+    items.forEach { item ->
+       NavigationRailItem(
+           selected = currentRoute == item.route,
+           onClick = {
+               navController.navigate(item.route) {
+                   popUpTo(navController.graph.startDestinationId)
+                   launchSingleTop = true
+               }
+           },
+           icon = {
+                Icon(
+                     painterResource(id = item.icon),
+                     contentDescription = null,
+                     tint = MaterialTheme.colorScheme.onPrimary
+                )
+           }
+       )
     }
 }
