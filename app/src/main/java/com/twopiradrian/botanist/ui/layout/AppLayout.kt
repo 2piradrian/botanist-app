@@ -11,15 +11,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.twopiradrian.botanist.ui.components.navigation.BottomNavigationBar
 
 @Composable
 fun AppLayout(
     modifier: Modifier = Modifier,
     navController: NavController,
+    withNavigationBar: Boolean = true,
     content: @Composable () -> Unit,
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
+        bottomBar = {
+            if (withNavigationBar) {
+                BottomNavigationBar(navController = navController)
+            }
+        }
     ) { innerPadding ->
         Column(
             modifier = Modifier

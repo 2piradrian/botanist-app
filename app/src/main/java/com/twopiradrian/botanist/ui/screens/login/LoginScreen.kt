@@ -35,8 +35,9 @@ fun LoginScreen(
     val passwordInput by viewModel.passwordInput.collectAsState()
 
     AppLayout(
+        modifier = Modifier.widthIn(max = MAX_WIDTH),
         navController = navController,
-        modifier = Modifier.widthIn(max = MAX_WIDTH)
+        withNavigationBar = false,
     ) {
         Body(
             viewModel = viewModel,

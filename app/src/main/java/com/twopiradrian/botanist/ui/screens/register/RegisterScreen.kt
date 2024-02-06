@@ -37,7 +37,8 @@ fun RegisterScreen(
 
     AppLayout(
         navController = navController,
-        modifier = Modifier.widthIn(max = MAX_WIDTH)
+        modifier = Modifier.widthIn(max = MAX_WIDTH),
+        withNavigationBar = false,
     ) {
         Body(
             viewModel = viewModel,

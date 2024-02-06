@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Botanist</string>
 
+    // Navigation
+    <string name="nav_home">Inicio</string>
+    <string name="nav_fav">Favoritos</string>
+    <string name="nav_profile">Perfil</string>
+
     // Register Activity
     <string name="register_title">¡Creemos una cuenta!</string>
     <string name="register_button">Registrarse</string>
