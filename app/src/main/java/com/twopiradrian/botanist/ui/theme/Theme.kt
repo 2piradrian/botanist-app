@@ -17,6 +17,7 @@ import com.twopiradrian.botanist.ui.theme.LightColors.Companion.error
 import com.twopiradrian.botanist.ui.theme.LightColors.Companion.onPrimary
 import com.twopiradrian.botanist.ui.theme.LightColors.Companion.primary
 import com.twopiradrian.botanist.ui.theme.LightColors.Companion.secondary
+import com.twopiradrian.botanist.ui.theme.LightColors.Companion.surface
 import com.twopiradrian.botanist.ui.theme.LightColors.Companion.tertiary
 import com.twopiradrian.botanist.ui.theme.LightColors.Companion.text
 
@@ -27,6 +28,7 @@ private val LightColorScheme = lightColorScheme(
     onPrimary = onPrimary,
     secondary = secondary,
     tertiary = tertiary,
+    surface = surface,
     onBackground = text,
     error = error
 )

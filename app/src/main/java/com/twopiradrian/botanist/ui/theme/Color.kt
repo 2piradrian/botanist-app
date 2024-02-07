@@ -7,6 +7,7 @@ sealed class LightColors {
         val primary = HexToColor.getColor("#53A688")
         val secondary = HexToColor.getColor("#FFF6D3")
         val tertiary = HexToColor.getColor("#E9F7FF")
+        val surface = HexToColor.getColor("#F9F9F9")
         val onPrimary = HexToColor.getColor("#FFFFFF")
         val text = HexToColor.getColor("#092720")
         val error = HexToColor.getColor("#FF6D3D")
