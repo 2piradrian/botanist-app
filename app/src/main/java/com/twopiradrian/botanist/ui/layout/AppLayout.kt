@@ -25,7 +25,7 @@ fun AppLayout(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            if (withNavigationBar) {
+            if (withNavigationBar && navigationType == NavigationType.BOTTOM_NAVIGATION) {
                 BottomNavigationBar(navController = navController)
             }
         }
