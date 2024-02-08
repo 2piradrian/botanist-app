@@ -17,13 +17,13 @@ fun AppNavigation() {
 
     NavHost(navController = navController, startDestination = AppScreens.Home.route) {
         composable(AppScreens.Login.route) {
-            LoginScreen(navController = navController, viewModel = LoginViewModel())
+            LoginScreen(navController = navController)
         }
         composable(AppScreens.Register.route) {
-            RegisterScreen(navController = navController, viewModel = RegisterViewModel())
+            RegisterScreen(navController = navController)
         }
         composable(AppScreens.Home.route) {
-            HomeScreen(navController = navController, viewModel = HomeViewModel())
+            HomeScreen(navController = navController)
         }
     }
 }

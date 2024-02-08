@@ -1,13 +1,14 @@
 package com.twopiradrian.botanist.ui.screens.login
 
 import android.util.Patterns
+import androidx.lifecycle.ViewModel
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.ui.components.input.InputData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 
-class LoginViewModel {
+class LoginViewModel : ViewModel() {
     private val _emailInput = MutableStateFlow(InputData.empty())
     val emailInput: StateFlow<InputData> = _emailInput
 

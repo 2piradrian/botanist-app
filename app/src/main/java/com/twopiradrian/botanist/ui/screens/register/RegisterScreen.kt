@@ -24,11 +24,13 @@ import com.twopiradrian.botanist.ui.components.input.OutlinedInput
 import com.twopiradrian.botanist.ui.components.title.TitleMedium
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 @Composable
 fun RegisterScreen(
     navController: NavController,
-    viewModel: RegisterViewModel
+    viewModel: RegisterViewModel = viewModel()
 ) {
 
     val emailInput by viewModel.emailInput.collectAsState()
