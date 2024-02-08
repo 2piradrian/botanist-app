@@ -29,7 +29,6 @@ class MainActivity : ComponentActivity() {
                 }
 
                 AppNavigation(
-                    windowSize = windowSize.widthSizeClass,
                     navigationType = navigationType
                 )
             }

@@ -25,11 +25,13 @@ import com.twopiradrian.botanist.ui.components.title.TitleMedium
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.twopiradrian.botanist.ui.app.NavigationType
 
 @Composable
 fun LoginScreen(
     navController: NavController,
     viewModel: LoginViewModel = viewModel(),
+    navigationType: NavigationType,
 ) {
 
     val emailInput by viewModel.emailInput.collectAsState()
@@ -38,8 +40,9 @@ fun LoginScreen(
     AppLayout(
         modifier = Modifier.widthIn(max = MAX_WIDTH),
         navController = navController,
-        adaptiveWidth = false,
+        navigationType = navigationType,
         withNavigationBar = false,
+        adaptiveWidth = false,
     ) {
         Body(
             viewModel = viewModel,
@@ -47,7 +50,6 @@ fun LoginScreen(
             emailInput = emailInput,
             passwordInput = passwordInput
         )
-
     }
 }
 

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -23,7 +22,6 @@ import com.twopiradrian.botanist.ui.screens.post.PostScreen
 fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = viewModel(),
-    windowSize: WindowWidthSizeClass,
     navigationType: NavigationType,
 ) {
 
@@ -37,7 +35,8 @@ fun HomeScreen(
 
     AppLayout(
         navController = navController,
-        adaptiveWidth = true
+        navigationType = navigationType,
+        adaptiveWidth = true,
     ) {
         Body(
             isShowingHomePage = isShowingHomePage

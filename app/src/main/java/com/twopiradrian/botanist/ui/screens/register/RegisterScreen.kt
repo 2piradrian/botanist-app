@@ -25,12 +25,14 @@ import com.twopiradrian.botanist.ui.components.title.TitleMedium
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.twopiradrian.botanist.ui.app.NavigationType
 
 
 @Composable
 fun RegisterScreen(
     navController: NavController,
-    viewModel: RegisterViewModel = viewModel()
+    viewModel: RegisterViewModel = viewModel(),
+    navigationType: NavigationType
 ) {
 
     val emailInput by viewModel.emailInput.collectAsState()
@@ -38,10 +40,11 @@ fun RegisterScreen(
     val usernameInput by viewModel.usernameInput.collectAsState()
 
     AppLayout(
-        navController = navController,
         modifier = Modifier.widthIn(max = MAX_WIDTH),
-        adaptiveWidth = false,
+        navController = navController,
+        navigationType = navigationType,
         withNavigationBar = false,
+        adaptiveWidth = false,
     ) {
         Body(
             viewModel = viewModel,
