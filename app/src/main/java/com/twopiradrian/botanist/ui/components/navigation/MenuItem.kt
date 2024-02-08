@@ -6,7 +6,9 @@ import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.NavigationRailItemColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -31,19 +33,19 @@ sealed class MenuItem(val route: String, val icon: Int, val label: Int ) {
     data object Explore: MenuItem(
         AppScreens.Login.route,
         R.drawable.ic_search,
-        R.string.nav_home,
+        R.string.nav_explore,
     )
 
     data object Favorites: MenuItem(
         AppScreens.Login.route,
         R.drawable.ic_favorite,
-        R.string.nav_home,
+        R.string.nav_fav,
     )
 
     data object Settings: MenuItem(
         AppScreens.Login.route,
         R.drawable.ic_account,
-        R.string.nav_home,
+        R.string.nav_profile
     )
 
 }
@@ -85,31 +87,42 @@ fun BottomNavigationBar(navController: NavController) {
 }
 
 @Composable
-fun NavigationRail(navController: NavController){
+fun StartNavigationRail(navController: NavController){
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
-    val items = listOf(
-        MenuItem.Home,
-        MenuItem.Explore,
-        MenuItem.Favorites,
-        MenuItem.Settings
-    )
-    items.forEach { item ->
-       NavigationRailItem(
-           selected = currentRoute == item.route,
-           onClick = {
-               navController.navigate(item.route) {
-                   popUpTo(navController.graph.startDestinationId)
-                   launchSingleTop = true
-               }
-           },
-           icon = {
-                Icon(
-                     painterResource(id = item.icon),
-                     contentDescription = null,
-                     tint = MaterialTheme.colorScheme.onPrimary
-                )
-           }
-       )
+
+    NavigationRail(
+        modifier = Modifier,
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
+    ) {
+        MenuItem.items.forEach { item ->
+            NavigationRailItem(
+                selected = currentRoute == item.route,
+                colors = NavigationRailItemColors(
+                    selectedIndicatorColor = MaterialTheme.colorScheme.onPrimary,
+                    disabledIconColor = MaterialTheme.colorScheme.onPrimary,
+                    disabledTextColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    selectedIconColor = MaterialTheme.colorScheme.onBackground,
+                    selectedTextColor = MaterialTheme.colorScheme.onBackground,
+                ),
+                onClick = {
+                    navController.navigate(item.route) {
+                        popUpTo(navController.graph.startDestinationId)
+                        launchSingleTop = true
+                    }
+                },
+                icon = {
+                    Icon(
+                        painterResource(id = item.icon),
+                        contentDescription = null,
+                        tint = if (currentRoute == item.route) MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.onPrimary
+                    )
+                },
+
+            )
+        }
     }
 }

@@ -3,6 +3,7 @@
 
     // Navigation
     <string name="nav_home">Inicio</string>
+    <string name="nav_explore">Explorar</string>
     <string name="nav_fav">Favoritos</string>
     <string name="nav_profile">Perfil</string>
 
