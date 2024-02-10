@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.ui.app.NavigationType
-import com.twopiradrian.botanist.ui.components.navigation.BottomNavigationBar
-import com.twopiradrian.botanist.ui.components.navigation.StartNavigationRail
+import com.twopiradrian.botanist.ui.components.navigation.AppNavigationBar
+import com.twopiradrian.botanist.ui.components.navigation.AppNavigationRail
 
 @Composable
 fun AppLayout(
@@ -29,7 +29,7 @@ fun AppLayout(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             if (withNavigationBar && navigationType == NavigationType.BOTTOM_NAVIGATION) {
-                BottomNavigationBar(navController = navController)
+                AppNavigationBar(navController = navController)
             }
         },
     ) { innerPadding ->
@@ -89,7 +89,7 @@ fun ContentInRow(
         verticalAlignment = Alignment.CenterVertically
     ) {
         if(withNavigationBar && navigationType == NavigationType.NAVIGATION_RAIL){
-            StartNavigationRail(navController = navController)
+            AppNavigationRail(navController = navController)
         }
         Row(
             modifier = Modifier

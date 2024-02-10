@@ -2,10 +2,11 @@ package com.twopiradrian.botanist.ui.components.navigation
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemColors
@@ -51,23 +52,17 @@ sealed class MenuItem(val route: String, val icon: Int, val label: Int ) {
 }
 
 @Composable
-fun BottomNavigationBar(navController: NavController) {
-    BottomNavigation(
+fun AppNavigationBar(navController: NavController) {
+    NavigationBar(
         modifier = Modifier
-            .height(56.dp)
-            .clip(
-                shape = RoundedCornerShape(
-                    topStart = 22.dp,
-                    topEnd = 22.dp
-                )
-            ),
-        backgroundColor = MaterialTheme.colorScheme.primary,
+            .height(56.dp),
+        containerColor = MaterialTheme.colorScheme.primary,
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
         MenuItem.items.forEach { item ->
-            BottomNavigationItem(
+            NavigationBarItem(
                 selected = currentRoute == item.route,
                 onClick = {
                     navController.navigate(item.route) {
@@ -79,15 +74,25 @@ fun BottomNavigationBar(navController: NavController) {
                     Icon(
                         painterResource(id = item.icon),
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onPrimary)
+                        tint = if (currentRoute == item.route) MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.onPrimary
+                    )
                 },
+                colors = NavigationBarItemColors(
+                    selectedIndicatorColor = MaterialTheme.colorScheme.onPrimary,
+                    disabledIconColor = MaterialTheme.colorScheme.onPrimary,
+                    disabledTextColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    selectedIconColor = MaterialTheme.colorScheme.onBackground,
+                    selectedTextColor = MaterialTheme.colorScheme.onBackground,
+                )
             )
         }
     }
 }
 
 @Composable
-fun StartNavigationRail(navController: NavController){
+fun AppNavigationRail(navController: NavController){
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
