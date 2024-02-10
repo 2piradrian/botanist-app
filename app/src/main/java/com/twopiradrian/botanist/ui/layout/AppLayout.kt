@@ -15,6 +15,7 @@ import androidx.navigation.NavController
 import com.twopiradrian.botanist.ui.app.NavigationType
 import com.twopiradrian.botanist.ui.components.navigation.AppNavigationBar
 import com.twopiradrian.botanist.ui.components.navigation.AppNavigationRail
+import com.twopiradrian.botanist.ui.components.navigation.AppPermanentNavigation
 
 @Composable
 fun AppLayout(
@@ -90,16 +91,18 @@ fun ContentInRow(
     ) {
         if(withNavigationBar && navigationType == NavigationType.NAVIGATION_RAIL){
             AppNavigationRail(navController = navController)
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(
-                    horizontal = if (navigationType == NavigationType.NAVIGATION_RAIL) 42.dp else 16.dp,
-                    vertical = 0.dp
-                ),
-        ) {
-            content()
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(
+                        horizontal = 42.dp,
+                        vertical = 0.dp
+                    ),
+            ) {
+                content()
+            }
+        }else if(withNavigationBar && navigationType == NavigationType.PERMANENT_NAVIGATION_DRAWER){
+            AppPermanentNavigation(navController = navController, content = content)
         }
     }
 }

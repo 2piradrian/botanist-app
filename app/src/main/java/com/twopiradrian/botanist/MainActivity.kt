@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                 val navigationType = when(windowSize.widthSizeClass){
                     WindowWidthSizeClass.Compact -> NavigationType.BOTTOM_NAVIGATION
                     WindowWidthSizeClass.Medium -> NavigationType.NAVIGATION_RAIL
-                    WindowWidthSizeClass.Expanded -> NavigationType.NAVIGATION_RAIL
+                    WindowWidthSizeClass.Expanded -> NavigationType.PERMANENT_NAVIGATION_DRAWER
                     else -> NavigationType.BOTTOM_NAVIGATION
                 }
 

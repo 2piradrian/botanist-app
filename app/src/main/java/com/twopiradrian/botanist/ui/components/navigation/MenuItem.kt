@@ -1,6 +1,7 @@
 package com.twopiradrian.botanist.ui.components.navigation
 
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -8,14 +9,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemColors
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemColors
+import androidx.compose.material3.PermanentDrawerSheet
+import androidx.compose.material3.PermanentNavigationDrawer
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -130,5 +138,58 @@ fun AppNavigationRail(navController: NavController){
 
             )
         }
+    }
+}
+
+@Composable
+fun AppPermanentNavigation(
+    navController: NavController,
+    content: @Composable () -> Unit
+){
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    PermanentNavigationDrawer(
+        drawerContent = {
+            PermanentDrawerSheet(
+                modifier = Modifier.padding(12.dp).width(240.dp).clip(RoundedCornerShape(12.dp)),
+                drawerContainerColor = MaterialTheme.colorScheme.primary,
+            ) {
+                MenuItem.items.forEach { item ->
+                    NavigationDrawerItem(
+                        modifier = Modifier.padding(12.dp),
+                        label = {
+                            Text(stringResource(id = item.label))
+                                },
+                        selected = currentRoute == item.route,
+                        onClick = {
+                            navController.navigate(item.route) {
+                                popUpTo(navController.graph.startDestinationId)
+                                launchSingleTop = true
+                            }
+                        },
+                        colors = NavigationDrawerItemDefaults.colors(
+                            unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                            unselectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                            selectedIconColor = MaterialTheme.colorScheme.onBackground,
+                            selectedTextColor = MaterialTheme.colorScheme.onBackground,
+                            unselectedContainerColor = MaterialTheme.colorScheme.primary,
+                            unselectedBadgeColor = MaterialTheme.colorScheme.onPrimary,
+                            selectedContainerColor = MaterialTheme.colorScheme.onPrimary,
+                            selectedBadgeColor = MaterialTheme.colorScheme.onPrimary,
+                        ),
+                        icon = {
+                            Icon(
+                                painterResource(id = item.icon),
+                                contentDescription = null,
+                                tint = if (currentRoute == item.route) MaterialTheme.colorScheme.onBackground else MaterialTheme.colorScheme.onPrimary
+                            )
+                        },
+                    )
+                }
+            }
+        }
+    ) {
+        content()
     }
 }
