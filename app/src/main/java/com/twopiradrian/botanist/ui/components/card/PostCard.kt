@@ -34,7 +34,9 @@ import coil.compose.AsyncImage
 import com.twopiradrian.botanist.R
 
 @Composable
-fun PostCard() {
+fun PostCard(
+    onClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .widthIn(max = 400.dp)
@@ -47,6 +49,9 @@ fun PostCard() {
         elevation = CardDefaults.cardElevation(
             defaultElevation = 1.dp
         ),
+        onClick = {
+            onClick()
+        }
     ) {
         CardHeader()
         CardContent()

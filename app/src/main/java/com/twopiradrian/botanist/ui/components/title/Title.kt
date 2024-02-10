@@ -8,14 +8,24 @@ import androidx.compose.ui.res.stringResource
 
 @Composable
 fun TitleLarge(
-    @StringRes text: Int
+    @StringRes textId: Int? = null,
+    text: String? = null
 ) {
-    Text(
-        text = stringResource(id = text),
-        style = MaterialTheme.typography.titleLarge.copy(
-            color = MaterialTheme.colorScheme.onBackground
+    if (text != null) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.titleLarge.copy(
+                color = MaterialTheme.colorScheme.onBackground
+            )
         )
-    )
+    } else {
+        Text(
+            text = stringResource(id = textId ?: 0),
+            style = MaterialTheme.typography.titleLarge.copy(
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        )
+    }
 }
 
 @Composable

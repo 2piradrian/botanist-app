@@ -44,7 +44,8 @@ fun HomeScreen(
     ){
         Body(
             isShowingHomePage = isShowingHomePage,
-            contentType = contentType
+            contentType = contentType,
+            viewModel = viewModel
         )
     }
 }
@@ -52,27 +53,33 @@ fun HomeScreen(
 @Composable
 fun Body(
     isShowingHomePage: Boolean,
-    contentType: ContentType
+    contentType: ContentType,
+    viewModel: HomeViewModel
 ) {
     if (contentType == ContentType.LIST_ONLY) {
         if(isShowingHomePage) {
-            HomeList()
+            HomeList(
+                viewModel = viewModel
+            )
         } else {
-            PostScreen()
+            PostScreen(
+                viewModel = viewModel
+            )
         }
     } else if (contentType == ContentType.LIST_WITH_DETAILS) {
         Row(
             modifier = Modifier.fillMaxSize(),
         ) {
-            HomeList(modifier = Modifier.weight(1f))
-            PostScreen(modifier = Modifier.weight(1f))
+            HomeList(modifier = Modifier.weight(1f), viewModel = viewModel)
+            PostScreen(modifier = Modifier.weight(1f), viewModel = viewModel)
         }
     }
 }
 
 @Composable
 fun HomeList(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel,
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -85,10 +92,14 @@ fun HomeList(
             verticalArrangement = Arrangement.Top
         ) {
             item{
-                TitleLarge(text = R.string.home_title)
-                PostCard()
-                PostCard()
-                PostCard()
+                TitleLarge(textId = R.string.home_title)
+                repeat(10){
+                    PostCard(
+                        onClick = {
+                            viewModel.setIsShowingHomePage(false)
+                        }
+                    )
+                }
             }
         }
     }
