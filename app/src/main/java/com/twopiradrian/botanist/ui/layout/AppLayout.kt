@@ -23,7 +23,6 @@ fun AppLayout(
     modifier: Modifier = Modifier,
     navController: NavController,
     navigationType: NavigationType,
-    contentType: ContentType,
     withNavigationBar: Boolean = true,
     content: @Composable () -> Unit,
 ) {

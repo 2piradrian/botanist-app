@@ -34,7 +34,6 @@ fun RegisterScreen(
     navController: NavController,
     viewModel: RegisterViewModel = viewModel(),
     navigationType: NavigationType,
-    contentType: ContentType
 ) {
 
     val emailInput by viewModel.emailInput.collectAsState()
@@ -45,7 +44,6 @@ fun RegisterScreen(
         modifier = Modifier.widthIn(max = MAX_WIDTH),
         navController = navController,
         navigationType = navigationType,
-        contentType = contentType,
         withNavigationBar = false,
     ) {
         Body(

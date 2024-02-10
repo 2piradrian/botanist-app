@@ -41,7 +41,6 @@ fun HomeScreen(
     AppLayout(
         navController = navController,
         navigationType = navigationType,
-        contentType = contentType,
     ){
         Body(
             isShowingHomePage = isShowingHomePage,

@@ -22,14 +22,12 @@ fun AppNavigation(
             LoginScreen(
                 navController = navController,
                 navigationType = navigationType,
-                contentType = contentType
             )
         }
         composable(AppScreens.Register.route) {
             RegisterScreen(
                 navController = navController,
                 navigationType = navigationType,
-                contentType = contentType,
             )
         }
         composable(AppScreens.Home.route) {

@@ -33,7 +33,6 @@ fun LoginScreen(
     navController: NavController,
     viewModel: LoginViewModel = viewModel(),
     navigationType: NavigationType,
-    contentType: ContentType,
 ) {
 
     val emailInput by viewModel.emailInput.collectAsState()
@@ -43,7 +42,6 @@ fun LoginScreen(
         modifier = Modifier.widthIn(max = MAX_WIDTH),
         navController = navController,
         navigationType = navigationType,
-        contentType = contentType,
         withNavigationBar = false,
     ) {
         Body(
