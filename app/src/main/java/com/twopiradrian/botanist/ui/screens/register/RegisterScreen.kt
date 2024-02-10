@@ -8,7 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -25,6 +25,7 @@ import com.twopiradrian.botanist.ui.components.title.TitleMedium
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
 
 
@@ -32,7 +33,8 @@ import com.twopiradrian.botanist.ui.app.NavigationType
 fun RegisterScreen(
     navController: NavController,
     viewModel: RegisterViewModel = viewModel(),
-    navigationType: NavigationType
+    navigationType: NavigationType,
+    contentType: ContentType
 ) {
 
     val emailInput by viewModel.emailInput.collectAsState()
@@ -43,8 +45,8 @@ fun RegisterScreen(
         modifier = Modifier.widthIn(max = MAX_WIDTH),
         navController = navController,
         navigationType = navigationType,
+        contentType = contentType,
         withNavigationBar = false,
-        adaptiveWidth = false,
     ) {
         Body(
             viewModel = viewModel,
@@ -66,7 +68,7 @@ fun Body(
         modifier = Modifier.fillMaxSize(),
     ) {
         TitleMedium(text = R.string.register_title)
-        Divider(
+        HorizontalDivider(
             modifier = Modifier.padding(20.dp)
         )
         OutlinedInput(

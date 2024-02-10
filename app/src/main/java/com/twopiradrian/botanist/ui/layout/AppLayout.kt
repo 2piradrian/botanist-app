@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
 import com.twopiradrian.botanist.ui.components.navigation.AppNavigationBar
 import com.twopiradrian.botanist.ui.components.navigation.AppNavigationRail
@@ -22,8 +23,8 @@ fun AppLayout(
     modifier: Modifier = Modifier,
     navController: NavController,
     navigationType: NavigationType,
+    contentType: ContentType,
     withNavigationBar: Boolean = true,
-    adaptiveWidth: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     Scaffold(
@@ -91,13 +92,10 @@ fun ContentInRow(
     ) {
         if(withNavigationBar && navigationType == NavigationType.NAVIGATION_RAIL){
             AppNavigationRail(navController = navController)
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(
-                        horizontal = 42.dp,
-                        vertical = 0.dp
-                    ),
+            Column(
+                modifier = Modifier.fillMaxSize().padding(horizontal = 42.dp, vertical = 0.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
                 content()
             }

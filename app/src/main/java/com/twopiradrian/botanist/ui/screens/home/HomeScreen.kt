@@ -2,6 +2,9 @@ package com.twopiradrian.botanist.ui.screens.home
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
 import com.twopiradrian.botanist.ui.components.card.PostCard
 import com.twopiradrian.botanist.ui.components.title.TitleLarge
@@ -23,6 +27,7 @@ fun HomeScreen(
     navController: NavController,
     viewModel: HomeViewModel = viewModel(),
     navigationType: NavigationType,
+    contentType: ContentType,
 ) {
 
     val isShowingHomePage by viewModel.isShowingHomePage.collectAsState()
@@ -36,35 +41,55 @@ fun HomeScreen(
     AppLayout(
         navController = navController,
         navigationType = navigationType,
-        adaptiveWidth = true,
-    ) {
+        contentType = contentType,
+    ){
         Body(
-            isShowingHomePage = isShowingHomePage
+            isShowingHomePage = isShowingHomePage,
+            contentType = contentType
         )
     }
 }
 
 @Composable
 fun Body(
-    isShowingHomePage: Boolean
+    isShowingHomePage: Boolean,
+    contentType: ContentType
 ) {
-    LazyColumn(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.Start,
-        verticalArrangement = Arrangement.Top
+    if (contentType == ContentType.LIST_ONLY) {
+        if(isShowingHomePage) {
+            HomeList()
+        } else {
+            PostScreen()
+        }
+    } else if (contentType == ContentType.LIST_WITH_DETAILS) {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            HomeList(modifier = Modifier.weight(1f))
+            PostScreen(modifier = Modifier.weight(1f))
+        }
+    }
+}
+
+@Composable
+fun HomeList(
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        if (isShowingHomePage) {
+        LazyColumn(
+            modifier = modifier.fillMaxHeight(),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.Top
+        ) {
             item{
                 TitleLarge(text = R.string.home_title)
                 PostCard()
                 PostCard()
                 PostCard()
-            }
-        }else{
-            item{
-                PostScreen(
-
-                )
             }
         }
     }

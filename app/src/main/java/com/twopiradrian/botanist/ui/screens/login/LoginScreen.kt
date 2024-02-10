@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -25,6 +25,7 @@ import com.twopiradrian.botanist.ui.components.title.TitleMedium
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
 
 @Composable
@@ -32,6 +33,7 @@ fun LoginScreen(
     navController: NavController,
     viewModel: LoginViewModel = viewModel(),
     navigationType: NavigationType,
+    contentType: ContentType,
 ) {
 
     val emailInput by viewModel.emailInput.collectAsState()
@@ -41,8 +43,8 @@ fun LoginScreen(
         modifier = Modifier.widthIn(max = MAX_WIDTH),
         navController = navController,
         navigationType = navigationType,
+        contentType = contentType,
         withNavigationBar = false,
-        adaptiveWidth = false,
     ) {
         Body(
             viewModel = viewModel,
@@ -62,7 +64,7 @@ fun Body(
 ) {
     FormLayout {
         TitleMedium(text = R.string.login_title)
-        Divider(
+        HorizontalDivider(
             modifier = Modifier.padding(20.dp)
         )
         OutlinedInput(
