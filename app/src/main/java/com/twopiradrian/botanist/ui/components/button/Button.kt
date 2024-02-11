@@ -47,7 +47,7 @@ fun MainButton(
 fun PlainButton(
     modifier: Modifier = Modifier, @StringRes text: Int, onClick: () -> Unit
 ) {
-    TextButton(onClick = onClick, modifier = modifier.padding(PaddingValues(vertical = 12.dp))) {
+    TextButton(onClick = onClick, modifier = modifier.padding(PaddingValues(vertical = 12.dp, horizontal = 0.dp))) {
         Text(
             text = stringResource(id = text),
             color = MaterialTheme.colorScheme.primary,

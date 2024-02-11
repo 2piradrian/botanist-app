@@ -20,7 +20,7 @@ val Typography = Typography(
                 fontFamily = jost,
                 fontWeight = FontWeight.Bold,
                 fontSize = 42.sp,
-                lineHeight = 24.sp,
+                lineHeight = 42.sp,
                 letterSpacing = 0.5.sp,
         ),
         titleMedium = TextStyle(
@@ -30,10 +30,24 @@ val Typography = Typography(
                 lineHeight = 24.sp,
                 letterSpacing = 0.5.sp,
         ),
+        bodyLarge = TextStyle(
+                fontFamily = jost,
+                fontWeight = FontWeight.Medium,
+                fontSize = 24.sp,
+                lineHeight = 24.sp,
+                letterSpacing = 0.15.sp,
+        ),
         bodyMedium = TextStyle(
                 fontFamily = jost,
                 fontWeight = FontWeight.Medium,
                 fontSize = 18.sp,
+                lineHeight = 24.sp,
+                letterSpacing = 0.15.sp,
+        ),
+        bodySmall = TextStyle(
+                fontFamily = jost,
+                fontWeight = FontWeight.Medium,
+                fontSize = 14.sp,
                 lineHeight = 24.sp,
                 letterSpacing = 0.15.sp,
         ),

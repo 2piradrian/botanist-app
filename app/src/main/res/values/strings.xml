@@ -19,6 +19,12 @@
     // Home Activity
     <string name="home_title">Botanist</string>
 
+    // Post Activity
+    <string name="post_like">Me gusta</string>
+    <string name="post_unlike">Ya no me gusta</string>
+    <string name="post_follow">Seguir</string>
+    <string name="post_unfollow">Dejar de seguir</string>
+
     // Inputs
     <string name="email_label">Correo electrónico</string>
     <string name="email_placeholder">rodriguezcadr@gmail.com</string>

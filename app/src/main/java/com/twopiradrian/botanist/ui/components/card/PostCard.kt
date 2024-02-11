@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,9 +63,9 @@ fun PostCard(
 fun CardHeader() {
     Row(
         modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp, 16.dp, 16.dp, 0.dp)
-                .height(20.dp),
+            .fillMaxWidth()
+            .padding(16.dp, 16.dp, 16.dp, 0.dp)
+            .height(20.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start
     ){
@@ -76,15 +77,24 @@ fun CardHeader() {
         Spacer(modifier = Modifier.width(8.dp))
         Text(
             text = "carlitos jimenez",
-            modifier = Modifier.fillMaxHeight(),
-            style = TextStyle(
-                textAlign = TextAlign.Center,
-                fontWeight = FontWeight.SemiBold
-            )
+            style = MaterialTheme.typography.bodySmall
         )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = "•",
+            style = MaterialTheme.typography.bodySmall
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = "20 min ago",
+            style = MaterialTheme.typography.bodySmall
+        )
+
     }
     Divider(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 8.dp),
     )
 }
 
@@ -92,18 +102,15 @@ fun CardHeader() {
 fun CardContent(){
     Column(
         modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp, 0.dp, 16.dp, 16.dp),
+            .fillMaxSize()
+            .padding(16.dp, 0.dp, 16.dp, 16.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
         Text(
             text = "This is a post",
             modifier = Modifier.fillMaxWidth(),
-            style = TextStyle(
-                textAlign = TextAlign.Start,
-                fontSize = 22.sp,
-            ),
+            style = MaterialTheme.typography.bodyLarge,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
@@ -111,10 +118,7 @@ fun CardContent(){
         Text(
             text = "This is a very very very very very very very very very very very long description...",
             modifier = Modifier.fillMaxWidth(),
-            style = TextStyle(
-                textAlign = TextAlign.Start,
-                fontSize = 16.sp,
-            ),
+            style = MaterialTheme.typography.bodyMedium,
             maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
@@ -123,8 +127,8 @@ fun CardContent(){
             model = "https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg",
             contentDescription = null,
             modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(8.dp)),
+                .fillMaxSize()
+                .clip(RoundedCornerShape(8.dp)),
             contentScale = ContentScale.Crop,
         )
     }
