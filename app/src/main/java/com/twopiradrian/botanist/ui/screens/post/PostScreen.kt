@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.twopiradrian.botanist.R
@@ -60,7 +61,7 @@ fun Body(){
             modifier = Modifier.height(12.dp)
         )
         Text(
-            text = "This is a very very very very very very very very very very very long description...",
+            text = LoremIpsum(20).values.joinToString(" "),
             modifier = Modifier.fillMaxWidth(),
             style = MaterialTheme.typography.bodyMedium,
         )
@@ -79,7 +80,7 @@ fun Body(){
             modifier = Modifier.height(12.dp)
         )
         Text(
-            text = "This is a content",
+            text = LoremIpsum(200).values.joinToString(" "),
             style = MaterialTheme.typography.bodyMedium
         )
         PostFooter()

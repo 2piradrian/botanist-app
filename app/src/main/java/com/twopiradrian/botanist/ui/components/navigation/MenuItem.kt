@@ -152,7 +152,7 @@ fun AppPermanentNavigation(
     PermanentNavigationDrawer(
         drawerContent = {
             PermanentDrawerSheet(
-                modifier = Modifier.padding(12.dp).width(240.dp).clip(RoundedCornerShape(12.dp)),
+                modifier = Modifier.padding(vertical = 12.dp).width(240.dp).clip(RoundedCornerShape(12.dp)),
                 drawerContainerColor = MaterialTheme.colorScheme.primary,
             ) {
                 MenuItem.items.forEach { item ->

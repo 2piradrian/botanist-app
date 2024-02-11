@@ -35,8 +35,7 @@ fun AppLayout(
         },
     ) { innerPadding ->
         Column(
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -92,14 +91,22 @@ fun ContentInRow(
         if(withNavigationBar && navigationType == NavigationType.NAVIGATION_RAIL){
             AppNavigationRail(navController = navController)
             Column(
-                modifier = Modifier.fillMaxSize().padding(horizontal = 42.dp, vertical = 0.dp),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 42.dp, vertical = 0.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
                 content()
             }
         }else if(withNavigationBar && navigationType == NavigationType.PERMANENT_NAVIGATION_DRAWER){
-            AppPermanentNavigation(navController = navController, content = content)
+            Column(
+                modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp, vertical = 0.dp),
+            ) {
+                AppPermanentNavigation(
+                    navController = navController, content = content
+                )
+            }
         }
     }
 }
