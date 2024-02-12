@@ -2,11 +2,14 @@ package com.twopiradrian.botanist.ui.screens.register
 
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.domain.usecase.user.Register
 import com.twopiradrian.botanist.ui.components.input.InputData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class RegisterViewModel : ViewModel() {
 
@@ -24,6 +27,42 @@ class RegisterViewModel : ViewModel() {
 
     private val _error = MutableStateFlow(0)
     val error: StateFlow<Int> = _error
+
+    private val _userRegistered = MutableStateFlow(false)
+    val userRegistered: StateFlow<Boolean> = _userRegistered
+
+    fun changeErrorState() {
+        _error.value = 0
+    }
+
+    fun registerUser(
+        email: String, password: String, username: String
+    ) {
+        viewModelScope.launch {
+            val result = try {
+                val request = Register.Request(email, password, username)
+                Register().invoke(request)
+            }
+            catch (e: Exception) {
+                null
+            }
+
+            result?.response?.let {
+                _error.value = 0
+                _userRegistered.value = true
+                return@launch
+            }
+
+            result?.error?.let {
+                _error.value = it
+                _userRegistered.value = false
+                return@launch
+            }
+
+            _error.value = R.string.server_error
+            _userRegistered.value = false
+        }
+    }
 
     fun onRegisterChange(
         email: String, password: String, username: String
@@ -106,6 +145,5 @@ class RegisterViewModel : ViewModel() {
     private fun enableRegisterButton(email: String, password: String, username: String): Boolean {
         return isEmailValid(email) && isPasswordValid(password) && isUsernameValid(username)
     }
-
 
 }

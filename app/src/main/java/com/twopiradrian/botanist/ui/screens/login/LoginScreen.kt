@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.login
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
@@ -8,9 +9,11 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
@@ -34,9 +37,27 @@ fun LoginScreen(
     viewModel: LoginViewModel = viewModel(),
     navigationType: NavigationType,
 ) {
+    val context = LocalContext.current
 
     val emailInput by viewModel.emailInput.collectAsState()
     val passwordInput by viewModel.passwordInput.collectAsState()
+
+    val error by viewModel.error.collectAsState()
+    val userLogged by viewModel.userLogged.collectAsState()
+
+    LaunchedEffect(userLogged) {
+        if (userLogged) {
+            Toast.makeText(context, context.getString(R.string.login_success), Toast.LENGTH_LONG).show()
+            navController.navigate(AppScreens.Home.route)
+        }
+    }
+
+    LaunchedEffect(error) {
+        if (error != 0) {
+            Toast.makeText(context, context.getString(error), Toast.LENGTH_LONG).show()
+        }
+        viewModel.changeErrorState()
+    }
 
     AppLayout(
         modifier = Modifier.widthIn(max = MAX_WIDTH),

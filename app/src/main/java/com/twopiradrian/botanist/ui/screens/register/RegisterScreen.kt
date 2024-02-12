@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.register
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -10,9 +11,11 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
@@ -25,6 +28,7 @@ import com.twopiradrian.botanist.ui.components.title.TitleMedium
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.twopiradrian.botanist.core.navigation.AppScreens
 import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
 
@@ -35,10 +39,28 @@ fun RegisterScreen(
     viewModel: RegisterViewModel = viewModel(),
     navigationType: NavigationType,
 ) {
+    val context = LocalContext.current
 
     val emailInput by viewModel.emailInput.collectAsState()
     val passwordInput by viewModel.passwordInput.collectAsState()
     val usernameInput by viewModel.usernameInput.collectAsState()
+
+    val error by viewModel.error.collectAsState()
+    val userRegistered by viewModel.userRegistered.collectAsState()
+
+    LaunchedEffect(userRegistered) {
+        if (userRegistered) {
+            Toast.makeText(context, context.getString(R.string.register_success), Toast.LENGTH_LONG).show()
+            navController.navigate(AppScreens.Login.route)
+        }
+    }
+
+    LaunchedEffect(error) {
+        if (error != 0) {
+            Toast.makeText(context, context.getString(error), Toast.LENGTH_LONG).show()
+        }
+        viewModel.changeErrorState()
+    }
 
     AppLayout(
         modifier = Modifier.widthIn(max = MAX_WIDTH),
@@ -97,7 +119,9 @@ fun Body(
             icon = Icons.Default.Lock
         )
         Spacer(modifier = Modifier.padding(12.dp))
-        MainButton(isEnabled = true, text = R.string.register_button, onClick = {  })
+        MainButton(isEnabled = true, text = R.string.register_button, onClick = {
+            viewModel.registerUser(emailInput.state, passwordInput.state, usernameInput.state)
+        })
     }
 
 }

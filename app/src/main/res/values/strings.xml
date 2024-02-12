@@ -10,11 +10,13 @@
     // Register Activity
     <string name="register_title">¡Creemos una cuenta!</string>
     <string name="register_button">Registrarse</string>
+    <string name="register_success">Registro exitoso</string>
 
     // Login Activity
     <string name="login_title">¡Que gusto verte!</string>
     <string name="login_button">Iniciar sesión</string>
     <string name="login_register">¿No tienes una cuenta?</string>
+    <string name="login_success">¡Hola de nuevo!</string>
 
     // Home Activity
     <string name="home_title">Botanist</string>
@@ -24,6 +26,12 @@
     <string name="post_unlike">Ya no me gusta</string>
     <string name="post_follow">Seguir</string>
     <string name="post_unfollow">Dejar de seguir</string>
+
+    // Api Errors
+    <string name="server_error">Vuelve a intentarlo más tarde</string>
+    <string name="network_error">No se pudo conectar al servidor</string>
+    <string name="user_not_found">Usuario no encontrado</string>
+    <string name="user_already_exists">El usuario ya existe</string>
 
     // Inputs
     <string name="email_label">Correo electrónico</string>
