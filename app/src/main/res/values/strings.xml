@@ -34,6 +34,13 @@
 
     // Write Activity
     <string name="write_title">Escribir un post</string>
+    <string name="write_post_title">Título</string>
+    <string name="write_post_category">Categoria</string>
+    <string name="write_post_description">Descripción</string>
+    <string name="write_post_content">Contenido</string>
+    <string name="write_post_image">Imagen</string>
+    <string name="write_post_image_button">Seleccionar imagen</string>
+    <string name="write_post_button">Publicar</string>
 
     // Categories
     <string name="category_tools">Herramientas</string>

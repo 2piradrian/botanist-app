@@ -5,8 +5,10 @@ import androidx.compose.ui.graphics.Color
 sealed class LightColors {
     companion object {
         val primary = HexToColor.getColor("#53A688")
-        val secondary = HexToColor.getColor("#FFF6D3")
-        val tertiary = HexToColor.getColor("#E9F7FF")
+        val secondary = HexToColor.getColor("#a66e53")
+        val tertiary = HexToColor.getColor("#744d3a")
+        val alternative1 = HexToColor.getColor("#5a62a6")
+        val alternative2 = HexToColor.getColor("#3f4574")
         val surface = HexToColor.getColor("#F9F9F9")
         val onPrimary = HexToColor.getColor("#FFFFFF")
         val text = HexToColor.getColor("#092720")
