@@ -26,6 +26,7 @@
     <string name="post_unlike">Ya no me gusta</string>
     <string name="post_follow">Seguir</string>
     <string name="post_unfollow">Dejar de seguir</string>
+    <string name="post_category">Categoria:</string>
 
     // Explore Activity
     <string name="explore_title">Explorar</string>

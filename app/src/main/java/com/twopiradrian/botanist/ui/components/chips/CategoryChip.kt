@@ -17,13 +17,7 @@ fun CategoryFilterChip (
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
     @StringRes textId: Int,
-){
-    //SuggestionChip(
-    //    modifier = modifier,
-    //    onClick = { onClick() },
-    //    label = { Text(text = stringResource(id = textId)) },
-    //)
-
+) {
     var selected by remember { mutableStateOf(false) }
 
     FilterChip(
@@ -33,19 +27,6 @@ fun CategoryFilterChip (
             onClick()
             selected = !selected
         },
-        label = { Text(text = stringResource(id = textId)) },
-    )
-}
-
-@Composable
-fun CategoryChip(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit = {},
-    @StringRes textId: Int,
-){
-    SuggestionChip(
-        modifier = modifier,
-        onClick = { onClick() },
         label = { Text(text = stringResource(id = textId)) },
     )
 }

@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -92,17 +93,14 @@ fun PostHeader(){
     Spacer(
         modifier = Modifier.height(12.dp)
     )
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        //Categories.entries.forEach {
-        //    CategoryChip(textId = it.category)
-        //}
-        CategoryChip(textId = Categories.INDOOR.category, modifier = Modifier.padding(end = 4.dp))
+    Row{
+        Text(text = stringResource(id = R.string.post_category), style = MaterialTheme.typography.bodySmall)
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = stringResource(id = R.string.category_indoor), style = MaterialTheme.typography.bodySmall)
     }
-
+    Spacer(
+        modifier = Modifier.height(12.dp)
+    )
 }
 
 @Composable
