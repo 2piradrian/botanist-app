@@ -41,7 +41,7 @@ sealed class MenuItem(val route: String, val icon: Int, val label: Int ) {
     )
 
     data object Explore: MenuItem(
-        AppScreens.Login.route,
+        AppScreens.Explore.route,
         R.drawable.ic_search,
         R.string.nav_explore,
     )

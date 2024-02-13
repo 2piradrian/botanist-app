@@ -27,6 +27,17 @@
     <string name="post_follow">Seguir</string>
     <string name="post_unfollow">Dejar de seguir</string>
 
+    // Explore Activity
+    <string name="explore_title">Explorar</string>
+
+    // Categories
+    <string name="category_tools">Herramientas</string>
+    <string name="category_indoor">Interior</string>
+    <string name="category_outdoor">Exterior</string>
+    <string name="category_do_it_yourself">Hazlo tu mismo</string>
+    <string name="category_tips">Consejos</string>
+    <string name="category_insects">Insectos</string>
+
     // Api Errors
     <string name="server_error">Vuelve a intentarlo más tarde</string>
     <string name="network_error">No se pudo conectar al servidor</string>

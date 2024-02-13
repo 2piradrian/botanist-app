@@ -107,6 +107,14 @@ fun ContentInRow(
                     navController = navController, content = content
                 )
             }
+        }else{
+            Column(
+                modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp, vertical = 0.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                content()
+            }
         }
     }
 }

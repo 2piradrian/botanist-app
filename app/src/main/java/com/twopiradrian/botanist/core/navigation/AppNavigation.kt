@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
+import com.twopiradrian.botanist.ui.screens.explore.ExploreScreen
 import com.twopiradrian.botanist.ui.screens.home.HomeScreen
 import com.twopiradrian.botanist.ui.screens.login.LoginScreen
 import com.twopiradrian.botanist.ui.screens.register.RegisterScreen
@@ -35,6 +36,12 @@ fun AppNavigation(
                 navController = navController,
                 navigationType = navigationType,
                 contentType = contentType
+            )
+        }
+        composable(AppScreens.Explore.route) {
+            ExploreScreen(
+                navController = navController,
+                navigationType = navigationType
             )
         }
     }

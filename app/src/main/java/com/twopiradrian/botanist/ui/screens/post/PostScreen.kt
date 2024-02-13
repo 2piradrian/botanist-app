@@ -23,7 +23,9 @@ import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.ui.components.button.PlainButton
+import com.twopiradrian.botanist.ui.components.chips.CategoryChip
 import com.twopiradrian.botanist.ui.components.title.TitleLarge
 import com.twopiradrian.botanist.ui.screens.home.HomeViewModel
 
@@ -54,20 +56,7 @@ fun Body(){
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top
     ) {
-        TitleLarge(
-            text = "This is a post title and is very long"
-        )
-        Spacer(
-            modifier = Modifier.height(12.dp)
-        )
-        Text(
-            text = LoremIpsum(20).values.joinToString(" "),
-            modifier = Modifier.fillMaxWidth(),
-            style = MaterialTheme.typography.bodyMedium,
-        )
-        Spacer(
-            modifier = Modifier.height(12.dp)
-        )
+        PostHeader()
         AsyncImage(
             model = "https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg",
             contentDescription = null,
@@ -88,9 +77,40 @@ fun Body(){
 }
 
 @Composable
+fun PostHeader(){
+    TitleLarge(
+        text = "This is a post title and is very long"
+    )
+    Spacer(
+        modifier = Modifier.height(12.dp)
+    )
+    Text(
+        text = LoremIpsum(20).values.joinToString(" "),
+        modifier = Modifier.fillMaxWidth(),
+        style = MaterialTheme.typography.bodyMedium,
+    )
+    Spacer(
+        modifier = Modifier.height(12.dp)
+    )
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        //Categories.entries.forEach {
+        //    CategoryChip(textId = it.category)
+        //}
+        CategoryChip(textId = Categories.INDOOR.category, modifier = Modifier.padding(end = 4.dp))
+    }
+
+}
+
+@Composable
 fun PostFooter(){
     Row(
-        modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
