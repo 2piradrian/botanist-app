@@ -10,6 +10,7 @@ import com.twopiradrian.botanist.ui.screens.explore.ExploreScreen
 import com.twopiradrian.botanist.ui.screens.home.HomeScreen
 import com.twopiradrian.botanist.ui.screens.login.LoginScreen
 import com.twopiradrian.botanist.ui.screens.register.RegisterScreen
+import com.twopiradrian.botanist.ui.screens.write.WriteScreen
 
 @Composable
 fun AppNavigation(
@@ -40,6 +41,12 @@ fun AppNavigation(
         }
         composable(AppScreens.Explore.route) {
             ExploreScreen(
+                navController = navController,
+                navigationType = navigationType
+            )
+        }
+        composable(AppScreens.Write.route) {
+            WriteScreen(
                 navController = navController,
                 navigationType = navigationType
             )

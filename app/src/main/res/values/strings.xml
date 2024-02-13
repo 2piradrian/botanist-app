@@ -5,6 +5,7 @@
     <string name="nav_home">Inicio</string>
     <string name="nav_explore">Explorar</string>
     <string name="nav_fav">Favoritos</string>
+    <string name="nav_write">Escribir</string>
     <string name="nav_profile">Perfil</string>
 
     // Register Activity
@@ -30,6 +31,9 @@
 
     // Explore Activity
     <string name="explore_title">Explorar</string>
+
+    // Write Activity
+    <string name="write_title">Escribir un post</string>
 
     // Categories
     <string name="category_tools">Herramientas</string>

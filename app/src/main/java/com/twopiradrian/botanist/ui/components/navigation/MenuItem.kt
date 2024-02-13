@@ -32,7 +32,7 @@ import com.twopiradrian.botanist.core.navigation.AppScreens
 
 sealed class MenuItem(val route: String, val icon: Int, val label: Int ) {
     companion object {
-        val items = listOf(Home, Explore, Favorites, Settings)
+        val items = listOf(Home, Explore, Write, Settings)
     }
     data object Home: MenuItem(
         AppScreens.Home.route,
@@ -46,10 +46,10 @@ sealed class MenuItem(val route: String, val icon: Int, val label: Int ) {
         R.string.nav_explore,
     )
 
-    data object Favorites: MenuItem(
-        AppScreens.Login.route,
-        R.drawable.ic_favorite,
-        R.string.nav_fav,
+    data object Write: MenuItem(
+        AppScreens.Write.route,
+        R.drawable.ic_write,
+        R.string.nav_write,
     )
 
     data object Settings: MenuItem(

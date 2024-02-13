@@ -24,9 +24,7 @@ import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.twopiradrian.botanist.R
-import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.ui.components.button.PlainButton
-import com.twopiradrian.botanist.ui.components.chips.CategoryChip
 import com.twopiradrian.botanist.ui.components.title.TitleLarge
 import com.twopiradrian.botanist.ui.screens.home.HomeViewModel
 
