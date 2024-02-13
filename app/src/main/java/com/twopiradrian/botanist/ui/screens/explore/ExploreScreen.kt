@@ -13,6 +13,7 @@ import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.ui.app.NavigationType
 import com.twopiradrian.botanist.ui.components.chips.CategoryChip
+import com.twopiradrian.botanist.ui.components.chips.CategoryFilterChip
 import com.twopiradrian.botanist.ui.components.title.TitleLarge
 import com.twopiradrian.botanist.ui.layout.AppLayout
 
@@ -40,7 +41,7 @@ fun Body() {
         ){
             Categories.entries.forEach {
                 item {
-                    CategoryChip(textId = it.category, modifier = Modifier.padding(end = 4.dp))
+                    CategoryFilterChip(textId = it.category, modifier = Modifier.padding(end = 4.dp))
                 }
             }
         }
