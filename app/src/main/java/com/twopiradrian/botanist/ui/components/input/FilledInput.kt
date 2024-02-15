@@ -39,6 +39,8 @@ fun FilledInput(
     isLastField: Boolean = false,
     maxLines: Int = 1,
     singleLine: Boolean = true,
+    readOnly: Boolean = false,
+    trailingIcon: @Composable (() -> Unit)? = null
 ) {
     val keyboardOptions = KeyboardOptions(
         keyboardType = when (inputType) {
@@ -66,6 +68,7 @@ fun FilledInput(
             //
             maxLines = maxLines,
             singleLine = singleLine,
+            readOnly = readOnly,
             keyboardOptions = keyboardOptions,
             visualTransformation = visualTransformation,
             keyboardActions = KeyboardActions(onDone = {
@@ -79,6 +82,7 @@ fun FilledInput(
                     style = MaterialTheme.typography.labelMedium,
                 )
             },
+            trailingIcon = trailingIcon,
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
                 focusedIndicatorColor = Color.Transparent,

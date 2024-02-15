@@ -63,6 +63,7 @@
     <string name="username_placeholder">2piradrian</string>
     <string name="password_label">Contraseña</string>
     <string name="password_placeholder">* * * * * * * *</string>
+    <string name="category_label">Categoria</string>
 
     // Validators
     <string name="error_invalid_email">Correo electrónico inválido</string>

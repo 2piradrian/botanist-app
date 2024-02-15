@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.ui.app.NavigationType
+import com.twopiradrian.botanist.ui.components.input.CategoryMenu
 import com.twopiradrian.botanist.ui.components.input.FilledInput
 import com.twopiradrian.botanist.ui.components.input.InputData
 import com.twopiradrian.botanist.ui.components.input.InputType
@@ -52,6 +53,8 @@ fun Body() {
             singleLine = false,
             modifier = Modifier.heightIn(min = 140.dp)
         )
+        Spacer(modifier = Modifier.height(12.dp))
+        CategoryMenu()
         Spacer(modifier = Modifier.height(12.dp))
         FilledInput(
             state = InputData.empty(),
