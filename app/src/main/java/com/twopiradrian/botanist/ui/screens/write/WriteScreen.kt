@@ -121,6 +121,9 @@ fun Body(
                 text = R.string.write_post_button,
                 onClick = {}
             )
+            Spacer(
+                modifier = Modifier.height(12.dp)
+            )
         }
     }
 }
