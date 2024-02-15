@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -21,6 +22,8 @@ import com.twopiradrian.botanist.ui.components.input.InputType
 import com.twopiradrian.botanist.ui.components.title.TitleLarge
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.twopiradrian.botanist.ui.components.button.ImagePickerButton
+import com.twopiradrian.botanist.ui.components.button.MainButton
 import com.twopiradrian.botanist.ui.layout.FormLayout
 
 @Composable
@@ -58,15 +61,15 @@ fun Body(
     isButtonEnabled: Boolean
 ) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
     ) {
-        TitleLarge(
-            textId = R.string.write_title
-        )
-        Spacer(
-            modifier = Modifier.height(12.dp)
-        )
         FormLayout {
+            TitleLarge(
+                textId = R.string.write_title
+            )
+            Spacer(
+                modifier = Modifier.height(12.dp)
+            )
             FilledInput(
                 state = titleInput,
                 inputType = InputType.TEXT,
@@ -83,13 +86,20 @@ fun Body(
                 onValueChange = {},
                 maxLines = 5,
                 singleLine = false,
-                modifier = Modifier.heightIn(min = 140.dp)
+                modifier = Modifier.heightIn(min = 120.dp)
             )
             Spacer(
                 modifier = Modifier.height(12.dp)
             )
             CategoryMenu(
                 state = categoryInput
+            )
+            Spacer(
+                modifier = Modifier.height(12.dp)
+            )
+            ImagePickerButton(
+                text = R.string.photo_label,
+                onClick = {}
             )
             Spacer(
                 modifier = Modifier.height(12.dp)
@@ -102,6 +112,14 @@ fun Body(
                 maxLines = 200,
                 singleLine = false,
                 modifier = Modifier.heightIn(min = 300.dp)
+            )
+            Spacer(
+                modifier = Modifier.height(12.dp)
+            )
+            MainButton(
+                isEnabled = isButtonEnabled,
+                text = R.string.write_post_button,
+                onClick = {}
             )
         }
     }

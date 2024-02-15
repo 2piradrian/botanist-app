@@ -1,10 +1,13 @@
 package com.twopiradrian.botanist.ui.components.title
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun TitleLarge(
@@ -15,15 +18,19 @@ fun TitleLarge(
         Text(
             text = text,
             style = MaterialTheme.typography.titleLarge.copy(
-                color = MaterialTheme.colorScheme.onBackground
-            )
+                color = MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Start
+            ),
+            modifier = Modifier.fillMaxWidth()
         )
     } else {
         Text(
             text = stringResource(id = textId ?: 0),
             style = MaterialTheme.typography.titleLarge.copy(
-                color = MaterialTheme.colorScheme.onBackground
-            )
+                color = MaterialTheme.colorScheme.onBackground,
+                textAlign = TextAlign.Start
+            ),
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
