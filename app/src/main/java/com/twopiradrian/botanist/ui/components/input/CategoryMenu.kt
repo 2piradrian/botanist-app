@@ -19,7 +19,9 @@ import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.domain.data.Categories
 
 @Composable
-fun CategoryMenu() {
+fun CategoryMenu(
+    state: InputData,
+) {
     var isExpanded by remember { mutableStateOf(false) }
     var category by remember { mutableStateOf(Categories.INDOOR) }
 
@@ -30,11 +32,7 @@ fun CategoryMenu() {
         }
     ) {
         FilledInput(
-            state = InputData(
-                state = stringResource(id = category.category),
-                isError = false,
-                errorState = 0
-            ),
+            state = state,
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded)
             },

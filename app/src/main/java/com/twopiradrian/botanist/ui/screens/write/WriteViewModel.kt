@@ -11,6 +11,9 @@ class WriteViewModel: ViewModel() {
     private val _description = MutableStateFlow(InputData.empty())
     val description: MutableStateFlow<InputData> = _description
 
+    private val _category = MutableStateFlow(InputData.empty())
+    val category: MutableStateFlow<InputData> = _category
+
     private val _content = MutableStateFlow(InputData.empty())
     val content: MutableStateFlow<InputData> = _content
 
