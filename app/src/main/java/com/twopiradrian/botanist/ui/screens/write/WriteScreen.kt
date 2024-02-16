@@ -1,8 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.write
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.runtime.Composable
@@ -59,70 +57,65 @@ fun Body(
     contentInput: InputData,
     isButtonEnabled: Boolean
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-    ) {
-        FormLayout {
-            TitleLarge(
-                textId = R.string.write_title
-            )
-            Spacer(
-                modifier = Modifier.height(12.dp)
-            )
-            FilledInput(
-                state = titleInput,
-                inputType = InputType.TEXT,
-                placeholder = R.string.write_post_title,
-                onValueChange = {}
-            )
-            Spacer(
-                modifier = Modifier.height(12.dp)
-            )
-            FilledInput(
-                state = descriptionInput,
-                inputType = InputType.TEXT,
-                placeholder = R.string.write_post_description,
-                onValueChange = {},
-                maxLines = 5,
-                singleLine = false,
-                modifier = Modifier.heightIn(min = 120.dp)
-            )
-            Spacer(
-                modifier = Modifier.height(12.dp)
-            )
-            CategoryMenu(
-                state = categoryInput
-            )
-            Spacer(
-                modifier = Modifier.height(12.dp)
-            )
-            ImagePickerButton(
-                text = R.string.photo_label,
-                onClick = {}
-            )
-            Spacer(
-                modifier = Modifier.height(12.dp)
-            )
-            FilledInput(
-                state = contentInput,
-                inputType = InputType.TEXT,
-                placeholder = R.string.write_post_content,
-                onValueChange = {},
-                maxLines = 200,
-                singleLine = false,
-                modifier = Modifier.heightIn(min = 300.dp)
-            )
-            Spacer(
-                modifier = Modifier.height(12.dp)
-            )
-            MainButton(
-                isEnabled = isButtonEnabled,
-                text = R.string.write_post_button,
-                onClick = {}
-            )
-            Spacer(
-                modifier = Modifier.height(12.dp)
-            )
-        }
+    FormLayout {
+        TitleLarge(
+            textId = R.string.write_title
+        )
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+        FilledInput(
+            state = titleInput,
+            inputType = InputType.TEXT,
+            placeholder = R.string.write_post_title,
+            onValueChange = {}
+        )
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+        FilledInput(
+            state = descriptionInput,
+            inputType = InputType.TEXT,
+            placeholder = R.string.write_post_description,
+            onValueChange = {},
+            maxLines = 5,
+            singleLine = false,
+            modifier = Modifier.heightIn(min = 120.dp)
+        )
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+        CategoryMenu(
+            state = categoryInput
+        )
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+        ImagePickerButton(
+            onClick = {}
+        )
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+        FilledInput(
+            state = contentInput,
+            inputType = InputType.TEXT,
+            placeholder = R.string.write_post_content,
+            onValueChange = {},
+            maxLines = 200,
+            singleLine = false,
+            modifier = Modifier.heightIn(min = 300.dp)
+        )
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+        MainButton(
+            isEnabled = isButtonEnabled,
+            text = R.string.write_post_button,
+            onClick = {}
+        )
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
     }
 }

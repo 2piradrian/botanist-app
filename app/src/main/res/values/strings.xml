@@ -72,4 +72,11 @@
     <string name="error_invalid_password">La contraseña debe tener al menos 8 caracteres</string>
     <string name="error_invalid_username">Nombre de usuario inválido</string>
 
+    <string name="error_title_short">Título muy corto</string>
+    <string name="error_title_long">Título muy largo</string>
+    <string name="error_description_short">Descripción muy corta</string>
+    <string name="error_description_long">Descripción muy larga</string>
+    <string name="error_content_short">Contenido muy corto</string>
+    <string name="error_content_long">Contenido muy largo</string>
+
 </resources>
