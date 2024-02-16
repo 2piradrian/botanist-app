@@ -1,19 +1,20 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.twopiradrian.botanist.ui.components.input
 
 import androidx.annotation.StringRes
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -28,6 +29,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.twopiradrian.botanist.ui.components.text.AnimatedError
 
 @Composable
 fun FilledInput(
@@ -60,7 +62,7 @@ fun FilledInput(
     val focusManager = LocalFocusManager.current
 
     Column(
-        modifier = modifier.height(64.dp).fillMaxWidth().padding(bottom = 8.dp)
+        modifier = modifier.fillMaxWidth().padding(bottom = 8.dp)
     ) {
         TextField(
             value = state.state,
@@ -84,7 +86,7 @@ fun FilledInput(
             },
             trailingIcon = trailingIcon,
             colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent,
@@ -99,13 +101,6 @@ fun FilledInput(
                     shape = RoundedCornerShape(8.dp)
                 ),
         )
-        AnimatedVisibility(visible = state.isError) {
-            Text(
-                text = if (state.isError) stringResource(state.errorState) else "",
-                color = MaterialTheme.colorScheme.error,
-                modifier = Modifier.padding(start = 16.dp),
-                style = MaterialTheme.typography.labelSmall
-            )
-        }
+        AnimatedError(visible = state.isError, errorState = state.errorState)
     }
 }
