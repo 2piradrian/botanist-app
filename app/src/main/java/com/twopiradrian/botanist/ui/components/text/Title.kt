@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.components.title
+package com.twopiradrian.botanist.ui.components.text
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth

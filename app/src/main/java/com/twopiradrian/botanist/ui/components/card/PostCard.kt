@@ -2,20 +2,16 @@ package com.twopiradrian.botanist.ui.components.card
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
-import androidx.compose.material3.Icon
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,16 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.ui.components.text.PostAuthor
 
 @Composable
 fun PostCard(
@@ -54,56 +44,27 @@ fun PostCard(
             onClick()
         }
     ) {
-        CardHeader()
-        CardContent()
+        Column(
+            modifier = Modifier.fillMaxSize().padding(8.dp),
+        ) {
+            CardHeader()
+            CardContent()
+        }
     }
 }
 
 @Composable
 fun CardHeader() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp, 16.dp, 16.dp, 0.dp)
-            .height(20.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start
-    ){
-        Icon(
-            painter = painterResource(id = R.drawable.ic_account),
-            contentDescription = null,
-            modifier = Modifier.fillMaxHeight()
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = "carlitos jimenez",
-            style = MaterialTheme.typography.bodySmall
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = "•",
-            style = MaterialTheme.typography.bodySmall
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        Text(
-            text = "20 min ago",
-            style = MaterialTheme.typography.bodySmall
-        )
-
-    }
-    Divider(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 8.dp),
-    )
+    PostAuthor()
+    HorizontalDivider(modifier = Modifier
+        .fillMaxWidth()
+        .padding(vertical = 8.dp))
 }
 
 @Composable
 fun CardContent(){
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp, 0.dp, 16.dp, 16.dp),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {

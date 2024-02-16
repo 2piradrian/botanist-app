@@ -24,7 +24,7 @@ import com.twopiradrian.botanist.ui.components.button.PlainButton
 import com.twopiradrian.botanist.ui.components.input.InputData
 import com.twopiradrian.botanist.ui.components.input.InputType
 import com.twopiradrian.botanist.ui.components.input.OutlinedInput
-import com.twopiradrian.botanist.ui.components.title.TitleMedium
+import com.twopiradrian.botanist.ui.components.text.TitleMedium
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
 import androidx.lifecycle.viewmodel.compose.viewModel

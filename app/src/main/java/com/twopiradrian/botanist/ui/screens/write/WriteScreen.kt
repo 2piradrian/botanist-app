@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -19,7 +18,7 @@ import com.twopiradrian.botanist.ui.components.input.CategoryMenu
 import com.twopiradrian.botanist.ui.components.input.FilledInput
 import com.twopiradrian.botanist.ui.components.input.InputData
 import com.twopiradrian.botanist.ui.components.input.InputType
-import com.twopiradrian.botanist.ui.components.title.TitleLarge
+import com.twopiradrian.botanist.ui.components.text.TitleLarge
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.twopiradrian.botanist.ui.components.button.ImagePickerButton

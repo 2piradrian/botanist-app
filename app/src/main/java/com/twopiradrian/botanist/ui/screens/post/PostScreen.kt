@@ -10,22 +10,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.ui.components.button.PlainButton
-import com.twopiradrian.botanist.ui.components.title.TitleLarge
+import com.twopiradrian.botanist.ui.components.image.PostImage
+import com.twopiradrian.botanist.ui.components.text.PostAuthor
+import com.twopiradrian.botanist.ui.components.text.PostContent
+import com.twopiradrian.botanist.ui.components.text.TitleLarge
 import com.twopiradrian.botanist.ui.screens.home.HomeViewModel
 
 // This screen have no navController because it's used as a detail screen
@@ -49,28 +48,16 @@ fun Body(){
     val scrollState = rememberScrollState()
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState),
+        modifier = Modifier.fillMaxSize().verticalScroll(scrollState),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top
     ) {
         PostHeader()
-        AsyncImage(
-            model = "https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg",
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(8.dp)),
-            contentScale = ContentScale.Crop,
-        )
-        Spacer(
-            modifier = Modifier.height(12.dp)
-        )
-        Text(
-            text = LoremIpsum(200).values.joinToString(" "),
-            style = MaterialTheme.typography.bodyMedium
-        )
+        Spacer(modifier = Modifier.height(12.dp))
+        PostImage()
+        Spacer(modifier = Modifier.height(12.dp))
+        PostContent()
+        Spacer(modifier = Modifier.height(12.dp))
         PostFooter()
     }
 }
@@ -96,36 +83,17 @@ fun PostHeader(){
         Spacer(modifier = Modifier.width(8.dp))
         Text(text = stringResource(id = R.string.category_indoor), style = MaterialTheme.typography.bodySmall)
     }
-    Spacer(
-        modifier = Modifier.height(12.dp)
-    )
+
 }
 
 @Composable
 fun PostFooter(){
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 16.dp),
+        modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Row {
-            Text(
-                text = "carlitos jimenez",
-                style = MaterialTheme.typography.bodySmall
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = "•",
-                style = MaterialTheme.typography.bodySmall
-            )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = "20 min ago",
-                style = MaterialTheme.typography.bodySmall
-            )
-        }
+        PostAuthor()
         Row {
             PlainButton(text = R.string.post_like, onClick = {})
             Spacer(modifier = Modifier.width(8.dp))

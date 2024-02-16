@@ -13,7 +13,7 @@ import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.ui.app.NavigationType
 import com.twopiradrian.botanist.ui.components.chips.CategoryFilterChip
-import com.twopiradrian.botanist.ui.components.title.TitleLarge
+import com.twopiradrian.botanist.ui.components.text.TitleLarge
 import com.twopiradrian.botanist.ui.layout.AppLayout
 
 @Composable

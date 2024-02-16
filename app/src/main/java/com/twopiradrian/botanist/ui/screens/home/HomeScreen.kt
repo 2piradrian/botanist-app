@@ -18,7 +18,7 @@ import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
 import com.twopiradrian.botanist.ui.components.card.PostCard
-import com.twopiradrian.botanist.ui.components.title.TitleLarge
+import com.twopiradrian.botanist.ui.components.text.TitleLarge
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
 
