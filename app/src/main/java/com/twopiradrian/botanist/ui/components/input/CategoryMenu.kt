@@ -21,9 +21,16 @@ import com.twopiradrian.botanist.domain.data.Categories
 @Composable
 fun CategoryMenu(
     state: InputData,
+    onValueChange: (String) -> Unit,
 ) {
     var isExpanded by remember { mutableStateOf(false) }
     var category by remember { mutableStateOf(Categories.INDOOR) }
+
+    val selected = if (state.state.isEmpty()) {
+        InputData.empty()
+    } else{
+       InputData(stringResource(id = category.category), state.isError, state.errorState)
+    }
 
     ExposedDropdownMenuBox(
         expanded = isExpanded,
@@ -32,7 +39,7 @@ fun CategoryMenu(
         }
     ) {
         FilledInput(
-            state = state,
+            state = selected,
             trailingIcon = {
                 ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded)
             },
@@ -57,6 +64,7 @@ fun CategoryMenu(
                     onClick = {
                         category = it
                         isExpanded = false
+                        onValueChange(category.name)
                     }
                 )
             }

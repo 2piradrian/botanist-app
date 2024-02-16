@@ -40,6 +40,7 @@ fun WriteScreen(
 
     AppLayout(navController = navController, navigationType = navigationType) {
         Body(
+            viewModel = viewModel,
             titleInput = titleInput,
             descriptionInput = descriptionInput,
             categoryInput = categoryInput,
@@ -51,6 +52,7 @@ fun WriteScreen(
 
 @Composable
 fun Body(
+    viewModel: WriteViewModel,
     titleInput: InputData,
     descriptionInput: InputData,
     categoryInput: InputData,
@@ -68,7 +70,14 @@ fun Body(
             state = titleInput,
             inputType = InputType.TEXT,
             placeholder = R.string.write_post_title,
-            onValueChange = {}
+            onValueChange = {
+                viewModel.onPostChange(
+                    title = it,
+                    description = descriptionInput.state,
+                    category = categoryInput.state,
+                    content = contentInput.state
+                )
+            }
         )
         Spacer(
             modifier = Modifier.height(12.dp)
@@ -77,7 +86,14 @@ fun Body(
             state = descriptionInput,
             inputType = InputType.TEXT,
             placeholder = R.string.write_post_description,
-            onValueChange = {},
+            onValueChange = {
+                viewModel.onPostChange(
+                    title = titleInput.state,
+                    description = it,
+                    category = categoryInput.state,
+                    content = contentInput.state
+                )
+            },
             maxLines = 5,
             singleLine = false,
             modifier = Modifier.heightIn(min = 120.dp)
@@ -86,7 +102,15 @@ fun Body(
             modifier = Modifier.height(12.dp)
         )
         CategoryMenu(
-            state = categoryInput
+            state = categoryInput,
+            onValueChange = {
+                viewModel.onPostChange(
+                    title = titleInput.state,
+                    description = descriptionInput.state,
+                    category = it,
+                    content = contentInput.state
+                )
+            }
         )
         Spacer(
             modifier = Modifier.height(12.dp)
@@ -101,7 +125,14 @@ fun Body(
             state = contentInput,
             inputType = InputType.TEXT,
             placeholder = R.string.write_post_content,
-            onValueChange = {},
+            onValueChange = {
+                viewModel.onPostChange(
+                    title = titleInput.state,
+                    description = descriptionInput.state,
+                    category = categoryInput.state,
+                    content = it
+                )
+            },
             maxLines = 200,
             singleLine = false,
             modifier = Modifier.heightIn(min = 300.dp)
