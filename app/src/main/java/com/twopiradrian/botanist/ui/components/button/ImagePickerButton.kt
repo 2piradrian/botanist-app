@@ -48,13 +48,11 @@ fun ImagePickerButton(
         Button(
             onClick = {
                 singlePhotoPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                onClick()
             },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
                 contentColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
-
-                ),
+            ),
             elevation = ButtonDefaults.elevation(
                 defaultElevation = 0.dp,
                 pressedElevation = 0.dp,
