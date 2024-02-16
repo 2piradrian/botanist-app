@@ -29,8 +29,6 @@ fun WriteScreen(
     navigationType: NavigationType,
     viewModel: WriteViewModel = viewModel()
 ) {
-    val context = LocalContext.current
-
     val titleInput by viewModel.title.collectAsState()
     val descriptionInput by viewModel.description.collectAsState()
     val categoryInput by viewModel.category.collectAsState()
