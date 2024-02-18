@@ -7,18 +7,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 
 @Composable
 fun AnimatedError(
     visible: Boolean,
-    errorState: Int
+    errorState: Int,
+    paddingStart: Dp
 ) {
     AnimatedVisibility(visible = visible) {
         Text(
             text = if (visible) stringResource(errorState) else "",
             color = MaterialTheme.colorScheme.error,
-            modifier = Modifier.padding(start = 16.dp),
+            modifier = Modifier.padding(start = paddingStart),
             style = MaterialTheme.typography.labelSmall
         )
     }

@@ -116,6 +116,10 @@ fun OutlinedInput(
                 )
                 .shadow(1.dp, RoundedCornerShape(22.dp)),
         )
-        AnimatedError(visible = state.isError, errorState = state.errorState)
+        AnimatedError(
+            visible = state.isError,
+            errorState = state.errorState,
+            paddingStart = 16.dp
+        )
     }
 }

@@ -33,7 +33,8 @@ fun SecondaryButton(
             pressedElevation = 0.dp,
             disabledElevation = 0.dp
         ),
-        modifier = Modifier.fillMaxWidth().height(52.dp).clip(RoundedCornerShape(8.dp))
+        modifier = Modifier.height(52.dp).fillMaxWidth(),
+        shape = RoundedCornerShape(8.dp)
     ) {
         Text(
             text = stringResource(text),
