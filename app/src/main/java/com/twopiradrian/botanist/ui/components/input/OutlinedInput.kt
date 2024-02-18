@@ -87,9 +87,12 @@ fun OutlinedInput(
             placeholder = {
                 Text(
                     text = stringResource(placeholder),
-                    style = MaterialTheme.typography.labelMedium
+                    style = MaterialTheme.typography.labelMedium.copy(
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                    )
                 )
             },
+            textStyle = MaterialTheme.typography.bodyMedium,
             trailingIcon = {
                 if (icon != null) {
                     Icon(
