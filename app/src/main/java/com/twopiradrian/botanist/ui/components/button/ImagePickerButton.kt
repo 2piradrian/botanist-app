@@ -13,15 +13,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.ui.components.text.AnimatedError
 
 @Composable
 fun ImagePickerButton(
+    state: Uri?,
     onClick: () -> Unit
 ) {
 
@@ -33,7 +36,8 @@ fun ImagePickerButton(
     )
 
     Column (
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.Start
     ){
         AsyncImage(
             model = if (uri != null) uri else R.drawable.default_image,
@@ -51,5 +55,4 @@ fun ImagePickerButton(
             text = R.string.photo_label
         )
     }
-
 }

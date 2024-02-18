@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.write
 
+import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,6 +33,7 @@ fun WriteScreen(
     val titleInput by viewModel.title.collectAsState()
     val descriptionInput by viewModel.description.collectAsState()
     val categoryInput by viewModel.category.collectAsState()
+    val imageInput by viewModel.image.collectAsState()
     val contentInput by viewModel.content.collectAsState()
 
     val isButtonEnabled by viewModel.isButtonEnabled.collectAsState()
@@ -42,6 +44,7 @@ fun WriteScreen(
             titleInput = titleInput,
             descriptionInput = descriptionInput,
             categoryInput = categoryInput,
+            imageInput = imageInput,
             contentInput = contentInput,
             isButtonEnabled = isButtonEnabled
         )
@@ -54,8 +57,9 @@ fun Body(
     titleInput: InputData,
     descriptionInput: InputData,
     categoryInput: InputData,
+    imageInput: Uri?,
     contentInput: InputData,
-    isButtonEnabled: Boolean
+    isButtonEnabled: Boolean,
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
@@ -116,6 +120,7 @@ fun Body(
                 modifier = Modifier.height(12.dp)
             )
             ImagePickerButton(
+                state = imageInput,
                 onClick = {}
             )
             Spacer(

@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.write
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.ui.components.input.InputData
@@ -15,6 +16,9 @@ class WriteViewModel: ViewModel() {
 
     private val _category = MutableStateFlow(InputData.empty())
     val category: MutableStateFlow<InputData> = _category
+
+    private val _image = MutableStateFlow<Uri?>(null)
+    val image: MutableStateFlow<Uri?> = _image
 
     private val _content = MutableStateFlow(InputData.empty())
     val content: MutableStateFlow<InputData> = _content
