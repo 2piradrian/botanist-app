@@ -21,7 +21,9 @@ import coil.compose.AsyncImage
 import com.twopiradrian.botanist.R
 
 @Composable
-fun ImagePickerButton(onClick: () -> Unit) {
+fun ImagePickerButton(
+    onClick: () -> Unit
+) {
 
     var uri by remember { mutableStateOf<Uri?>(null)}
 
@@ -34,7 +36,8 @@ fun ImagePickerButton(onClick: () -> Unit) {
         modifier = Modifier.fillMaxWidth()
     ){
         AsyncImage(
-            model = uri, contentDescription = null,
+            model = if (uri != null) uri else R.drawable.default_image,
+            contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
