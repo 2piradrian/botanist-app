@@ -1,6 +1,5 @@
-package com.twopiradrian.botanist.data.datasource.api
+package com.twopiradrian.botanist.data.datasource.api.user
 
-import com.twopiradrian.ads.data.datasources.api.user.Client
 import com.twopiradrian.botanist.core.helper.RetrofitHelper
 import com.twopiradrian.botanist.domain.usecase.user.Login
 import com.twopiradrian.botanist.domain.usecase.user.RefreshTokens

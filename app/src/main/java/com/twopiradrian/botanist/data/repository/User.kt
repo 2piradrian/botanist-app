@@ -1,6 +1,6 @@
 package com.twopiradrian.botanist.data.repository
 
-import com.twopiradrian.botanist.data.datasource.api.UserAPIService
+import com.twopiradrian.botanist.data.datasource.api.user.UserAPIService
 import com.twopiradrian.botanist.domain.repository.UserRepository
 import com.twopiradrian.botanist.domain.usecase.user.Login
 import com.twopiradrian.botanist.domain.usecase.user.RefreshTokens
