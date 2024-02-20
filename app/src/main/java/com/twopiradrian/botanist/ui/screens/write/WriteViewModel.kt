@@ -1,6 +1,8 @@
 package com.twopiradrian.botanist.ui.screens.write
 
+import android.content.Context
 import android.net.Uri
+import android.util.Base64
 import androidx.lifecycle.ViewModel
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.ui.components.input.InputData
@@ -52,6 +54,14 @@ class WriteViewModel: ViewModel() {
             it.copy(state = content, isError = !isContentValid(content))
         }
         _isButtonEnabled.value = enablePostButton(title, description, category, content)
+    }
+
+    private fun convertUriToBase64(uri: Uri, context: Context): String? {
+        val inputStream = context.contentResolver.openInputStream(uri)
+        val bytes = inputStream?.readBytes()
+        inputStream?.close()
+
+        return Base64.encodeToString(bytes, Base64.DEFAULT)
     }
 
     private fun isTitleValid(title: String): Boolean{
