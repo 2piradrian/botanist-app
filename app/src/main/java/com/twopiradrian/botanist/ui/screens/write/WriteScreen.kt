@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.write
 
+import android.content.Context
 import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
@@ -20,6 +22,7 @@ import com.twopiradrian.botanist.ui.components.input.InputType
 import com.twopiradrian.botanist.ui.components.text.TitleLarge
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.ui.components.button.ImagePickerButton
 import com.twopiradrian.botanist.ui.components.button.SecondaryButton
 import com.twopiradrian.botanist.ui.layout.FormLayout
@@ -30,6 +33,9 @@ fun WriteScreen(
     navigationType: NavigationType,
     viewModel: WriteViewModel = viewModel()
 ) {
+    val context = LocalContext.current
+    val session = Session.also { it.init(context) }
+
     val titleInput by viewModel.title.collectAsState()
     val descriptionInput by viewModel.description.collectAsState()
     val categoryInput by viewModel.category.collectAsState()
@@ -41,6 +47,9 @@ fun WriteScreen(
     AppLayout(navController = navController, navigationType = navigationType) {
         Body(
             viewModel = viewModel,
+            context = context,
+            session = session,
+            // --
             titleInput = titleInput,
             descriptionInput = descriptionInput,
             categoryInput = categoryInput,
@@ -54,12 +63,16 @@ fun WriteScreen(
 @Composable
 fun Body(
     viewModel: WriteViewModel,
+    context: Context,
+    session: Session,
+    // --
     titleInput: InputData,
     descriptionInput: InputData,
     categoryInput: InputData,
     imageInput: Uri?,
     contentInput: InputData,
     isButtonEnabled: Boolean,
+
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
@@ -121,7 +134,7 @@ fun Body(
             )
             ImagePickerButton(
                 state = imageInput,
-                onClick = {}
+                updateState = { viewModel.onImageChange(it) }
             )
             Spacer(
                 modifier = Modifier.height(12.dp)
@@ -147,7 +160,17 @@ fun Body(
             SecondaryButton(
                 isEnabled = isButtonEnabled,
                 text = R.string.write_post_button,
-                onClick = {}
+                onClick = {
+                    viewModel.createPost(
+                        title = titleInput.state,
+                        description = descriptionInput.state,
+                        category = categoryInput.state,
+                        content = contentInput.state,
+                        image = imageInput,
+                        tokens = session.getTokens(),
+                        context = context
+                    )
+                }
             )
             Spacer(
                 modifier = Modifier.height(12.dp)

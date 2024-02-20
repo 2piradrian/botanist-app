@@ -67,14 +67,14 @@ class WriteViewModel: ViewModel() {
         content: String,
         image: Uri?,
         context: Context,
-        tokensEntity: TokensEntity
+        tokens: TokensEntity
     ) {
         val base64Image = image?.let { convertUriToBase64(it, context) } ?: ""
 
         viewModelScope.launch {
             val result = try {
-                val request = Create.Request(title, description, category, content, base64Image)
-                Create().invoke(tokensEntity.accessToken, request)
+                val request = Create.Request(title, description, category, base64Image, content)
+                Create().invoke(tokens.accessToken, request)
             } catch (e: Exception) {
                 e.printStackTrace()
                 null
@@ -89,6 +89,11 @@ class WriteViewModel: ViewModel() {
             }
         }
     }
+
+    fun onImageChange(uri: Uri?) {
+        _image.value = uri
+    }
+
     private fun convertUriToBase64(uri: Uri, context: Context): String? {
         val inputStream = context.contentResolver.openInputStream(uri)
         val bytes = inputStream?.readBytes()

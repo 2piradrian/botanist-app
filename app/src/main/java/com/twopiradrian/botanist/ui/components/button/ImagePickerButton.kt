@@ -25,14 +25,14 @@ import com.twopiradrian.botanist.ui.components.text.AnimatedError
 @Composable
 fun ImagePickerButton(
     state: Uri?,
-    onClick: () -> Unit
+    updateState: (uri: Uri?) -> Unit
 ) {
-
-    var uri by remember { mutableStateOf<Uri?>(null)}
 
     val singlePhotoPicker = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
-        onResult = { uri = it }
+        onResult = {
+            updateState(it)
+        }
     )
 
     Column (
@@ -40,7 +40,7 @@ fun ImagePickerButton(
         horizontalAlignment = Alignment.Start
     ){
         AsyncImage(
-            model = if (uri != null) uri else R.drawable.default_image,
+            model = state ?: R.drawable.default_image,
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()

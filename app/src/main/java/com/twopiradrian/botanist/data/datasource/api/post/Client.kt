@@ -6,7 +6,7 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface Client {
-    @POST("post/create")
+    @POST("posts/create")
     suspend fun create(
         @Header("Authorization") token: String,
         @Body request: Create.Request
