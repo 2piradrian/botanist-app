@@ -4,10 +4,14 @@ import android.content.Context
 import android.net.Uri
 import android.util.Base64
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.domain.entity.TokensEntity
+import com.twopiradrian.botanist.domain.usecase.post.Create
 import com.twopiradrian.botanist.ui.components.input.InputData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class WriteViewModel: ViewModel() {
     private val _title = MutableStateFlow(InputData.empty())
@@ -56,6 +60,35 @@ class WriteViewModel: ViewModel() {
         _isButtonEnabled.value = enablePostButton(title, description, category, content)
     }
 
+    fun createPost(
+        title: String,
+        description: String,
+        category: String,
+        content: String,
+        image: Uri?,
+        context: Context,
+        tokensEntity: TokensEntity
+    ) {
+        val base64Image = image?.let { convertUriToBase64(it, context) } ?: ""
+
+        viewModelScope.launch {
+            val result = try {
+                val request = Create.Request(title, description, category, content, base64Image)
+                Create().invoke(tokensEntity.accessToken, request)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+
+            result?.response?.let {
+                // TODO: Navigate to the post
+            }
+
+            result?.error?.let {
+                _error.value = it
+            }
+        }
+    }
     private fun convertUriToBase64(uri: Uri, context: Context): String? {
         val inputStream = context.contentResolver.openInputStream(uri)
         val bytes = inputStream?.readBytes()
