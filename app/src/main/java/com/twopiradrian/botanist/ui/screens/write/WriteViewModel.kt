@@ -51,7 +51,7 @@ class WriteViewModel: ViewModel() {
         _content.update {
             it.copy(state = content, isError = !isContentValid(content))
         }
-        _isButtonEnabled.value = title.isNotEmpty() && description.isNotEmpty() && category.isNotEmpty() && content.isNotEmpty()
+        _isButtonEnabled.value = enablePostButton(title, description, category, content)
     }
 
     private fun isTitleValid(title: String): Boolean{
@@ -148,5 +148,17 @@ class WriteViewModel: ViewModel() {
             }
             true
         }
+    }
+
+    private fun enablePostButton(
+        title: String,
+        description: String,
+        category: String,
+        content: String
+    ): Boolean {
+        return isTitleValid(title) &&
+            isDescriptionValid(description) &&
+            isCategoryValid(category) &&
+            isContentValid(content)
     }
 }
