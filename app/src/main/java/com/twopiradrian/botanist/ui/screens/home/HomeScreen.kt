@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.core.navigation.AppScreens
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
@@ -36,9 +37,21 @@ fun HomeScreen(
     val session = Session.also{ it.init(context) }
 
     val isShowingHomePage by viewModel.isShowingHomePage.collectAsState()
+    val isUserLoggedIn by viewModel.isUserLoggedIn.collectAsState()
 
     LaunchedEffect(true){
         viewModel.checkIfUserIsLoggedIn(session)
+    }
+
+    LaunchedEffect(isUserLoggedIn){
+        when (isUserLoggedIn) {
+            true -> {
+                // load some posts
+            }
+            false -> {
+                navController.navigate(AppScreens.Login.route)
+            }
+        }
     }
 
     BackHandler {
