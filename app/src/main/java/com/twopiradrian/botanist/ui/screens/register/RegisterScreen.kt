@@ -43,6 +43,7 @@ fun RegisterScreen(
     val emailInput by viewModel.emailInput.collectAsState()
     val passwordInput by viewModel.passwordInput.collectAsState()
     val usernameInput by viewModel.usernameInput.collectAsState()
+    val isButtonEnabled by viewModel.isButtonEnabled.collectAsState()
 
     val error by viewModel.error.collectAsState()
     val userRegistered by viewModel.userRegistered.collectAsState()
@@ -72,6 +73,7 @@ fun RegisterScreen(
             emailInput = emailInput,
             passwordInput = passwordInput,
             usernameInput = usernameInput,
+            isButtonEnabled = isButtonEnabled
         )
     }
 }
@@ -82,6 +84,7 @@ fun Body(
     emailInput: InputData,
     passwordInput: InputData,
     usernameInput: InputData,
+    isButtonEnabled: Boolean,
 ) {
     FormLayout(
         modifier = Modifier.fillMaxSize(),
@@ -118,9 +121,13 @@ fun Body(
             icon = Icons.Default.Lock
         )
         Spacer(modifier = Modifier.padding(12.dp))
-        MainButton(isEnabled = true, text = R.string.register_button, onClick = {
-            viewModel.registerUser(emailInput.state, passwordInput.state, usernameInput.state)
-        })
+        MainButton(
+            isEnabled = isButtonEnabled,
+            text = R.string.register_button,
+            onClick = {
+                viewModel.registerUser(emailInput.state, passwordInput.state, usernameInput.state)
+            }
+        )
     }
 
 }

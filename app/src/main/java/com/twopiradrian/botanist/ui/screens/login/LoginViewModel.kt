@@ -1,6 +1,5 @@
 package com.twopiradrian.botanist.ui.screens.login
 
-import android.content.Context
 import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -35,7 +34,7 @@ class LoginViewModel : ViewModel() {
         _error.value = 0
     }
 
-    fun loginUser(email: String, password: String, context: Context) {
+    fun loginUser(email: String, password: String, session: Session) {
         viewModelScope.launch {
             val result = try {
                 val request = Login.Request(email, password)
@@ -46,7 +45,7 @@ class LoginViewModel : ViewModel() {
             }
 
             result?.response?.let {
-                saveData(it, context)
+                saveData(it, session)
                 _error.value = 0
                 _userLogged.value = true
                 return@launch
@@ -64,10 +63,8 @@ class LoginViewModel : ViewModel() {
     }
 
     private fun saveData(
-        result: Login.Response, context: Context
+        result: Login.Response, session: Session
     ) {
-
-        Session.init(context)
 
         val userResponse = result.user
         val tokensResponse = result.tokens
@@ -78,7 +75,7 @@ class LoginViewModel : ViewModel() {
             val user = UserDataEntity(
                 userId, userEmail
             )
-            Session.saveUser(user)
+            session.saveUser(user)
         }
 
         tokensResponse.let {
@@ -87,7 +84,7 @@ class LoginViewModel : ViewModel() {
             val tokens = TokensEntity(
                 accessToken, refreshToken
             )
-            Session.saveTokens(tokens)
+            session.saveTokens(tokens)
         }
     }
 

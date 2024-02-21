@@ -28,6 +28,7 @@ import com.twopiradrian.botanist.ui.components.text.TitleMedium
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.ui.app.NavigationType
 
 @Composable
@@ -37,9 +38,11 @@ fun LoginScreen(
     navigationType: NavigationType,
 ) {
     val context = LocalContext.current
+    val session = Session.also { it.init(context) }
 
     val emailInput by viewModel.emailInput.collectAsState()
     val passwordInput by viewModel.passwordInput.collectAsState()
+    val isButtonEnabled by viewModel.isButtonEnabled.collectAsState()
 
     val error by viewModel.error.collectAsState()
     val userLogged by viewModel.userLogged.collectAsState()
@@ -67,8 +70,10 @@ fun LoginScreen(
         Body(
             viewModel = viewModel,
             navController = navController,
+            session = session,
             emailInput = emailInput,
-            passwordInput = passwordInput
+            passwordInput = passwordInput,
+            isButtonEnabled = isButtonEnabled
         )
     }
 }
@@ -77,8 +82,10 @@ fun LoginScreen(
 fun Body(
     viewModel: LoginViewModel,
     navController: NavController,
+    session: Session,
     emailInput: InputData,
     passwordInput: InputData,
+    isButtonEnabled: Boolean,
 ) {
     FormLayout {
         TitleMedium(text = R.string.login_title)
@@ -105,9 +112,13 @@ fun Body(
         )
         Spacer(modifier = Modifier.padding(12.dp))
         MainButton(
-            isEnabled = true,
+            isEnabled = isButtonEnabled,
             text = R.string.login_button,
-            onClick = {  }
+            onClick = { viewModel.loginUser(
+                email = emailInput.state,
+                password = passwordInput.state,
+                session = session
+            ) }
         )
         Spacer(modifier = Modifier.padding(18.dp))
         PlainButton(
