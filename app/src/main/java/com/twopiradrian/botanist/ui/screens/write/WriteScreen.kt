@@ -93,6 +93,7 @@ fun Body(
                         title = it,
                         description = descriptionInput.state,
                         category = categoryInput.state,
+                        image = imageInput.state,
                         content = contentInput.state
                     )
                 }
@@ -109,6 +110,7 @@ fun Body(
                         title = titleInput.state,
                         description = it,
                         category = categoryInput.state,
+                        image = imageInput.state,
                         content = contentInput.state
                     )
                 },
@@ -125,6 +127,7 @@ fun Body(
                         title = titleInput.state,
                         description = descriptionInput.state,
                         category = it,
+                        image = imageInput.state,
                         content = contentInput.state
                     )
                 }
@@ -148,6 +151,7 @@ fun Body(
                         title = titleInput.state,
                         description = descriptionInput.state,
                         category = categoryInput.state,
+                        image = imageInput.state,
                         content = it
                     )
                 },

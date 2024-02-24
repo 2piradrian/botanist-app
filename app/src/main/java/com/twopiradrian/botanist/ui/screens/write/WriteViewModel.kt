@@ -44,6 +44,7 @@ class WriteViewModel: ViewModel() {
         title: String,
         description: String,
         category: String,
+        image: Uri?,
         content: String
     ) {
         _title.update {
@@ -58,7 +59,7 @@ class WriteViewModel: ViewModel() {
         _content.update {
             it.copy(state = content, isError = !isContentValid(content))
         }
-        _isButtonEnabled.value = enablePostButton(title, description, category, content)
+        _isButtonEnabled.value = enablePostButton(title, description, category, image, content)
     }
 
     fun createPost(
@@ -174,6 +175,21 @@ class WriteViewModel: ViewModel() {
         }
     }
 
+    private fun isImageValid(image: Uri?): Boolean {
+        return if (image == null) {
+            _image.update {
+                it.copy(errorState = R.string.error_required_field)
+            }
+            false
+        }
+        else {
+            _image.update {
+                it.copy(errorState = 0)
+            }
+            true
+        }
+    }
+
     private fun isContentValid(content: String): Boolean{
         return if (content.isEmpty()) {
             _content.update {
@@ -205,11 +221,13 @@ class WriteViewModel: ViewModel() {
         title: String,
         description: String,
         category: String,
+        image: Uri?,
         content: String
     ): Boolean {
         return isTitleValid(title) &&
             isDescriptionValid(description) &&
             isCategoryValid(category) &&
+            isImageValid(image) &&
             isContentValid(content)
     }
 }
