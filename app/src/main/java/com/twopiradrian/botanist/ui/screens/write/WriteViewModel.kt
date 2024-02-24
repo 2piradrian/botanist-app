@@ -15,6 +15,10 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class WriteViewModel: ViewModel() {
+
+    private val _isShowingThePost = MutableStateFlow(false)
+    val isShowingThePost: MutableStateFlow<Boolean> = _isShowingThePost
+
     private val _title = MutableStateFlow(InputData.empty())
     val title: MutableStateFlow<InputData> = _title
 
@@ -38,6 +42,10 @@ class WriteViewModel: ViewModel() {
 
     fun changeErrorState() {
         _error.value = 0
+    }
+
+    fun setIsShowingThePost(b: Boolean) {
+        _isShowingThePost.value = b
     }
 
     fun onPostChange(

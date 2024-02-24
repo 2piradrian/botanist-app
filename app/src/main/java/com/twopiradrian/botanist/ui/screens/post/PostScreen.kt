@@ -31,7 +31,6 @@ import com.twopiradrian.botanist.ui.screens.home.HomeViewModel
 @Composable
 fun PostScreen(
     modifier: Modifier = Modifier,
-    viewModel: HomeViewModel,
 ) {
     Column(
         modifier = modifier.fillMaxSize(),

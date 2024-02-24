@@ -48,7 +48,8 @@ fun AppNavigation(
         composable(AppScreens.Write.route) {
             WriteScreen(
                 navController = navController,
-                navigationType = navigationType
+                navigationType = navigationType,
+                contentType = contentType
             )
         }
     }

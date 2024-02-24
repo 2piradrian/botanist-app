@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.core.navigation.AppScreens
@@ -85,7 +87,8 @@ fun Body(
             )
         } else {
             PostScreen(
-                viewModel = viewModel
+                // Just send the functions, not the whole viewModel
+                // Probably we need create a new component with the functions implemented
             )
         }
     } else if (contentType == ContentType.LIST_WITH_DETAILS) {
@@ -93,7 +96,7 @@ fun Body(
             modifier = Modifier.fillMaxSize(),
         ) {
             HomeList(modifier = Modifier.weight(1f), viewModel = viewModel)
-            PostScreen(modifier = Modifier.weight(1f), viewModel = viewModel)
+            PostScreen(modifier = Modifier.weight(1f))
         }
     }
 }
@@ -104,17 +107,16 @@ fun HomeList(
     viewModel: HomeViewModel,
 ) {
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize().padding(vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         LazyColumn(
-            modifier = modifier.fillMaxHeight(),
-            horizontalAlignment = Alignment.Start,
+            modifier = modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
             item{
-                TitleLarge(textId = R.string.home_title)
                 repeat(10){
                     PostCard(
                         onClick = {
