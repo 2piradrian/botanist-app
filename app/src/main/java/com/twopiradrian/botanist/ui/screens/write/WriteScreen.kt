@@ -1,7 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.write
 
 import android.content.Context
-import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,14 +16,15 @@ import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.ui.app.NavigationType
 import com.twopiradrian.botanist.ui.components.input.CategoryMenu
 import com.twopiradrian.botanist.ui.components.input.FilledInput
-import com.twopiradrian.botanist.ui.components.input.InputData
-import com.twopiradrian.botanist.ui.components.input.InputType
+import com.twopiradrian.botanist.ui.app.InputData
+import com.twopiradrian.botanist.ui.app.InputType
 import com.twopiradrian.botanist.ui.components.text.TitleLarge
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.ui.components.button.ImagePickerButton
 import com.twopiradrian.botanist.ui.components.button.SecondaryButton
+import com.twopiradrian.botanist.ui.app.ImageData
 import com.twopiradrian.botanist.ui.layout.FormLayout
 
 @Composable
@@ -69,11 +69,11 @@ fun Body(
     titleInput: InputData,
     descriptionInput: InputData,
     categoryInput: InputData,
-    imageInput: Uri?,
+    imageInput: ImageData,
     contentInput: InputData,
     isButtonEnabled: Boolean,
 
-) {
+    ) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -166,7 +166,7 @@ fun Body(
                         description = descriptionInput.state,
                         category = categoryInput.state,
                         content = contentInput.state,
-                        image = imageInput,
+                        image = imageInput.state,
                         tokens = session.getTokens(),
                         context = context
                     )

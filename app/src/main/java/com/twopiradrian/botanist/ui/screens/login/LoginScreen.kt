@@ -21,8 +21,8 @@ import com.twopiradrian.botanist.core.app.Constants.Companion.MAX_WIDTH
 import com.twopiradrian.botanist.core.navigation.AppScreens
 import com.twopiradrian.botanist.ui.components.button.MainButton
 import com.twopiradrian.botanist.ui.components.button.PlainButton
-import com.twopiradrian.botanist.ui.components.input.InputData
-import com.twopiradrian.botanist.ui.components.input.InputType
+import com.twopiradrian.botanist.ui.app.InputData
+import com.twopiradrian.botanist.ui.app.InputType
 import com.twopiradrian.botanist.ui.components.input.OutlinedInput
 import com.twopiradrian.botanist.ui.components.text.TitleMedium
 import com.twopiradrian.botanist.ui.layout.AppLayout

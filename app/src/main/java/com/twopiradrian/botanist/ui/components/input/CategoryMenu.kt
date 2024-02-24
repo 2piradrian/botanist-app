@@ -20,6 +20,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.domain.data.Categories
+import com.twopiradrian.botanist.ui.app.InputData
+import com.twopiradrian.botanist.ui.app.InputType
 import com.twopiradrian.botanist.ui.components.text.AnimatedError
 
 @Composable

@@ -9,10 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,11 +16,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.ui.app.ImageData
 import com.twopiradrian.botanist.ui.components.text.AnimatedError
 
 @Composable
 fun ImagePickerButton(
-    state: Uri?,
+    state: ImageData,
     updateState: (uri: Uri?) -> Unit
 ) {
 
@@ -40,7 +37,7 @@ fun ImagePickerButton(
         horizontalAlignment = Alignment.Start
     ){
         AsyncImage(
-            model = state ?: R.drawable.default_image,
+            model = state.state ?: R.drawable.default_image,
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
@@ -54,5 +51,6 @@ fun ImagePickerButton(
             },
             text = R.string.photo_label
         )
+        AnimatedError(visible = state.isError, errorState = R.string.error_required_field, paddingStart = 0.dp)
     }
 }

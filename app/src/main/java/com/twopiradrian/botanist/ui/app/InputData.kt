@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.components.input
+package com.twopiradrian.botanist.ui.app
 
 import androidx.annotation.StringRes
 

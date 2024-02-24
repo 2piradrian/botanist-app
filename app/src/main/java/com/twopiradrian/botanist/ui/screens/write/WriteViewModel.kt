@@ -8,7 +8,8 @@ import androidx.lifecycle.viewModelScope
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.domain.entity.TokensEntity
 import com.twopiradrian.botanist.domain.usecase.post.Create
-import com.twopiradrian.botanist.ui.components.input.InputData
+import com.twopiradrian.botanist.ui.app.ImageData
+import com.twopiradrian.botanist.ui.app.InputData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -23,8 +24,8 @@ class WriteViewModel: ViewModel() {
     private val _category = MutableStateFlow(InputData.empty())
     val category: MutableStateFlow<InputData> = _category
 
-    private val _image = MutableStateFlow<Uri?>(null)
-    val image: MutableStateFlow<Uri?> = _image
+    private val _image = MutableStateFlow(ImageData.empty())
+    val image: MutableStateFlow<ImageData> = _image
 
     private val _content = MutableStateFlow(InputData.empty())
     val content: MutableStateFlow<InputData> = _content
@@ -91,7 +92,9 @@ class WriteViewModel: ViewModel() {
     }
 
     fun onImageChange(uri: Uri?) {
-        _image.value = uri
+        _image.update {
+            it.copy(state = uri, isError = (uri == null))
+        }
     }
 
     private fun convertUriToBase64(uri: Uri, context: Context): String? {
