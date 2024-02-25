@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -24,6 +25,7 @@ import com.twopiradrian.botanist.ui.app.InputType
 import com.twopiradrian.botanist.ui.components.text.TitleLarge
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.twopiradrian.botanist.core.navigation.AppScreens
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.components.button.ImagePickerButton
@@ -43,6 +45,7 @@ fun WriteScreen(
     val session = Session.also { it.init(context) }
 
     val isShowingThePost by viewModel.isShowingThePost.collectAsState()
+    val postedSuccessfully by viewModel.postedSuccessfully.collectAsState()
 
     val titleInput by viewModel.title.collectAsState()
     val descriptionInput by viewModel.description.collectAsState()
@@ -55,6 +58,12 @@ fun WriteScreen(
     BackHandler {
         if (isShowingThePost) {
             viewModel.setIsShowingThePost(false)
+        }
+    }
+
+    LaunchedEffect(postedSuccessfully) {
+        if (postedSuccessfully) {
+            navController.navigate(AppScreens.Home.route)
         }
     }
 

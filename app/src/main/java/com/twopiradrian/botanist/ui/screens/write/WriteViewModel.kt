@@ -1,8 +1,11 @@
 package com.twopiradrian.botanist.ui.screens.write
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Base64
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.twopiradrian.botanist.R
@@ -10,9 +13,13 @@ import com.twopiradrian.botanist.domain.entity.TokensEntity
 import com.twopiradrian.botanist.domain.usecase.post.Create
 import com.twopiradrian.botanist.ui.app.ImageData
 import com.twopiradrian.botanist.ui.app.InputData
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.ByteArrayOutputStream
+import kotlin.math.sqrt
 
 class WriteViewModel: ViewModel() {
 
@@ -36,6 +43,9 @@ class WriteViewModel: ViewModel() {
 
     private val _isButtonEnabled = MutableStateFlow(false)
     val isButtonEnabled: MutableStateFlow<Boolean> = _isButtonEnabled
+
+    private val _postedSuccessfully = MutableStateFlow(false)
+    val postedSuccessfully: MutableStateFlow<Boolean> = _postedSuccessfully
 
     private val _error = MutableStateFlow(0)
     val error: MutableStateFlow<Int> = _error
@@ -79,9 +89,11 @@ class WriteViewModel: ViewModel() {
         context: Context,
         tokens: TokensEntity
     ) {
-        val base64Image = image?.let { convertUriToBase64(it, context) } ?: ""
-
         viewModelScope.launch {
+            val base64Image = image?.let { convertUriToBase64(it, context) } ?: ""
+
+            Log.d("WriteViewModel", "imagen len: ${base64Image.length}")
+
             val result = try {
                 val request = Create.Request(title, description, category, base64Image, content)
                 Create().invoke(tokens.accessToken, request)
@@ -90,8 +102,10 @@ class WriteViewModel: ViewModel() {
                 null
             }
 
+            Log.d("WriteViewModel", "createPost: $result")
+
             result?.response?.let {
-                // TODO: Navigate to the post
+                _postedSuccessfully.value = true
             }
 
             result?.error?.let {
@@ -106,12 +120,33 @@ class WriteViewModel: ViewModel() {
         }
     }
 
-    private fun convertUriToBase64(uri: Uri, context: Context): String? {
-        val inputStream = context.contentResolver.openInputStream(uri)
-        val bytes = inputStream?.readBytes()
-        inputStream?.close()
+    private suspend fun convertUriToBase64(uri: Uri, context: Context): String? {
+        return withContext(Dispatchers.IO){
+            val inputStream = context.contentResolver.openInputStream(uri)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            val compressedBitmap = compressBitmap(bitmap)
 
-        return Base64.encodeToString(bytes, Base64.DEFAULT)
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            compressedBitmap.compress(Bitmap.CompressFormat.WEBP, 95, byteArrayOutputStream)
+
+            val byteArray = byteArrayOutputStream.toByteArray()
+
+            inputStream?.close()
+
+            return@withContext Base64.encodeToString(byteArray, Base64.DEFAULT)
+        }
+    }
+
+    private fun compressBitmap(source: Bitmap): Bitmap {
+        val maxSize = 1024 * 180
+
+        var scale = sqrt((maxSize).toDouble() / (source.width * source.height))
+        if (scale > 1) {
+            scale = 1.0
+        }
+        val width = (source.width * scale).toInt()
+        val height = (source.height * scale).toInt()
+        return Bitmap.createScaledBitmap(source, width, height, true)
     }
 
     private fun isTitleValid(title: String): Boolean{
