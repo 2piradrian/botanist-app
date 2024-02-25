@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.components.image
 
+import android.net.Uri
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -8,13 +9,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.ui.app.ImageData
 
 @Composable
 fun PostImage(
-    url: String = "https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg"
+    image: Uri?
 ){
     AsyncImage(
-        model = url,
+        model = image ?: R.drawable.default_image,
         contentDescription = null,
         modifier = Modifier
             .fillMaxWidth()

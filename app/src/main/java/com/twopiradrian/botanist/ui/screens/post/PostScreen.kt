@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.domain.data.Categories
@@ -27,7 +26,6 @@ import com.twopiradrian.botanist.ui.components.image.PostImage
 import com.twopiradrian.botanist.ui.components.text.PostAuthor
 import com.twopiradrian.botanist.ui.components.text.PostContent
 import com.twopiradrian.botanist.ui.components.text.TitleLarge
-import com.twopiradrian.botanist.ui.screens.home.HomeViewModel
 
 // This screen have no navController because it's used as a detail screen
 @Composable
@@ -75,9 +73,7 @@ fun Body(
     val scrollState = rememberScrollState()
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState),
+        modifier = Modifier.fillMaxSize().verticalScroll(scrollState),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top
     ) {
@@ -86,18 +82,31 @@ fun Body(
             description = description,
             category = category
         )
-        Spacer(modifier = Modifier.height(12.dp))
-        PostImage()
-        Spacer(modifier = Modifier.height(12.dp))
-        PostContent()
-        Spacer(modifier = Modifier.height(12.dp))
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+        PostImage(
+            image = image,
+        )
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
+        PostContent(
+            content = content
+        )
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
         PostFooter()
         if(isPreview){
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(
+                modifier = Modifier.height(12.dp)
+            )
             publishButton()
         }
-        Spacer(modifier = Modifier.height(12.dp))
-
+        Spacer(
+            modifier = Modifier.height(12.dp)
+        )
     }
 }
 

@@ -3,12 +3,21 @@ package com.twopiradrian.botanist.ui.components.text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
+import com.twopiradrian.botanist.R
 
 @Composable
-fun PostContent() {
+fun PostContent(
+    content: String
+) {
     Text(
-        text = LoremIpsum(200).values.joinToString(" "),
+        text = if (content == "") {
+                    stringResource(id = R.string.placeholder_content)
+               }
+               else{
+                    content
+               },
         style = MaterialTheme.typography.bodyMedium
     )
 }
