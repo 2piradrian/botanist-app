@@ -162,12 +162,6 @@ class WriteViewModel: ViewModel() {
             }
             return false
         }
-        else if(title.length > 21){
-            _title.update {
-                it.copy(errorState = R.string.error_title_long)
-            }
-            return false
-        }
         else {
             _title.update {
                 it.copy(errorState = 0)
@@ -186,12 +180,6 @@ class WriteViewModel: ViewModel() {
         else if(description.length < 15){
             _description.update {
                 it.copy(errorState = R.string.error_description_short)
-            }
-            false
-        }
-        else if(description.length > 101){
-            _description.update {
-                it.copy(errorState = R.string.error_description_long)
             }
             false
         }
@@ -243,12 +231,6 @@ class WriteViewModel: ViewModel() {
         else if(content.length < 15){
             _content.update {
                 it.copy(errorState = R.string.error_content_short)
-            }
-            false
-        }
-        else if(content.length > 1001){
-            _content.update {
-                it.copy(errorState = R.string.error_content_long)
             }
             false
         }
