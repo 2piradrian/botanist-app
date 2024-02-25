@@ -98,23 +98,29 @@ fun Body(
            ) {
                PostScreen(
                    isPreview = true,
-                     publishButton = {
-                          SecondaryButton(
-                            isEnabled = isButtonEnabled,
-                            text = R.string.write_post_button,
-                            onClick = {
-                                 viewModel.createPost(
-                                      title = titleInput.state,
-                                      description = descriptionInput.state,
-                                      category = categoryInput.state,
-                                      content = contentInput.state,
-                                      image = imageInput.state,
-                                      tokens = session.getTokens(),
-                                      context = context
-                                 )
-                            }
-                          )
-                     }
+                   publishButton = {
+                       SecondaryButton(
+                           isEnabled = isButtonEnabled,
+                           text = R.string.write_post_button,
+                           onClick = {
+                               viewModel.createPost(
+                                   title = titleInput.state,
+                                   description = descriptionInput.state,
+                                   category = categoryInput.state,
+                                   content = contentInput.state,
+                                   image = imageInput.state,
+                                   tokens = session.getTokens(),
+                                   context = context
+                               )
+                           }
+                       )
+                   },
+                   // --
+                   title = titleInput.state,
+                   description = descriptionInput.state,
+                   category = categoryInput.state,
+                   image = imageInput.state,
+                   content = contentInput.state
                )
            }
        }
@@ -154,7 +160,14 @@ fun Body(
                contentInput = contentInput,
                isButtonEnabled = isButtonEnabled,
            )
-           PostScreen(modifier = Modifier.weight(1f))
+           PostScreen(
+               modifier = Modifier.weight(1f),
+               title = titleInput.state,
+               description = descriptionInput.state,
+               category = categoryInput.state,
+               image = imageInput.state,
+               content = contentInput.state
+           )
        }
    }
 }

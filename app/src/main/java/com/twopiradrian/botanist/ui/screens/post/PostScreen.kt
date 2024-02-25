@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.post
 
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.ui.components.button.PlainButton
 import com.twopiradrian.botanist.ui.components.image.PostImage
 import com.twopiradrian.botanist.ui.components.text.PostAuthor
@@ -32,7 +34,13 @@ import com.twopiradrian.botanist.ui.screens.home.HomeViewModel
 fun PostScreen(
     modifier: Modifier = Modifier,
     isPreview: Boolean = false,
-    publishButton: @Composable () -> Unit? = {}
+    publishButton: @Composable () -> Unit? = {},
+    // ---
+    title: String = "",
+    description: String = "",
+    category: String = "",
+    image: Uri? = null,
+    content: String = ""
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -41,7 +49,13 @@ fun PostScreen(
     ) {
         Body(
             isPreview = isPreview,
-            publishButton = publishButton
+            publishButton = publishButton,
+            // ---
+            title = title,
+            description = description,
+            category = category,
+            image = image,
+            content = content
         )
     }
 }
@@ -49,17 +63,29 @@ fun PostScreen(
 @Composable
 fun Body(
     isPreview: Boolean = false,
-    publishButton: @Composable () -> Unit? = {}
+    publishButton: @Composable () -> Unit? = {},
+    // ---
+    title: String,
+    description: String,
+    category: String,
+    image: Uri?,
+    content: String
 ){
 
     val scrollState = rememberScrollState()
 
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(scrollState),
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top
     ) {
-        PostHeader()
+        PostHeader(
+            title = title,
+            description = description,
+            category = category
+        )
         Spacer(modifier = Modifier.height(12.dp))
         PostImage()
         Spacer(modifier = Modifier.height(12.dp))
@@ -76,15 +102,28 @@ fun Body(
 }
 
 @Composable
-fun PostHeader(){
+fun PostHeader(
+    title: String,
+    description: String,
+    category: String
+){
     TitleLarge(
-        text = "This is a post title and is very long"
+        text = if (title == "") {
+            stringResource(id = R.string.placeholder_title)
+        }
+        else {
+            title
+        },
     )
     Spacer(
         modifier = Modifier.height(12.dp)
     )
     Text(
-        text = LoremIpsum(20).values.joinToString(" "),
+        text = if (description == "") {
+            stringResource(id = R.string.placeholder_description)
+        } else {
+            description
+        },
         modifier = Modifier.fillMaxWidth(),
         style = MaterialTheme.typography.bodyMedium,
     )
@@ -92,9 +131,19 @@ fun PostHeader(){
         modifier = Modifier.height(12.dp)
     )
     Row{
-        Text(text = stringResource(id = R.string.post_category), style = MaterialTheme.typography.bodySmall)
+        Text(
+            text = stringResource(id = R.string.post_category),
+            style = MaterialTheme.typography.bodySmall
+        )
         Spacer(modifier = Modifier.width(8.dp))
-        Text(text = stringResource(id = R.string.category_indoor), style = MaterialTheme.typography.bodySmall)
+        Text(
+            text = if (category == "") {
+                stringResource(id = R.string.placeholder_category)
+            } else {
+                stringResource(id = Categories.valueOf(category).category)
+            },
+            style = MaterialTheme.typography.bodySmall
+        )
     }
 
 }
@@ -102,7 +151,9 @@ fun PostHeader(){
 @Composable
 fun PostFooter(){
     Row(
-        modifier = Modifier.fillMaxWidth().padding(vertical = 16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

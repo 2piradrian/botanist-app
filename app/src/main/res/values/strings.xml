@@ -29,6 +29,12 @@
     <string name="post_unfollow">Dejar de seguir</string>
     <string name="post_category">Categoria:</string>
 
+    // Post Activity - Placeholders
+    <string name="placeholder_title">Título</string>
+    <string name="placeholder_description">Descripción</string>
+    <string name="placeholder_category">Categoria</string>
+    <string name="placeholder_content">Contenido</string>
+
     // Explore Activity
     <string name="explore_title">Explorar</string>
 
