@@ -31,18 +31,26 @@ import com.twopiradrian.botanist.ui.screens.home.HomeViewModel
 @Composable
 fun PostScreen(
     modifier: Modifier = Modifier,
+    isPreview: Boolean = false,
+    publishButton: @Composable () -> Unit? = {}
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Body()
+        Body(
+            isPreview = isPreview,
+            publishButton = publishButton
+        )
     }
 }
 
 @Composable
-fun Body(){
+fun Body(
+    isPreview: Boolean = false,
+    publishButton: @Composable () -> Unit? = {}
+){
 
     val scrollState = rememberScrollState()
 
@@ -58,6 +66,12 @@ fun Body(){
         PostContent()
         Spacer(modifier = Modifier.height(12.dp))
         PostFooter()
+        if(isPreview){
+            Spacer(modifier = Modifier.height(12.dp))
+            publishButton()
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+
     }
 }
 

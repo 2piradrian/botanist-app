@@ -93,8 +93,32 @@ fun Body(
 ) {
    if (contentType == ContentType.LIST_ONLY) {
        if (isShowingThePost) {
-           PostScreen()
-       } else {
+           Column(
+                modifier = Modifier.fillMaxSize()
+           ) {
+               PostScreen(
+                   isPreview = true,
+                     publishButton = {
+                          SecondaryButton(
+                            isEnabled = isButtonEnabled,
+                            text = R.string.write_post_button,
+                            onClick = {
+                                 viewModel.createPost(
+                                      title = titleInput.state,
+                                      description = descriptionInput.state,
+                                      category = categoryInput.state,
+                                      content = contentInput.state,
+                                      image = imageInput.state,
+                                      tokens = session.getTokens(),
+                                      context = context
+                                 )
+                            }
+                          )
+                     }
+               )
+           }
+       }
+       else {
            PostForm(
                viewModel = viewModel,
                context = context,
@@ -109,12 +133,15 @@ fun Body(
                contentType = contentType
            )
        }
-   }else if (contentType == ContentType.LIST_WITH_DETAILS) {
+   }
+   else if (contentType == ContentType.LIST_WITH_DETAILS) {
        Row(
            modifier = Modifier.fillMaxSize(),
        ) {
            PostForm(
-               modifier = Modifier.weight(1f).padding(horizontal = 16.dp),
+               modifier = Modifier
+                   .weight(1f)
+                   .padding(horizontal = 16.dp),
                viewModel = viewModel,
                context = context,
                session = session,
@@ -235,21 +262,30 @@ fun PostForm(
             Spacer(
                 modifier = Modifier.height(12.dp)
             )
-            SecondaryButton(
-                isEnabled = isButtonEnabled,
-                text = R.string.write_post_button,
-                onClick = {
-                    viewModel.createPost(
-                        title = titleInput.state,
-                        description = descriptionInput.state,
-                        category = categoryInput.state,
-                        content = contentInput.state,
-                        image = imageInput.state,
-                        tokens = session.getTokens(),
-                        context = context
-                    )
-                }
-            )
+            if (contentType == ContentType.LIST_WITH_DETAILS) {
+                SecondaryButton(
+                    isEnabled = isButtonEnabled,
+                    text = R.string.write_post_button,
+                    onClick = {
+                        viewModel.createPost(
+                            title = titleInput.state,
+                            description = descriptionInput.state,
+                            category = categoryInput.state,
+                            content = contentInput.state,
+                            image = imageInput.state,
+                            tokens = session.getTokens(),
+                            context = context
+                        )
+                    }
+                )
+            }
+            else {
+                SecondaryButton(
+                    onClick = {
+                        viewModel.setIsShowingThePost(true)
+                    },
+                    text = R.string.write_post_preview)
+            }
             Spacer(
                 modifier = Modifier.height(12.dp)
             )
