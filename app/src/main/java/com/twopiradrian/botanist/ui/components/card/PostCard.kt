@@ -34,7 +34,6 @@ fun PostCard(
 ) {
     Card(
         modifier = Modifier
-            .widthIn(max = 400.dp)
             .fillMaxWidth()
             .height(400.dp)
             .padding(vertical = 8.dp),
@@ -70,9 +69,11 @@ fun CardHeader(
     PostAuthor(
         author = author,
     )
-    HorizontalDivider(modifier = Modifier
+    HorizontalDivider(
+        modifier = Modifier
         .fillMaxWidth()
-        .padding(vertical = 8.dp))
+        .padding(vertical = 8.dp)
+    )
 }
 
 @Composable
