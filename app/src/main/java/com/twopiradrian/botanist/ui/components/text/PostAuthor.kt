@@ -18,7 +18,9 @@ import androidx.compose.ui.unit.dp
 import com.twopiradrian.botanist.R
 
 @Composable
-fun PostAuthor() {
+fun PostAuthor(
+    author: String
+) {
     Row(
         modifier = Modifier.height(20.dp),
         verticalAlignment = Alignment.CenterVertically,
@@ -33,7 +35,7 @@ fun PostAuthor() {
             modifier = Modifier.width(8.dp)
         )
         Text(
-            text = "carlitos jimenez",
+            text = author,
             style = MaterialTheme.typography.bodySmall
         )
     }

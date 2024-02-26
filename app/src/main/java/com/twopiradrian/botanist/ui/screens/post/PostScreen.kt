@@ -81,7 +81,13 @@ fun Body(
             content = content
         )
         Spacer(modifier = Modifier.height(12.dp))
-        PostFooter()
+        PostFooter(
+            likeFunction = {},
+            followFunction = {},
+            following = false,
+            liked = false,
+            author = "Author"
+        )
         if(isPreview){
             Spacer(
                 modifier = Modifier.height(12.dp)

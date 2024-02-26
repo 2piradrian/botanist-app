@@ -26,7 +26,11 @@ import com.twopiradrian.botanist.ui.components.text.PostAuthor
 
 @Composable
 fun PostCard(
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    title: String,
+    description: String,
+    imageUrl: String,
+    author: String,
 ) {
     Card(
         modifier = Modifier
@@ -47,29 +51,43 @@ fun PostCard(
         Column(
             modifier = Modifier.fillMaxSize().padding(8.dp),
         ) {
-            CardHeader()
-            CardContent()
+            CardHeader(
+                author = author
+            )
+            CardContent(
+                title = title,
+                description = description,
+                imageUrl = imageUrl
+            )
         }
     }
 }
 
 @Composable
-fun CardHeader() {
-    PostAuthor()
+fun CardHeader(
+    author: String
+) {
+    PostAuthor(
+        author = author,
+    )
     HorizontalDivider(modifier = Modifier
         .fillMaxWidth()
         .padding(vertical = 8.dp))
 }
 
 @Composable
-fun CardContent(){
+fun CardContent(
+    title: String,
+    description: String,
+    imageUrl: String
+){
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
         Text(
-            text = "This is a post",
+            text = title,
             modifier = Modifier.fillMaxWidth(),
             style = MaterialTheme.typography.bodyLarge,
             maxLines = 1,
@@ -77,7 +95,7 @@ fun CardContent(){
         )
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = "This is a very very very very very very very very very very very long description...",
+            text = description,
             modifier = Modifier.fillMaxWidth(),
             style = MaterialTheme.typography.bodyMedium,
             maxLines = 2,
@@ -85,7 +103,7 @@ fun CardContent(){
         )
         Spacer(modifier = Modifier.height(12.dp))
         AsyncImage(
-            model = "https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg",
+            model = imageUrl,
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()

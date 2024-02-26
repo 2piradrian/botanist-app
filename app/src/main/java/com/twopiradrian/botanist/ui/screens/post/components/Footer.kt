@@ -19,7 +19,8 @@ fun PostFooter(
     likeFunction: () -> Unit = {},
     followFunction: () -> Unit = {},
     following: Boolean = false,
-    liked: Boolean = false
+    liked: Boolean = false,
+    author: String = "Author"
 ){
     Row(
         modifier = Modifier
@@ -28,7 +29,9 @@ fun PostFooter(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        PostAuthor()
+        PostAuthor(
+            author = author
+        )
         Row {
             PlainButton(
                 text = if (liked) {

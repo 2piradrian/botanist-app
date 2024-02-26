@@ -121,7 +121,11 @@ fun HomeList(
                     PostCard(
                         onClick = {
                             viewModel.setIsShowingHomePage(false)
-                        }
+                        },
+                        title = "Title",
+                        description = "Description",
+                        imageUrl = "https://picsum.photos/200/300",
+                        author = "Author"
                     )
                 }
             }
