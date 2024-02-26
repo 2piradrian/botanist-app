@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -72,15 +73,22 @@ fun Body(
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ){
-            posts.forEach {
-                item {
-                    PostCard(
-                        onClick = {},
-                        title = it.title,
-                        description = it.description,
-                        imageUrl = it.image,
-                        author = it.authorUsername
-                    )
+            if (posts.isEmpty()) {
+                item{
+                    Text(text = "Cargando...")
+                }
+            }
+            else {
+                posts.forEach {
+                    item {
+                        PostCard(
+                            onClick = {},
+                            title = it.title,
+                            description = it.description,
+                            imageUrl = it.image,
+                            author = it.authorUsername
+                        )
+                    }
                 }
             }
         }

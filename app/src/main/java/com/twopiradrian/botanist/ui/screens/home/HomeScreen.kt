@@ -107,7 +107,7 @@ fun HomeList(
     viewModel: HomeViewModel,
 ) {
     Column(
-        modifier = modifier.fillMaxSize().padding(vertical = 16.dp),
+        modifier = modifier.fillMaxSize().padding(horizontal = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -117,6 +117,9 @@ fun HomeList(
             verticalArrangement = Arrangement.Top
         ) {
             item{
+                TitleLarge(
+                    textId = R.string.app_name
+                )
                 repeat(10){
                     PostCard(
                         onClick = {

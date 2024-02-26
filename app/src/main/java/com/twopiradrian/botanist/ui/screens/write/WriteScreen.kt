@@ -100,85 +100,89 @@ fun Body(
     isButtonEnabled: Boolean,
     isShowingThePost: Boolean
 ) {
-   if (contentType == ContentType.LIST_ONLY) {
-       if (isShowingThePost) {
-           Column(
-                modifier = Modifier.fillMaxSize()
-           ) {
-               PostScreen(
-                   isPreview = true,
-                   publishButton = {
-                       SecondaryButton(
-                           isEnabled = isButtonEnabled,
-                           text = R.string.write_post_button,
-                           onClick = {
-                               viewModel.createPost(
-                                   title = titleInput.state,
-                                   description = descriptionInput.state,
-                                   category = categoryInput.state,
-                                   content = contentInput.state,
-                                   image = imageInput.state,
-                                   tokens = session.getTokens(),
-                                   context = context
-                               )
-                           }
-                       )
-                   },
-                   // --
-                   title = titleInput.state,
-                   description = descriptionInput.state,
-                   category = categoryInput.state,
-                   image = imageInput.state,
-                   content = contentInput.state
-               )
-           }
-       }
-       else {
-           PostForm(
-               viewModel = viewModel,
-               context = context,
-               session = session,
-               // --
-               titleInput = titleInput,
-               descriptionInput = descriptionInput,
-               categoryInput = categoryInput,
-               imageInput = imageInput,
-               contentInput = contentInput,
-               isButtonEnabled = isButtonEnabled,
-               contentType = contentType
-           )
-       }
-   }
-   else if (contentType == ContentType.LIST_WITH_DETAILS) {
-       Row(
-           modifier = Modifier.fillMaxSize(),
-       ) {
-           PostForm(
-               modifier = Modifier
-                   .weight(1f)
-                   .padding(horizontal = 16.dp),
-               viewModel = viewModel,
-               context = context,
-               session = session,
-               contentType = contentType,
-               // --
-               titleInput = titleInput,
-               descriptionInput = descriptionInput,
-               categoryInput = categoryInput,
-               imageInput = imageInput,
-               contentInput = contentInput,
-               isButtonEnabled = isButtonEnabled,
-           )
-           PostScreen(
-               modifier = Modifier.weight(1f),
-               title = titleInput.state,
-               description = descriptionInput.state,
-               category = categoryInput.state,
-               image = imageInput.state,
-               content = contentInput.state
-           )
-       }
-   }
+    Column(
+        modifier = Modifier.fillMaxSize().padding(horizontal = 8.dp)
+    ) {
+        if (contentType == ContentType.LIST_ONLY) {
+            if (isShowingThePost) {
+                Column(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    PostScreen(
+                        isPreview = true,
+                        publishButton = {
+                            SecondaryButton(
+                                isEnabled = isButtonEnabled,
+                                text = R.string.write_post_button,
+                                onClick = {
+                                    viewModel.createPost(
+                                        title = titleInput.state,
+                                        description = descriptionInput.state,
+                                        category = categoryInput.state,
+                                        content = contentInput.state,
+                                        image = imageInput.state,
+                                        tokens = session.getTokens(),
+                                        context = context
+                                    )
+                                }
+                            )
+                        },
+                        // --
+                        title = titleInput.state,
+                        description = descriptionInput.state,
+                        category = categoryInput.state,
+                        image = imageInput.state,
+                        content = contentInput.state
+                    )
+                }
+            }
+            else {
+                PostForm(
+                    viewModel = viewModel,
+                    context = context,
+                    session = session,
+                    // --
+                    titleInput = titleInput,
+                    descriptionInput = descriptionInput,
+                    categoryInput = categoryInput,
+                    imageInput = imageInput,
+                    contentInput = contentInput,
+                    isButtonEnabled = isButtonEnabled,
+                    contentType = contentType
+                )
+            }
+        }
+        else if (contentType == ContentType.LIST_WITH_DETAILS) {
+            Row(
+                modifier = Modifier.fillMaxSize(),
+            ) {
+                PostForm(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 16.dp),
+                    viewModel = viewModel,
+                    context = context,
+                    session = session,
+                    contentType = contentType,
+                    // --
+                    titleInput = titleInput,
+                    descriptionInput = descriptionInput,
+                    categoryInput = categoryInput,
+                    imageInput = imageInput,
+                    contentInput = contentInput,
+                    isButtonEnabled = isButtonEnabled,
+                )
+                PostScreen(
+                    modifier = Modifier.weight(1f),
+                    title = titleInput.state,
+                    description = descriptionInput.state,
+                    category = categoryInput.state,
+                    image = imageInput.state,
+                    content = contentInput.state
+                )
+            }
+        }
+    }
 }
 
 @Composable
