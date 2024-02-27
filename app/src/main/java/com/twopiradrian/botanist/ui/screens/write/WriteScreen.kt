@@ -157,9 +157,7 @@ fun Body(
                 modifier = Modifier.fillMaxSize(),
             ) {
                 PostForm(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(horizontal = 16.dp),
+                    modifier = Modifier.weight(1f),
                     viewModel = viewModel,
                     context = context,
                     session = session,

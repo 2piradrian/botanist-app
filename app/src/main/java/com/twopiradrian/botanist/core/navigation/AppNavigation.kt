@@ -42,7 +42,8 @@ fun AppNavigation(
         composable(AppScreens.Explore.route) {
             ExploreScreen(
                 navController = navController,
-                navigationType = navigationType
+                navigationType = navigationType,
+                contentType = contentType
             )
         }
         composable(AppScreens.Write.route) {

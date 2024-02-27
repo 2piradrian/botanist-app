@@ -15,11 +15,25 @@ class ExploreViewModel : ViewModel() {
     private var page: Int? = 1
     private val pageSize: Int = 3
 
+    private val _isShowingThePost = MutableStateFlow(false)
+    val isShowingThePost: StateFlow<Boolean> = _isShowingThePost
+
+    private val _selectedPost = MutableStateFlow<PostEntity?>(null)
+    val selectedPost: StateFlow<PostEntity?> = _selectedPost
+
     private val _posts = MutableStateFlow(emptyList<PostEntity>())
     val posts: StateFlow<List<PostEntity>> = _posts
 
     private val _categories = MutableStateFlow(emptyList<Categories>())
     val categoriesFlow: StateFlow<List<Categories>> = _categories
+
+    fun setIsShowingThePost(b: Boolean){
+        _isShowingThePost.value = b
+    }
+
+    fun setSelectedPost(post: PostEntity){
+        _selectedPost.value = post
+    }
 
     fun setCategories(category: Categories){
         val list = _categories.value.toMutableList()
@@ -35,7 +49,8 @@ class ExploreViewModel : ViewModel() {
     suspend fun getPosts(
         session: Session,
         categories: List<Categories> = emptyList(),
-        postList: List<PostEntity> = emptyList()
+        postList: List<PostEntity> = emptyList(),
+        selectedPost: PostEntity? = null
     ){
         viewModelScope.launch {
             if (page == null) return@launch
@@ -57,12 +72,15 @@ class ExploreViewModel : ViewModel() {
 
             result?.response?.let {
                 _posts.value = postList + it.posts
+
+                if (selectedPost == null) {
+                    _selectedPost.value = it.posts.first()
+                }
             }
 
             result?.error?.let {
                 page = null
             }
-
 
         }
     }

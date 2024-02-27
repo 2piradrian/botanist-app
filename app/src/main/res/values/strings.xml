@@ -86,4 +86,7 @@
     <string name="error_content_short">Contenido muy corto</string>
     <string name="error_content_long">Contenido muy largo</string>
 
+    // UX
+    <string name="loading">Cargando…</string>
+
 </resources>

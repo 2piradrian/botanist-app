@@ -1,6 +1,8 @@
 package com.twopiradrian.botanist.ui.screens.explore
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
@@ -24,32 +27,43 @@ import com.twopiradrian.botanist.ui.components.text.TitleLarge
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.twopiradrian.botanist.domain.entity.PostEntity
+import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.components.card.PostCard
+import com.twopiradrian.botanist.ui.screens.home.HomeList
+import com.twopiradrian.botanist.ui.screens.post.PostScreen
 
 @Composable
 fun ExploreScreen(
     navController: NavController,
     navigationType: NavigationType,
+    contentType: ContentType,
     viewModel: ExploreViewModel = viewModel()
 ) {
     val context = LocalContext.current
     val session = Session.also { it.init(context) }
 
+    val isShowingThePost by viewModel.isShowingThePost.collectAsState()
+    val selectedPost by viewModel.selectedPost.collectAsState()
+
     val posts by viewModel.posts.collectAsState()
     val categories by viewModel.categoriesFlow.collectAsState()
 
-    LaunchedEffect(true){
-        viewModel.getPosts(session)
+    LaunchedEffect(categories){
+        viewModel.getPosts(session, categories, emptyList(), selectedPost)
     }
 
-    LaunchedEffect(categories){
-        viewModel.getPosts(session, categories, emptyList())
+    BackHandler {
+        if (isShowingThePost) {
+            viewModel.setIsShowingThePost(false)
+        }
     }
 
     AppLayout(navController = navController, navigationType = navigationType) {
         Body(
             session = session,
             viewModel = viewModel,
+            contentType = contentType,
+            isShowingThePost = isShowingThePost,
             posts = posts
         )
     }
@@ -59,36 +73,78 @@ fun ExploreScreen(
 fun Body(
     session: Session,
     viewModel: ExploreViewModel,
+    contentType: ContentType,
+    isShowingThePost: Boolean,
+    posts: List<PostEntity>
+) {
+    if (contentType == ContentType.LIST_ONLY) {
+        if(!isShowingThePost) {
+            ExploreList(
+                viewModel = viewModel,
+                session = session,
+                posts = posts
+            )
+        } else {
+            PostScreen(
+                // Just send the functions, not the whole viewModel
+                // Probably we need create a new component with the functions implemented
+            )
+        }
+    } else if (contentType == ContentType.LIST_WITH_DETAILS) {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            ExploreList(
+                modifier = Modifier.weight(1f),
+                viewModel = viewModel,
+                session = session,
+                posts = posts
+            )
+            PostScreen(
+                modifier = Modifier.weight(1f)
+            )
+        }
+    }
+}
+
+@Composable
+fun ExploreList(
+    modifier: Modifier = Modifier,
+    session: Session,
+    viewModel: ExploreViewModel,
     posts: List<PostEntity>
 ) {
     Column(
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 8.dp)
     ) {
-        TitleLarge(
-            textId = R.string.explore_title
-        )
-        LazyRow(
-            modifier = Modifier.fillMaxWidth(),
-
-        ){
-            Categories.entries.forEach {
-                item {
-                    CategoryFilterChip(
-                        category = it,
-                        onClick = {
-                            viewModel.setCategories(it)
-                        },
-                        modifier = Modifier.padding(end = 4.dp)
-                    )
-                }
-            }
-        }
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ){
+            item {
+                TitleLarge(
+                    textId = R.string.explore_title
+                )
+                LazyRow(
+                    modifier = Modifier.fillMaxWidth(),
+                ){
+                    Categories.entries.forEach {
+                        item {
+                            CategoryFilterChip(
+                                category = it,
+                                onClick = {
+                                    viewModel.setCategories(it)
+                                },
+                                modifier = Modifier.padding(end = 4.dp)
+                            )
+                        }
+                    }
+                }
+            }
             if (posts.isEmpty()) {
-                item{
-                    Text(text = "Cargando...")
+                item {
+                    Text(text = stringResource(id = R.string.loading))
                 }
             }
             else {
