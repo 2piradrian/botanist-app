@@ -29,6 +29,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.components.card.PostCard
+import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 import com.twopiradrian.botanist.ui.screens.home.HomeList
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
 
@@ -59,12 +60,21 @@ fun ExploreScreen(
     }
 
     AppLayout(navController = navController, navigationType = navigationType) {
-        Body(
-            session = session,
-            viewModel = viewModel,
+        AdaptiveLayout(
+            screen1 = {
+                ExploreList(
+                    session = session,
+                    viewModel = viewModel,
+                    posts = posts,
+                )
+            },
+            screen2 = {
+                PostScreen(
+                    // Just send the functions, not the whole viewModel
+                    // Probably we need create a new component with the functions implemented
+                )
+            },
             contentType = contentType,
-            isShowingThePost = isShowingThePost,
-            posts = posts
         )
     }
 }
