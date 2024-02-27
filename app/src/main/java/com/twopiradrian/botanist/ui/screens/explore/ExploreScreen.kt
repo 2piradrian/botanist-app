@@ -36,14 +36,20 @@ fun ExploreScreen(
     val session = Session.also { it.init(context) }
 
     val posts by viewModel.posts.collectAsState()
+    val categories by viewModel.categoriesFlow.collectAsState()
 
     LaunchedEffect(true){
         viewModel.getPosts(session)
     }
 
+    LaunchedEffect(categories){
+        viewModel.getPosts(session, categories, emptyList())
+    }
+
     AppLayout(navController = navController, navigationType = navigationType) {
         Body(
             session = session,
+            viewModel = viewModel,
             posts = posts
         )
     }
@@ -52,6 +58,7 @@ fun ExploreScreen(
 @Composable
 fun Body(
     session: Session,
+    viewModel: ExploreViewModel,
     posts: List<PostEntity>
 ) {
     Column(
@@ -66,7 +73,13 @@ fun Body(
         ){
             Categories.entries.forEach {
                 item {
-                    CategoryFilterChip(textId = it.category, modifier = Modifier.padding(end = 4.dp))
+                    CategoryFilterChip(
+                        category = it,
+                        onClick = {
+                            viewModel.setCategories(it)
+                        },
+                        modifier = Modifier.padding(end = 4.dp)
+                    )
                 }
             }
         }

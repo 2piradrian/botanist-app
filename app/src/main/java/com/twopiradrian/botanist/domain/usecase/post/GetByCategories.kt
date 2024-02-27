@@ -2,6 +2,7 @@ package com.twopiradrian.botanist.domain.usecase.post
 
 import com.google.gson.annotations.SerializedName
 import com.twopiradrian.botanist.data.repository.PostRepository
+import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.domain.entity.TokensEntity
 
@@ -9,7 +10,7 @@ class GetByCategories {
     private val repository: PostRepository = PostRepository()
 
     data class Request(
-        @SerializedName("categories") val categories: List<String>,
+        @SerializedName("categories") val categories: List<Categories>,
         @SerializedName("page") val page: Int,
         @SerializedName("pageSize") val pageSize: Int
     )

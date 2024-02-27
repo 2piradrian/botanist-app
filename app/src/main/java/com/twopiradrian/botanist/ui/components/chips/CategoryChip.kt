@@ -1,8 +1,6 @@
 package com.twopiradrian.botanist.ui.components.chips
 
-import androidx.annotation.StringRes
 import androidx.compose.material3.FilterChip
-import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,12 +9,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import com.twopiradrian.botanist.domain.data.Categories
 
 @Composable
 fun CategoryFilterChip (
     modifier: Modifier = Modifier,
-    onClick: () -> Unit = {},
-    @StringRes textId: Int,
+    onClick: (Categories) -> Unit,
+    category: Categories,
 ) {
     var selected by remember { mutableStateOf(false) }
 
@@ -24,9 +23,9 @@ fun CategoryFilterChip (
         modifier = modifier,
         selected = selected,
         onClick = {
-            onClick()
             selected = !selected
+            onClick(category)
         },
-        label = { Text(text = stringResource(id = textId)) },
+        label = { Text(text = stringResource(id = category.category)) },
     )
 }
