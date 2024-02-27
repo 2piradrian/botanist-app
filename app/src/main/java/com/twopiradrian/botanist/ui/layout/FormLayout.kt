@@ -20,7 +20,7 @@ fun FormLayout(
 
     LaunchedEffect(imeState.value){
         if (imeState.value){
-            scrollState.scrollTo(scrollState.maxValue)
+            scrollState.scrollTo(0)
         }
     }
 
