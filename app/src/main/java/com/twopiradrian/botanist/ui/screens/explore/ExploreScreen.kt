@@ -75,45 +75,8 @@ fun ExploreScreen(
                 )
             },
             contentType = contentType,
+            isShowingMainScreen = !isShowingThePost
         )
-    }
-}
-
-@Composable
-fun Body(
-    session: Session,
-    viewModel: ExploreViewModel,
-    contentType: ContentType,
-    isShowingThePost: Boolean,
-    posts: List<PostEntity>
-) {
-    if (contentType == ContentType.LIST_ONLY) {
-        if(!isShowingThePost) {
-            ExploreList(
-                viewModel = viewModel,
-                session = session,
-                posts = posts
-            )
-        } else {
-            PostScreen(
-                // Just send the functions, not the whole viewModel
-                // Probably we need create a new component with the functions implemented
-            )
-        }
-    } else if (contentType == ContentType.LIST_WITH_DETAILS) {
-        Row(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            ExploreList(
-                modifier = Modifier.weight(1f),
-                viewModel = viewModel,
-                session = session,
-                posts = posts
-            )
-            PostScreen(
-                modifier = Modifier.weight(1f)
-            )
-        }
     }
 }
 

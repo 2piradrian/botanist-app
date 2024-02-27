@@ -24,6 +24,7 @@ import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
 import com.twopiradrian.botanist.ui.components.card.PostCard
 import com.twopiradrian.botanist.ui.components.text.TitleLarge
+import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
 
@@ -65,38 +66,21 @@ fun HomeScreen(
         navController = navController,
         navigationType = navigationType,
     ){
-        Body(
-            isShowingHomePage = isShowingHomePage,
+        AdaptiveLayout(
+            screen1 = {
+                HomeList(
+                    viewModel = viewModel
+                )
+            },
+            screen2 = {
+                PostScreen(
+                    // Just send the functions, not the whole viewModel
+                    // Probably we need create a new component with the functions implemented
+                )
+            },
             contentType = contentType,
-            viewModel = viewModel
+            isShowingMainScreen = isShowingHomePage
         )
-    }
-}
-
-@Composable
-fun Body(
-    isShowingHomePage: Boolean,
-    contentType: ContentType,
-    viewModel: HomeViewModel
-) {
-    if (contentType == ContentType.LIST_ONLY) {
-        if(isShowingHomePage) {
-            HomeList(
-                viewModel = viewModel
-            )
-        } else {
-            PostScreen(
-                // Just send the functions, not the whole viewModel
-                // Probably we need create a new component with the functions implemented
-            )
-        }
-    } else if (contentType == ContentType.LIST_WITH_DETAILS) {
-        Row(
-            modifier = Modifier.fillMaxSize(),
-        ) {
-            HomeList(modifier = Modifier.weight(1f), viewModel = viewModel)
-            PostScreen(modifier = Modifier.weight(1f))
-        }
     }
 }
 
@@ -106,7 +90,9 @@ fun HomeList(
     viewModel: HomeViewModel,
 ) {
     Column(
-        modifier = modifier.fillMaxSize().padding(horizontal = 8.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
