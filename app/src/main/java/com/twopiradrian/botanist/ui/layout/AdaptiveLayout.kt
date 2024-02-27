@@ -33,10 +33,10 @@ fun AdaptiveLayout(
            Row(
                 modifier = Modifier.fillMaxSize()
            ){
-               Box(modifier = Modifier.weight(1f)) {
+               Box(modifier = Modifier.weight(1f).padding(horizontal = 8.dp)) {
                    screen1()
                }
-               Box(modifier = Modifier.weight(1f)) {
+               Box(modifier = Modifier.weight(1f).padding(horizontal = 8.dp)) {
                    screen2()
                }
            }

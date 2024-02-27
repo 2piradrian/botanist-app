@@ -88,9 +88,7 @@ fun ExploreList(
     posts: List<PostEntity>
 ) {
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(horizontal = 8.dp)
+        modifier = modifier.fillMaxSize()
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize()
