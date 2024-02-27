@@ -1,7 +1,10 @@
 package com.twopiradrian.botanist.ui.screens.login
 
 import android.widget.Toast
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
@@ -12,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -29,13 +33,16 @@ import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.twopiradrian.botanist.data.datasource.app.Session
+import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
+import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 
 @Composable
 fun LoginScreen(
     navController: NavController,
     viewModel: LoginViewModel = viewModel(),
     navigationType: NavigationType,
+    contentType: ContentType
 ) {
     val context = LocalContext.current
     val session = Session.also { it.init(context) }
@@ -67,13 +74,18 @@ fun LoginScreen(
         navigationType = navigationType,
         withNavigationBar = false,
     ) {
-        Body(
-            viewModel = viewModel,
-            navController = navController,
-            session = session,
-            emailInput = emailInput,
-            passwordInput = passwordInput,
-            isButtonEnabled = isButtonEnabled
+        AdaptiveLayout(
+            screen1 = {
+                Body(
+                    viewModel = viewModel,
+                    navController = navController,
+                    session = session,
+                    emailInput = emailInput,
+                    passwordInput = passwordInput,
+                    isButtonEnabled = isButtonEnabled
+                )
+            },
+            contentType = contentType
         )
     }
 }
@@ -87,45 +99,51 @@ fun Body(
     passwordInput: InputData,
     isButtonEnabled: Boolean,
 ) {
-    FormLayout {
-        TitleMedium(text = R.string.login_title)
-        HorizontalDivider(
-            modifier = Modifier.padding(20.dp)
-        )
-        OutlinedInput(
-            state = emailInput,
-            inputType = InputType.EMAIL,
-            label = R.string.email_label,
-            placeholder = R.string.email_placeholder,
-            onValueChange = { viewModel.onLoginChange(it, passwordInput.state) },
-            isLastField = false,
-            icon = Icons.Default.Email
-        )
-        OutlinedInput(
-            state = passwordInput,
-            inputType = InputType.PASSWORD,
-            label = R.string.password_label,
-            placeholder = R.string.password_placeholder,
-            onValueChange = { viewModel.onLoginChange(emailInput.state, it) },
-            isLastField = true,
-            icon = Icons.Default.Lock
-        )
-        Spacer(modifier = Modifier.padding(12.dp))
-        MainButton(
-            isEnabled = isButtonEnabled,
-            text = R.string.login_button,
-            onClick = { viewModel.loginUser(
-                email = emailInput.state,
-                password = passwordInput.state,
-                session = session
-            ) }
-        )
-        Spacer(modifier = Modifier.padding(18.dp))
-        PlainButton(
-            text = R.string.login_register,
-            onClick = {
-                navController.navigate(AppScreens.Register.route)
-            }
-        )
+    Column (
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        FormLayout {
+            TitleMedium(text = R.string.login_title)
+            HorizontalDivider(
+                modifier = Modifier.padding(20.dp)
+            )
+            OutlinedInput(
+                state = emailInput,
+                inputType = InputType.EMAIL,
+                label = R.string.email_label,
+                placeholder = R.string.email_placeholder,
+                onValueChange = { viewModel.onLoginChange(it, passwordInput.state) },
+                isLastField = false,
+                icon = Icons.Default.Email
+            )
+            OutlinedInput(
+                state = passwordInput,
+                inputType = InputType.PASSWORD,
+                label = R.string.password_label,
+                placeholder = R.string.password_placeholder,
+                onValueChange = { viewModel.onLoginChange(emailInput.state, it) },
+                isLastField = true,
+                icon = Icons.Default.Lock
+            )
+            Spacer(modifier = Modifier.padding(12.dp))
+            MainButton(
+                isEnabled = isButtonEnabled,
+                text = R.string.login_button,
+                onClick = {
+                    viewModel.loginUser(
+                        email = emailInput.state, password = passwordInput.state, session = session
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.padding(18.dp))
+            PlainButton(
+                text = R.string.login_register,
+                onClick = {
+                    navController.navigate(AppScreens.Register.route)
+                }
+            )
+        }
     }
 }

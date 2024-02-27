@@ -31,6 +31,7 @@ import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.components.button.ImagePickerButton
 import com.twopiradrian.botanist.ui.components.button.SecondaryButton
 import com.twopiradrian.botanist.ui.app.ImageData
+import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
 
@@ -68,75 +69,8 @@ fun WriteScreen(
     }
 
     AppLayout(navController = navController, navigationType = navigationType) {
-        Body(
-            viewModel = viewModel,
-            context = context,
-            session = session,
-            contentType = contentType,
-            // --
-            titleInput = titleInput,
-            descriptionInput = descriptionInput,
-            categoryInput = categoryInput,
-            imageInput = imageInput,
-            contentInput = contentInput,
-            isButtonEnabled = isButtonEnabled,
-            isShowingThePost = isShowingThePost
-        )
-    }
-}
-
-@Composable
-fun Body(
-    viewModel: WriteViewModel,
-    context: Context,
-    session: Session,
-    contentType: ContentType,
-    // --
-    titleInput: InputData,
-    descriptionInput: InputData,
-    categoryInput: InputData,
-    imageInput: ImageData,
-    contentInput: InputData,
-    isButtonEnabled: Boolean,
-    isShowingThePost: Boolean
-) {
-    Column(
-        modifier = Modifier.fillMaxSize().padding(horizontal = 8.dp)
-    ) {
-        if (contentType == ContentType.LIST_ONLY) {
-            if (isShowingThePost) {
-                Column(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    PostScreen(
-                        isPreview = true,
-                        publishButton = {
-                            SecondaryButton(
-                                isEnabled = isButtonEnabled,
-                                text = R.string.write_post_button,
-                                onClick = {
-                                    viewModel.createPost(
-                                        title = titleInput.state,
-                                        description = descriptionInput.state,
-                                        category = categoryInput.state,
-                                        content = contentInput.state,
-                                        image = imageInput.state,
-                                        tokens = session.getTokens(),
-                                        context = context
-                                    )
-                                }
-                            )
-                        },
-                        // --
-                        title = titleInput.state,
-                        description = descriptionInput.state,
-                        category = categoryInput.state,
-                        image = imageInput.state,
-                        content = contentInput.state
-                    )
-                }
-            }
-            else {
+        AdaptiveLayout(
+            screen1 = {
                 PostForm(
                     viewModel = viewModel,
                     context = context,
@@ -150,36 +84,38 @@ fun Body(
                     isButtonEnabled = isButtonEnabled,
                     contentType = contentType
                 )
-            }
-        }
-        else if (contentType == ContentType.LIST_WITH_DETAILS) {
-            Row(
-                modifier = Modifier.fillMaxSize(),
-            ) {
-                PostForm(
-                    modifier = Modifier.weight(1f),
-                    viewModel = viewModel,
-                    context = context,
-                    session = session,
-                    contentType = contentType,
-                    // --
-                    titleInput = titleInput,
-                    descriptionInput = descriptionInput,
-                    categoryInput = categoryInput,
-                    imageInput = imageInput,
-                    contentInput = contentInput,
-                    isButtonEnabled = isButtonEnabled,
-                )
+            },
+            screen2 = {
                 PostScreen(
-                    modifier = Modifier.weight(1f),
+                    isPreview = true,
+                    publishButton = {
+                        SecondaryButton(
+                            isEnabled = isButtonEnabled,
+                            text = R.string.write_post_button,
+                            onClick = {
+                                viewModel.createPost(
+                                    title = titleInput.state,
+                                    description = descriptionInput.state,
+                                    category = categoryInput.state,
+                                    content = contentInput.state,
+                                    image = imageInput.state,
+                                    tokens = session.getTokens(),
+                                    context = context
+                                )
+                            }
+                        )
+                    },
+                    // --
                     title = titleInput.state,
                     description = descriptionInput.state,
                     category = categoryInput.state,
                     image = imageInput.state,
                     content = contentInput.state
                 )
-            }
-        }
+            },
+            contentType = contentType,
+            isShowingMainScreen = !isShowingThePost
+        )
     }
 }
 

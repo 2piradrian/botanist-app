@@ -1,6 +1,8 @@
 package com.twopiradrian.botanist.ui.screens.register
 
 import android.widget.Toast
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -29,7 +32,9 @@ import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.twopiradrian.botanist.core.navigation.AppScreens
+import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
+import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 
 
 @Composable
@@ -37,6 +42,7 @@ fun RegisterScreen(
     navController: NavController,
     viewModel: RegisterViewModel = viewModel(),
     navigationType: NavigationType,
+    contentType: ContentType,
 ) {
     val context = LocalContext.current
 
@@ -68,12 +74,17 @@ fun RegisterScreen(
         navigationType = navigationType,
         withNavigationBar = false,
     ) {
-        Body(
-            viewModel = viewModel,
-            emailInput = emailInput,
-            passwordInput = passwordInput,
-            usernameInput = usernameInput,
-            isButtonEnabled = isButtonEnabled
+        AdaptiveLayout(
+            screen1 = {
+                Body(
+                    viewModel = viewModel,
+                    emailInput = emailInput,
+                    passwordInput = passwordInput,
+                    usernameInput = usernameInput,
+                    isButtonEnabled = isButtonEnabled
+                )
+            },
+            contentType = contentType
         )
     }
 }
@@ -86,48 +97,76 @@ fun Body(
     usernameInput: InputData,
     isButtonEnabled: Boolean,
 ) {
-    FormLayout(
+    Column (
         modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TitleMedium(text = R.string.register_title)
-        HorizontalDivider(
-            modifier = Modifier.padding(20.dp)
-        )
-        OutlinedInput(
-            state = usernameInput,
-            inputType = InputType.TEXT,
-            label = R.string.username_label,
-            placeholder = R.string.username_placeholder,
-            onValueChange = { viewModel.onRegisterChange(emailInput.state, passwordInput.state, it) },
-            isLastField = false,
-            icon = Icons.Default.AccountCircle
-        )
-        OutlinedInput(
-            state = emailInput,
-            inputType = InputType.EMAIL,
-            label = R.string.email_label,
-            placeholder = R.string.email_placeholder,
-            onValueChange = { viewModel.onRegisterChange(it, passwordInput.state, usernameInput.state) },
-            isLastField = false,
-            icon = Icons.Default.Email
-        )
-        OutlinedInput(
-            state = passwordInput,
-            inputType = InputType.PASSWORD,
-            label = R.string.password_label,
-            placeholder = R.string.password_placeholder,
-            onValueChange = { viewModel.onRegisterChange(emailInput.state, it, usernameInput.state) },
-            isLastField = true,
-            icon = Icons.Default.Lock
-        )
-        Spacer(modifier = Modifier.padding(12.dp))
-        MainButton(
-            isEnabled = isButtonEnabled,
-            text = R.string.register_button,
-            onClick = {
-                viewModel.registerUser(emailInput.state, passwordInput.state, usernameInput.state)
-            }
-        )
+        FormLayout(
+            modifier = Modifier.fillMaxSize(),
+        ) {
+            TitleMedium(text = R.string.register_title)
+            HorizontalDivider(
+                modifier = Modifier.padding(20.dp)
+            )
+            OutlinedInput(
+                state = usernameInput,
+                inputType = InputType.TEXT,
+                label = R.string.username_label,
+                placeholder = R.string.username_placeholder,
+                onValueChange = {
+                    viewModel.onRegisterChange(
+                        emailInput.state,
+                        passwordInput.state,
+                        it
+                    )
+                },
+                isLastField = false,
+                icon = Icons.Default.AccountCircle
+            )
+            OutlinedInput(
+                state = emailInput,
+                inputType = InputType.EMAIL,
+                label = R.string.email_label,
+                placeholder = R.string.email_placeholder,
+                onValueChange = {
+                    viewModel.onRegisterChange(
+                        it,
+                        passwordInput.state,
+                        usernameInput.state
+                    )
+                },
+                isLastField = false,
+                icon = Icons.Default.Email
+            )
+            OutlinedInput(
+                state = passwordInput,
+                inputType = InputType.PASSWORD,
+                label = R.string.password_label,
+                placeholder = R.string.password_placeholder,
+                onValueChange = {
+                    viewModel.onRegisterChange(
+                        emailInput.state,
+                        it,
+                        usernameInput.state
+                    )
+                },
+                isLastField = true,
+                icon = Icons.Default.Lock
+            )
+            Spacer(modifier = Modifier.padding(12.dp))
+            MainButton(
+                isEnabled = isButtonEnabled,
+                text = R.string.register_button,
+                onClick = {
+                    viewModel.registerUser(
+                        emailInput.state,
+                        passwordInput.state,
+                        usernameInput.state
+                    )
+                }
+            )
+        }
     }
 
 }
