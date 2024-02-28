@@ -15,13 +15,13 @@ fun AdaptiveLayout(
     screen1: @Composable () -> Unit,
     screen2: @Composable (() -> Unit)? = null,
     contentType: ContentType,
-    isShowingMainScreen: Boolean? = null
+    isShowingMainScreen: Boolean = true
 ) {
    if (screen2 != null) {
        // Two screens layout
        if (contentType == ContentType.LIST_ONLY) {
            // Single column layout
-           if (isShowingMainScreen == true) {
+           if (isShowingMainScreen) {
                screen1()
            }
            else {

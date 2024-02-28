@@ -85,7 +85,7 @@ fun LoginScreen(
                     isButtonEnabled = isButtonEnabled
                 )
             },
-            contentType = contentType
+            contentType = contentType,
         )
     }
 }

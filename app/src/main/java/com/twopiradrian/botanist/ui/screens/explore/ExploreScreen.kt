@@ -2,12 +2,13 @@ package com.twopiradrian.botanist.ui.screens.explore
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,7 +31,6 @@ import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.components.card.PostCard
 import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
-import com.twopiradrian.botanist.ui.screens.home.HomeList
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
 
 @Composable
@@ -43,10 +43,13 @@ fun ExploreScreen(
     val context = LocalContext.current
     val session = Session.also { it.init(context) }
 
+    val scrollState = rememberLazyListState()
+
     val posts by viewModel.posts.collectAsState()
     val selectedPost by viewModel.selectedPost.collectAsState()
     val categories by viewModel.categoriesFlow.collectAsState()
     val isShowingMainScreen by viewModel.isShowingMainScreen.collectAsState()
+
 
 
     LaunchedEffect(categories){
@@ -54,8 +57,8 @@ fun ExploreScreen(
     }
 
     BackHandler {
-        if (isShowingMainScreen) {
-            viewModel.setIsShowingMainScreen(false)
+        if (!isShowingMainScreen) {
+            viewModel.setIsShowingMainScreen(true)
         }
     }
 
@@ -65,6 +68,7 @@ fun ExploreScreen(
                 ExploreList(
                     session = session,
                     viewModel = viewModel,
+                    scrollState = scrollState,
                     posts = posts,
                 )
             },
@@ -83,14 +87,16 @@ fun ExploreScreen(
 fun ExploreList(
     modifier: Modifier = Modifier,
     session: Session,
+    scrollState: LazyListState,
     viewModel: ExploreViewModel,
-    posts: List<PostEntity>
+    posts: List<PostEntity>,
 ) {
     Column(
         modifier = modifier.fillMaxSize()
     ) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
+            state = scrollState,
         ){
             item {
                 TitleLarge(
@@ -121,7 +127,10 @@ fun ExploreList(
                 posts.forEach {
                     item {
                         PostCard(
-                            onClick = {},
+                            onClick = {
+                                viewModel.setSelectedPost(it)
+                                viewModel.setIsShowingMainScreen(false)
+                            },
                             post = it
                         )
                     }
