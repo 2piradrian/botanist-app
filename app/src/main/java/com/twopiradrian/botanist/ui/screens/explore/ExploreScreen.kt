@@ -77,6 +77,7 @@ fun ExploreScreen(
                     session = session,
                     viewModel = viewModel,
                     scrollState = scrollState,
+                    categories = categories,
                     posts = posts,
                 )
             },
@@ -97,6 +98,7 @@ fun ExploreList(
     session: Session,
     scrollState: LazyListState,
     viewModel: ExploreViewModel,
+    categories: List<Categories>,
     posts: List<PostEntity>,
 ) {
     Column(
@@ -117,6 +119,7 @@ fun ExploreList(
                         item {
                             CategoryFilterChip(
                                 category = it,
+                                categories = categories,
                                 onClick = {
                                     viewModel.setCategories(it)
                                 },

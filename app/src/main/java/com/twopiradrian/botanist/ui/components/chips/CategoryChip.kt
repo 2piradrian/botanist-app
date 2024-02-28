@@ -15,15 +15,13 @@ import com.twopiradrian.botanist.domain.data.Categories
 fun CategoryFilterChip (
     modifier: Modifier = Modifier,
     onClick: (Categories) -> Unit,
+    categories: List<Categories>,
     category: Categories,
 ) {
-    var selected by remember { mutableStateOf(false) }
-
     FilterChip(
         modifier = modifier,
-        selected = selected,
+        selected = categories.contains(category),
         onClick = {
-            selected = !selected
             onClick(category)
         },
         label = { Text(text = stringResource(id = category.category)) },

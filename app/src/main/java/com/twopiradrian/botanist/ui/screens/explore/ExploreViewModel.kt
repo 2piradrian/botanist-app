@@ -43,6 +43,8 @@ class ExploreViewModel : ViewModel() {
         } else{
             list.add(category)
         }
+        page = 1 // Reset page
+
         _categories.value = list
     }
 
