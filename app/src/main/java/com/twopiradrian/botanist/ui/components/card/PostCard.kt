@@ -22,15 +22,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.ui.components.text.PostAuthor
 
 @Composable
 fun PostCard(
     onClick: () -> Unit,
-    title: String,
-    description: String,
-    imageUrl: String,
-    author: String,
+    post: PostEntity
 ) {
     Card(
         modifier = Modifier
@@ -51,12 +49,12 @@ fun PostCard(
             modifier = Modifier.fillMaxSize().padding(8.dp),
         ) {
             CardHeader(
-                author = author
+                author = post.authorUsername
             )
             CardContent(
-                title = title,
-                description = description,
-                imageUrl = imageUrl
+                title = post.title,
+                description = post.description,
+                imageUrl = post.image
             )
         }
     }

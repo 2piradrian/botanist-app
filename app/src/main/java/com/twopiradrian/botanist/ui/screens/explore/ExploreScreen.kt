@@ -43,19 +43,19 @@ fun ExploreScreen(
     val context = LocalContext.current
     val session = Session.also { it.init(context) }
 
-    val isShowingThePost by viewModel.isShowingThePost.collectAsState()
-    val selectedPost by viewModel.selectedPost.collectAsState()
-
     val posts by viewModel.posts.collectAsState()
+    val selectedPost by viewModel.selectedPost.collectAsState()
     val categories by viewModel.categoriesFlow.collectAsState()
+    val isShowingMainScreen by viewModel.isShowingMainScreen.collectAsState()
+
 
     LaunchedEffect(categories){
         viewModel.getPosts(session, categories, emptyList(), selectedPost)
     }
 
     BackHandler {
-        if (isShowingThePost) {
-            viewModel.setIsShowingThePost(false)
+        if (isShowingMainScreen) {
+            viewModel.setIsShowingMainScreen(false)
         }
     }
 
@@ -70,12 +70,11 @@ fun ExploreScreen(
             },
             screen2 = {
                 PostScreen(
-                    // Just send the functions, not the whole viewModel
-                    // Probably we need create a new component with the functions implemented
+                    post = selectedPost
                 )
             },
             contentType = contentType,
-            isShowingMainScreen = !isShowingThePost
+            isShowingMainScreen = isShowingMainScreen
         )
     }
 }
@@ -123,10 +122,7 @@ fun ExploreList(
                     item {
                         PostCard(
                             onClick = {},
-                            title = it.title,
-                            description = it.description,
-                            imageUrl = it.image,
-                            author = it.authorUsername
+                            post = it
                         )
                     }
                 }

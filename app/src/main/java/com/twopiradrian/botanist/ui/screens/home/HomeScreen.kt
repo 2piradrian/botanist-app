@@ -74,8 +74,7 @@ fun HomeScreen(
             },
             screen2 = {
                 PostScreen(
-                    // Just send the functions, not the whole viewModel
-                    // Probably we need create a new component with the functions implemented
+                   post =  null
                 )
             },
             contentType = contentType,
@@ -103,17 +102,6 @@ fun HomeList(
                 TitleLarge(
                     textId = R.string.app_name
                 )
-                repeat(10){
-                    PostCard(
-                        onClick = {
-                            viewModel.setIsShowingHomePage(false)
-                        },
-                        title = "Title",
-                        description = "Description",
-                        imageUrl = "https://picsum.photos/200/300",
-                        author = "Author"
-                    )
-                }
             }
         }
     }

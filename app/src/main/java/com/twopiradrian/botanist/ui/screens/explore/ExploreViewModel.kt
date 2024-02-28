@@ -15,8 +15,8 @@ class ExploreViewModel : ViewModel() {
     private var page: Int? = 1
     private val pageSize: Int = 3
 
-    private val _isShowingThePost = MutableStateFlow(false)
-    val isShowingThePost: StateFlow<Boolean> = _isShowingThePost
+    private val _isShowingMainScreen = MutableStateFlow(true)
+    val isShowingMainScreen: StateFlow<Boolean> = _isShowingMainScreen
 
     private val _selectedPost = MutableStateFlow<PostEntity?>(null)
     val selectedPost: StateFlow<PostEntity?> = _selectedPost
@@ -27,8 +27,8 @@ class ExploreViewModel : ViewModel() {
     private val _categories = MutableStateFlow(emptyList<Categories>())
     val categoriesFlow: StateFlow<List<Categories>> = _categories
 
-    fun setIsShowingThePost(b: Boolean){
-        _isShowingThePost.value = b
+    fun setIsShowingMainScreen(b: Boolean){
+        _isShowingMainScreen.value = b
     }
 
     fun setSelectedPost(post: PostEntity){

@@ -27,6 +27,7 @@ import com.twopiradrian.botanist.ui.layout.AppLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.twopiradrian.botanist.core.navigation.AppScreens
 import com.twopiradrian.botanist.data.datasource.app.Session
+import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.components.button.ImagePickerButton
 import com.twopiradrian.botanist.ui.components.button.SecondaryButton
@@ -34,6 +35,7 @@ import com.twopiradrian.botanist.ui.app.ImageData
 import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
+import java.util.Date
 
 @Composable
 fun WriteScreen(
@@ -106,11 +108,18 @@ fun WriteScreen(
                         )
                     },
                     // --
-                    title = titleInput.state,
-                    description = descriptionInput.state,
-                    category = categoryInput.state,
-                    image = imageInput.state,
-                    content = contentInput.state
+                    post = PostEntity(
+                        title = titleInput.state ,
+                        description = descriptionInput.state,
+                        category = categoryInput.state,
+                        content = contentInput.state,
+                        image = imageInput.state.toString(),
+                        authorUsername = "Author",
+                        authorId = "0",
+                        id = "0",
+                        createdAt = Date(),
+                        likedBy = listOf(),
+                    )
                 )
             },
             contentType = contentType,

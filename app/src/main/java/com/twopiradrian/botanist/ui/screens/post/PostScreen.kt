@@ -1,18 +1,17 @@
 package com.twopiradrian.botanist.ui.screens.post
 
-import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.ui.components.image.PostImage
 import com.twopiradrian.botanist.ui.components.text.PostContent
 import com.twopiradrian.botanist.ui.screens.post.components.PostFooter
@@ -25,11 +24,7 @@ fun PostScreen(
     isPreview: Boolean = false,
     publishButton: @Composable () -> Unit? = {},
     // ---
-    title: String = "",
-    description: String = "",
-    category: String = "",
-    image: Uri? = null,
-    content: String = ""
+    post: PostEntity?
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -40,11 +35,7 @@ fun PostScreen(
             isPreview = isPreview,
             publishButton = publishButton,
             // ---
-            title = title,
-            description = description,
-            category = category,
-            image = image,
-            content = content
+            post = post
         )
     }
 }
@@ -54,13 +45,8 @@ fun Body(
     isPreview: Boolean = false,
     publishButton: @Composable () -> Unit? = {},
     // ---
-    title: String,
-    description: String,
-    category: String,
-    image: Uri?,
-    content: String
+    post: PostEntity?
 ){
-
     val scrollState = rememberScrollState()
 
     Column(
@@ -68,18 +54,22 @@ fun Body(
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Top
     ) {
+        if (post == null) {
+            // Do not show anything if there is no post
+            return
+        }
         PostHeader(
-            title = title,
-            description = description,
-            category = category
+            title = post.title,
+            description = post.description,
+            category = post.category
         )
         Spacer(modifier = Modifier.height(12.dp))
         PostImage(
-            image = image,
+            image = post.image
         )
         Spacer(modifier = Modifier.height(12.dp))
         PostContent(
-            content = content
+            content = post.content
         )
         Spacer(modifier = Modifier.height(12.dp))
         PostFooter(
@@ -87,7 +77,7 @@ fun Body(
             followFunction = {},
             following = false,
             liked = false,
-            author = "Author"
+            author = post.authorUsername,
         )
         if(isPreview){
             Spacer(

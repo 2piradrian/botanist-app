@@ -14,7 +14,7 @@ import com.twopiradrian.botanist.ui.app.ImageData
 
 @Composable
 fun PostImage(
-    image: Uri?
+    image: String?,
 ){
     AsyncImage(
         model = image ?: R.drawable.default_image,
