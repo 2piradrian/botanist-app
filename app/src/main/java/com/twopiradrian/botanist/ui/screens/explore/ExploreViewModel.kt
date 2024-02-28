@@ -72,6 +72,7 @@ class ExploreViewModel : ViewModel() {
 
             result?.response?.let {
                 _posts.value = postList + it.posts
+                page = it.nextPage
 
                 if (selectedPost == null) {
                     _selectedPost.value = it.posts.first()

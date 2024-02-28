@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.explore
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,6 +33,7 @@ import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.components.card.PostCard
 import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
+import kotlinx.coroutines.flow.collect
 
 @Composable
 fun ExploreScreen(
@@ -50,7 +52,13 @@ fun ExploreScreen(
     val categories by viewModel.categoriesFlow.collectAsState()
     val isShowingMainScreen by viewModel.isShowingMainScreen.collectAsState()
 
-
+    LaunchedEffect(scrollState) {
+       scrollState.interactionSource.interactions.collect{
+           if (scrollState.firstVisibleItemIndex == posts.size - 2) {
+               viewModel.getPosts(session, categories, posts, selectedPost)
+           }
+       }
+    }
 
     LaunchedEffect(categories){
         viewModel.getPosts(session, categories, emptyList(), selectedPost)
