@@ -1,11 +1,14 @@
 package com.twopiradrian.botanist.ui.screens.explore
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.domain.usecase.post.GetByCategories
+import com.twopiradrian.botanist.domain.usecase.user.FollowUser
+import com.twopiradrian.botanist.domain.usecase.user.LikePost
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -33,6 +36,51 @@ class ExploreViewModel : ViewModel() {
 
     fun setSelectedPost(post: PostEntity){
         _selectedPost.value = post
+    }
+
+    fun likePost (session: Session, post: PostEntity){
+        viewModelScope.launch {
+            val tokens = session.getTokens()
+
+            val result = try {
+                val request = LikePost.Request(post.id)
+                LikePost().invoke(tokens, request)
+            } catch (e: Exception){
+                e.printStackTrace()
+                null
+            }
+
+            result?.response?.let {
+                Log.d("ExploreViewModel", "Post liked")
+            }
+
+            result?.error?.let {
+                Log.d("ExploreViewModel", "Error liking post")
+            }
+        }
+    }
+
+    fun followUser(session: Session, post: PostEntity){
+        viewModelScope.launch {
+            val tokens = session.getTokens()
+            val followedId = post.authorId
+
+            val result = try {
+                val request = FollowUser.Request(followedId)
+                FollowUser().invoke(tokens, request)
+            } catch (e: Exception){
+                e.printStackTrace()
+                null
+            }
+
+            result?.response?.let {
+                Log.d("ExploreViewModel", "User followed")
+            }
+
+            result?.error?.let {
+                Log.d("ExploreViewModel", "Error following user")
+            }
+        }
     }
 
     fun setCategories(category: Categories){

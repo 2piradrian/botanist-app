@@ -4,12 +4,11 @@ import com.google.gson.annotations.SerializedName
 import com.twopiradrian.botanist.data.repository.UserRepository
 import com.twopiradrian.botanist.domain.entity.TokensEntity
 
-
-class LikePost {
+class FollowUser {
     private val repository: UserRepository = UserRepository()
 
     data class Request(
-        @SerializedName("postId") val postId: String
+        @SerializedName("followedId") val followedId: String
     )
 
     data class Response(
@@ -23,7 +22,7 @@ class LikePost {
 
     suspend fun invoke (tokens: TokensEntity, request: Request): Result {
         return try {
-            val response = repository.likePost(tokens.accessToken, request)
+            val response = repository.followUser(tokens.accessToken, request)
             Result(response = Response(response.message))
         } catch (e: Exception) {
             e.printStackTrace()
@@ -32,5 +31,6 @@ class LikePost {
             Result(error = 0)
         }
     }
+
 
 }

@@ -23,6 +23,8 @@ fun PostScreen(
     modifier: Modifier = Modifier,
     isPreview: Boolean = false,
     publishButton: @Composable () -> Unit? = {},
+    likeFunction: () -> Unit = {},
+    followFunction: () -> Unit = {},
     // ---
     post: PostEntity?
 ) {
@@ -34,6 +36,8 @@ fun PostScreen(
         Body(
             isPreview = isPreview,
             publishButton = publishButton,
+            likeFunction = likeFunction,
+            followFunction = followFunction,
             // ---
             post = post
         )
@@ -44,6 +48,8 @@ fun PostScreen(
 fun Body(
     isPreview: Boolean = false,
     publishButton: @Composable () -> Unit? = {},
+    likeFunction: () -> Unit = {},
+    followFunction: () -> Unit = {},
     // ---
     post: PostEntity?
 ){
@@ -73,8 +79,8 @@ fun Body(
         )
         Spacer(modifier = Modifier.height(12.dp))
         PostFooter(
-            likeFunction = {},
-            followFunction = {},
+            likeFunction = likeFunction,
+            followFunction = followFunction,
             following = false,
             liked = false,
             author = post.authorUsername,

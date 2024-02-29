@@ -1,6 +1,5 @@
 package com.twopiradrian.botanist.ui.screens.explore
 
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -83,7 +82,18 @@ fun ExploreScreen(
             },
             screen2 = {
                 PostScreen(
-                    post = selectedPost
+                    post = selectedPost,
+                    isPreview = false,
+                    likeFunction = {
+                        selectedPost?.let {
+                            viewModel.likePost(session, it)
+                        }
+                    },
+                    followFunction = {
+                        selectedPost?.let {
+                            viewModel.followUser(session, it)
+                        }
+                    }
                 )
             },
             contentType = contentType,
