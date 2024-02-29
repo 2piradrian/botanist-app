@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.explore
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +15,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -46,6 +49,8 @@ fun ExploreScreen(
 
     val scrollState = rememberLazyListState()
 
+    val userProfile by viewModel.userProfile.collectAsState()
+
     val posts by viewModel.posts.collectAsState()
     val selectedPost by viewModel.selectedPost.collectAsState()
     val categories by viewModel.categoriesFlow.collectAsState()
@@ -57,6 +62,10 @@ fun ExploreScreen(
                viewModel.getPosts(session, categories, posts, selectedPost)
            }
        }
+    }
+
+    LaunchedEffect(true){
+        viewModel.getUserProfile(session)
     }
 
     LaunchedEffect(categories){
@@ -83,15 +92,16 @@ fun ExploreScreen(
             screen2 = {
                 PostScreen(
                     post = selectedPost,
+                    user = userProfile,
                     isPreview = false,
                     likeFunction = {
                         selectedPost?.let {
-                            viewModel.likePost(session, it)
+                            viewModel.likePost(session, it, userProfile)
                         }
                     },
                     followFunction = {
                         selectedPost?.let {
-                            viewModel.followUser(session, it)
+                            viewModel.followUser(session, it, userProfile)
                         }
                     }
                 )

@@ -118,8 +118,10 @@ fun WriteScreen(
                         authorId = "0",
                         id = "0",
                         createdAt = Date(),
-                        likedBy = listOf(),
-                    )
+                        likedBy = listOf()
+
+                    ),
+                    user = null
                 )
             },
             contentType = contentType,

@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.twopiradrian.botanist.domain.entity.PostEntity
+import com.twopiradrian.botanist.domain.entity.UserEntity
 import com.twopiradrian.botanist.ui.components.image.PostImage
 import com.twopiradrian.botanist.ui.components.text.PostContent
 import com.twopiradrian.botanist.ui.screens.post.components.PostFooter
@@ -26,7 +27,8 @@ fun PostScreen(
     likeFunction: () -> Unit = {},
     followFunction: () -> Unit = {},
     // ---
-    post: PostEntity?
+    post: PostEntity?,
+    user: UserEntity?
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
@@ -39,7 +41,8 @@ fun PostScreen(
             likeFunction = likeFunction,
             followFunction = followFunction,
             // ---
-            post = post
+            post = post,
+            user = user
         )
     }
 }
@@ -51,7 +54,8 @@ fun Body(
     likeFunction: () -> Unit = {},
     followFunction: () -> Unit = {},
     // ---
-    post: PostEntity?
+    post: PostEntity?,
+    user: UserEntity?
 ){
     val scrollState = rememberScrollState()
 
@@ -81,8 +85,8 @@ fun Body(
         PostFooter(
             likeFunction = likeFunction,
             followFunction = followFunction,
-            following = false,
-            liked = false,
+            following = user?.following?.contains(post.authorId) ?: false,
+            liked = user?.likes?.contains(post.id) ?: false,
             author = post.authorUsername,
         )
         if(isPreview){

@@ -74,7 +74,8 @@ fun HomeScreen(
             },
             screen2 = {
                 PostScreen(
-                   post =  null
+                   post =  null,
+                   user = null
                 )
             },
             contentType = contentType,

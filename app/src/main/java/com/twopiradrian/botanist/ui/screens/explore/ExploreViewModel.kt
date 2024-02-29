@@ -6,8 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.domain.entity.PostEntity
+import com.twopiradrian.botanist.domain.entity.UserEntity
 import com.twopiradrian.botanist.domain.usecase.post.GetByCategories
 import com.twopiradrian.botanist.domain.usecase.user.FollowUser
+import com.twopiradrian.botanist.domain.usecase.user.GetProfile
 import com.twopiradrian.botanist.domain.usecase.user.LikePost
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,6 +32,9 @@ class ExploreViewModel : ViewModel() {
     private val _categories = MutableStateFlow(emptyList<Categories>())
     val categoriesFlow: StateFlow<List<Categories>> = _categories
 
+    private val _userProfile = MutableStateFlow<UserEntity?>(null)
+    val userProfile: StateFlow<UserEntity?> = _userProfile
+
     fun setIsShowingMainScreen(b: Boolean){
         _isShowingMainScreen.value = b
     }
@@ -38,7 +43,7 @@ class ExploreViewModel : ViewModel() {
         _selectedPost.value = post
     }
 
-    fun likePost (session: Session, post: PostEntity){
+    fun likePost (session: Session, post: PostEntity, user: UserEntity?){
         viewModelScope.launch {
             val tokens = session.getTokens()
 
@@ -51,7 +56,17 @@ class ExploreViewModel : ViewModel() {
             }
 
             result?.response?.let {
-                Log.d("ExploreViewModel", "Post liked")
+                if (user != null) {
+                    val list = user.likes.toMutableList()
+
+                    if (list.contains(post.id)) {
+                        list.remove(post.id)
+                    }
+                    else {
+                        list.add(post.id)
+                    }
+                    _userProfile.value = user.copy(likes = list)
+                }
             }
 
             result?.error?.let {
@@ -60,7 +75,7 @@ class ExploreViewModel : ViewModel() {
         }
     }
 
-    fun followUser(session: Session, post: PostEntity){
+    fun followUser(session: Session, post: PostEntity, user: UserEntity?){
         viewModelScope.launch {
             val tokens = session.getTokens()
             val followedId = post.authorId
@@ -74,7 +89,17 @@ class ExploreViewModel : ViewModel() {
             }
 
             result?.response?.let {
-                Log.d("ExploreViewModel", "User followed")
+                if (user != null) {
+                    val list = user.following.toMutableList()
+
+                    if (list.contains(post.authorId)) {
+                        list.remove(post.authorId)
+                    }
+                    else {
+                        list.add(post.authorId)
+                    }
+                    _userProfile.value = user.copy(following = list)
+                }
             }
 
             result?.error?.let {
@@ -133,6 +158,29 @@ class ExploreViewModel : ViewModel() {
                 page = null
             }
 
+        }
+    }
+
+    suspend fun getUserProfile(session: Session) {
+        viewModelScope.launch {
+            val tokens = session.getTokens()
+            val user = session.getUser()
+
+            val request = GetProfile.Request(user.id)
+            val result = try {
+                GetProfile().invoke(tokens, request)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+
+            result?.response?.let {
+                _userProfile.value = it.user
+            }
+
+            result?.error?.let {
+                Log.d("ExploreViewModel", "Error getting user profile")
+            }
         }
     }
 
