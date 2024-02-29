@@ -4,7 +4,7 @@ import android.util.Patterns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.twopiradrian.botanist.R
-import com.twopiradrian.botanist.domain.usecase.user.Register
+import com.twopiradrian.botanist.domain.usecase.auth.Register
 import com.twopiradrian.botanist.ui.app.InputData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

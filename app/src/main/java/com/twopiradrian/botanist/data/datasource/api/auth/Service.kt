@@ -1,13 +1,13 @@
-package com.twopiradrian.botanist.data.datasource.api.user
+package com.twopiradrian.botanist.data.datasource.api.auth
 
 import com.twopiradrian.botanist.core.helper.RetrofitHelper
-import com.twopiradrian.botanist.domain.usecase.user.Login
-import com.twopiradrian.botanist.domain.usecase.user.RefreshTokens
-import com.twopiradrian.botanist.domain.usecase.user.Register
+import com.twopiradrian.botanist.domain.usecase.auth.Login
+import com.twopiradrian.botanist.domain.usecase.auth.RefreshTokens
+import com.twopiradrian.botanist.domain.usecase.auth.Register
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class UserAPIService: Client {
+class AuthAPIService: Client {
     private val retrofit = RetrofitHelper.getRetrofit()
 
     override suspend fun refreshTokens(request: RefreshTokens.Request): RefreshTokens.Response {

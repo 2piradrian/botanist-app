@@ -1,16 +1,16 @@
-package com.twopiradrian.botanist.domain.usecase.user
+package com.twopiradrian.botanist.domain.usecase.auth
 
 import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import com.twopiradrian.botanist.R
-import com.twopiradrian.botanist.data.repository.UserRepository
+import com.twopiradrian.botanist.data.repository.AuthRepository
 import com.twopiradrian.botanist.domain.data.HTTPError
 import com.twopiradrian.botanist.domain.entity.TokensEntity
 import com.twopiradrian.botanist.domain.entity.UserEntity
 import retrofit2.HttpException
 
 class Login {
-    private val repository: UserRepository = UserRepository()
+    private val repository: AuthRepository = AuthRepository()
 
     data class Request(
         @SerializedName("email") val email: String,

@@ -1,11 +1,10 @@
 package com.twopiradrian.botanist.ui.screens.home
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.domain.entity.TokensEntity
-import com.twopiradrian.botanist.domain.usecase.user.RefreshTokens
+import com.twopiradrian.botanist.domain.usecase.auth.RefreshTokens
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch

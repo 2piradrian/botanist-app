@@ -1,9 +1,9 @@
-package com.twopiradrian.botanist.data.datasource.api.user
+package com.twopiradrian.botanist.data.datasource.api.auth
 
 
-import com.twopiradrian.botanist.domain.usecase.user.Login
-import com.twopiradrian.botanist.domain.usecase.user.RefreshTokens
-import com.twopiradrian.botanist.domain.usecase.user.Register
+import com.twopiradrian.botanist.domain.usecase.auth.Login
+import com.twopiradrian.botanist.domain.usecase.auth.RefreshTokens
+import com.twopiradrian.botanist.domain.usecase.auth.Register
 import retrofit2.http.Body
 import retrofit2.http.POST
 

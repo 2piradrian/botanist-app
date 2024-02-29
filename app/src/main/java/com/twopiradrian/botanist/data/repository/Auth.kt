@@ -1,13 +1,13 @@
 package com.twopiradrian.botanist.data.repository
 
-import com.twopiradrian.botanist.data.datasource.api.user.UserAPIService
-import com.twopiradrian.botanist.domain.repository.UserRepository
-import com.twopiradrian.botanist.domain.usecase.user.Login
-import com.twopiradrian.botanist.domain.usecase.user.RefreshTokens
-import com.twopiradrian.botanist.domain.usecase.user.Register
+import com.twopiradrian.botanist.data.datasource.api.auth.AuthAPIService
+import com.twopiradrian.botanist.domain.repository.AuthRepository
+import com.twopiradrian.botanist.domain.usecase.auth.Login
+import com.twopiradrian.botanist.domain.usecase.auth.RefreshTokens
+import com.twopiradrian.botanist.domain.usecase.auth.Register
 
-class UserRepository: UserRepository {
-    private val api = UserAPIService()
+class AuthRepository: AuthRepository {
+    private val api = AuthAPIService()
     override suspend fun refreshTokens(request: RefreshTokens.Request): RefreshTokens.Response {
        return api.refreshTokens(request)
     }

@@ -7,7 +7,7 @@ import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.domain.entity.TokensEntity
 import com.twopiradrian.botanist.domain.entity.UserDataEntity
-import com.twopiradrian.botanist.domain.usecase.user.Login
+import com.twopiradrian.botanist.domain.usecase.auth.Login
 import com.twopiradrian.botanist.ui.app.InputData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
