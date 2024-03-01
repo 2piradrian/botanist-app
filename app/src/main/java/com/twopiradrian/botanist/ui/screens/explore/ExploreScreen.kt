@@ -1,6 +1,5 @@
 package com.twopiradrian.botanist.ui.screens.explore
 
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,8 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -35,7 +32,6 @@ import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.components.card.PostCard
 import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
-import kotlinx.coroutines.flow.collect
 
 @Composable
 fun ExploreScreen(
@@ -82,7 +78,6 @@ fun ExploreScreen(
         AdaptiveLayout(
             screen1 = {
                 ExploreList(
-                    session = session,
                     viewModel = viewModel,
                     scrollState = scrollState,
                     categories = categories,
@@ -115,7 +110,6 @@ fun ExploreScreen(
 @Composable
 fun ExploreList(
     modifier: Modifier = Modifier,
-    session: Session,
     scrollState: LazyListState,
     viewModel: ExploreViewModel,
     categories: List<Categories>,
