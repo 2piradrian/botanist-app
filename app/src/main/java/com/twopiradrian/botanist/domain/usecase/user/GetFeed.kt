@@ -3,6 +3,7 @@ package com.twopiradrian.botanist.domain.usecase.user
 import com.google.gson.annotations.SerializedName
 import com.twopiradrian.botanist.data.repository.UserRepository
 import com.twopiradrian.botanist.domain.entity.PostEntity
+import com.twopiradrian.botanist.domain.entity.TokensEntity
 
 class GetFeed {
     val repository: UserRepository = UserRepository()
@@ -21,9 +22,9 @@ class GetFeed {
         val response: Response? = null
     )
 
-    suspend fun invoke(token: String, request: Request): Result {
+    suspend fun invoke(tokens: TokensEntity, request: Request): Result {
         return try {
-            val response = repository.getFeed(token, request)
+            val response = repository.getFeed(tokens.accessToken, request)
             Result(response = response)
         } catch (e: Exception) {
             e.printStackTrace()

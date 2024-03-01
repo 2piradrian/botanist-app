@@ -14,7 +14,7 @@ import retrofit2.http.Query
 
 interface Client {
 
-    @GET("user/get-feed?{page}&{pageSize}")
+    @GET("user/get-feed")
     suspend fun getFeed(
         @Header("Authorization") token: String,
         @Query("page") page: Int,
