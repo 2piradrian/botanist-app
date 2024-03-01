@@ -2,6 +2,7 @@ package com.twopiradrian.botanist.ui.screens.explore
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -9,14 +10,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
@@ -30,6 +29,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.components.card.PostCard
+import com.twopiradrian.botanist.ui.components.loading.CircularIndicator
 import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
 
@@ -120,7 +120,7 @@ fun ExploreList(
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            state = scrollState,
+            state = scrollState
         ){
             item {
                 TitleLarge(
@@ -145,7 +145,8 @@ fun ExploreList(
             }
             if (posts.isEmpty()) {
                 item {
-                    Text(text = stringResource(id = R.string.loading))
+                    Spacer(modifier = Modifier.padding(16.dp))
+                    CircularIndicator(modifier = Modifier.fillMaxSize())
                 }
             }
             else {

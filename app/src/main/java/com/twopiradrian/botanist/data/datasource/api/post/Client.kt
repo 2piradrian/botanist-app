@@ -1,10 +1,14 @@
 package com.twopiradrian.botanist.data.datasource.api.post
 
+import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.domain.usecase.post.Create
 import com.twopiradrian.botanist.domain.usecase.post.GetByCategories
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 interface Client {
     @POST("posts/create")
@@ -13,9 +17,11 @@ interface Client {
         @Body request: Create.Request
     ): Create.Response
 
-    @POST("posts/get-by-categories")
+    @GET("posts/get-by-categories")
     suspend fun getByCategories(
         @Header("Authorization") token: String,
-        @Body request: GetByCategories.Request
+        @Query("page") page: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query("categories") categories: String
     ): GetByCategories.Response
 }

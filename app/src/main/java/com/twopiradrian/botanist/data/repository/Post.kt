@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.data.repository
 
+import android.util.Log
 import com.twopiradrian.botanist.data.datasource.api.post.PostAPIService
 import com.twopiradrian.botanist.domain.repository.PostRepository
 import com.twopiradrian.botanist.domain.usecase.post.Create
@@ -12,7 +13,9 @@ class PostRepository: PostRepository {
     }
 
     override suspend fun getByCategories(token: String, request: GetByCategories.Request): GetByCategories.Response {
-        return api.getByCategories(token, request)
+        val categoriesString = request.categories.joinToString(separator = ",") { it.name }
+
+        return api.getByCategories(token, request.page, request.pageSize, categoriesString)
     }
 
 }

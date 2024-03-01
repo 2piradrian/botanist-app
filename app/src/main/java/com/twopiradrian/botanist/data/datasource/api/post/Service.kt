@@ -1,6 +1,7 @@
 package com.twopiradrian.botanist.data.datasource.api.post
 
 import com.twopiradrian.botanist.core.helper.RetrofitHelper
+import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.domain.usecase.post.Create
 import com.twopiradrian.botanist.domain.usecase.post.GetByCategories
 import kotlinx.coroutines.Dispatchers
@@ -14,10 +15,9 @@ class PostAPIService: Client {
         }
     }
 
-    override suspend fun getByCategories(token: String, request: GetByCategories.Request): GetByCategories.Response {
+    override suspend fun getByCategories(token: String, page: Int, pageSize: Int, categories: String): GetByCategories.Response {
         return withContext(Dispatchers.IO) {
-            retrofit.create(Client::class.java).getByCategories("Bearer $token", request)
+            retrofit.create(Client::class.java).getByCategories("Bearer $token", page, pageSize, categories)
         }
     }
-
 }
