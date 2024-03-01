@@ -49,6 +49,9 @@
     <string name="write_post_button">Publicar</string>
     <string name="write_post_preview">Vista previa</string>
 
+    // Profile Activity
+    <string name="profile_title">Perfil</string>
+
     // Categories
     <string name="category_tools">Herramientas</string>
     <string name="category_indoor">Interior</string>

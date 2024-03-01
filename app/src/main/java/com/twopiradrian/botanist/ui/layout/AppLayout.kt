@@ -67,7 +67,7 @@ fun ContentInColumn(
     Column(
         modifier = modifier
             .padding(bottom = innerPadding.calculateBottomPadding())
-            .padding(horizontal = 16.dp, vertical = 0.dp),
+            .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -99,7 +99,8 @@ fun ContentInRow(
             ) {
                 content()
             }
-        }else if(withNavigationBar && navigationType == NavigationType.PERMANENT_NAVIGATION_DRAWER){
+        }
+        else if(withNavigationBar && navigationType == NavigationType.PERMANENT_NAVIGATION_DRAWER){
             Column(
                 modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp, vertical = 0.dp),
             ) {
@@ -107,7 +108,8 @@ fun ContentInRow(
                     navController = navController, content = content
                 )
             }
-        }else{
+        }
+        else{
             Column(
                 modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp, vertical = 0.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,

@@ -8,6 +8,7 @@ import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
 import com.twopiradrian.botanist.ui.screens.explore.ExploreScreen
 import com.twopiradrian.botanist.ui.screens.login.LoginScreen
+import com.twopiradrian.botanist.ui.screens.profile.ProfileScreen
 import com.twopiradrian.botanist.ui.screens.register.RegisterScreen
 import com.twopiradrian.botanist.ui.screens.write.WriteScreen
 
@@ -42,6 +43,13 @@ fun AppNavigation(
         }
         composable(AppScreens.Write.route) {
             WriteScreen(
+                navController = navController,
+                navigationType = navigationType,
+                contentType = contentType
+            )
+        }
+        composable(AppScreens.Profile.route) {
+            ProfileScreen(
                 navController = navController,
                 navigationType = navigationType,
                 contentType = contentType

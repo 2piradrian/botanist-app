@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.components.navigation
 
+import android.provider.ContactsContract.Profile
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -31,7 +32,7 @@ import com.twopiradrian.botanist.core.navigation.AppScreens
 
 sealed class MenuItem(val route: String, val icon: Int, val label: Int ) {
     companion object {
-        val items = listOf(Explore, Write, Settings)
+        val items = listOf(Explore, Write, Profile)
     }
 
     data object Explore: MenuItem(
@@ -46,8 +47,8 @@ sealed class MenuItem(val route: String, val icon: Int, val label: Int ) {
         R.string.nav_write,
     )
 
-    data object Settings: MenuItem(
-        AppScreens.Login.route,
+    data object Profile: MenuItem(
+        AppScreens.Profile.route,
         R.drawable.ic_account,
         R.string.nav_profile
     )

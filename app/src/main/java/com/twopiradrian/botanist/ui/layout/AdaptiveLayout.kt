@@ -44,10 +44,6 @@ fun AdaptiveLayout(
    }
    else {
        // Single screen layout
-       Column (
-              modifier = Modifier.fillMaxSize().padding(horizontal = 8.dp)
-       ) {
-           screen1()
-       }
+       screen1()
    }
 }

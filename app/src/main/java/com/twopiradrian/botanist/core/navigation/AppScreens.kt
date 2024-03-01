@@ -5,4 +5,6 @@ sealed class AppScreens(val route: String) {
     data object Login : AppScreens("login")
     data object Explore : AppScreens("explore")
     data object Write : AppScreens("write")
+
+    data object Profile : AppScreens("profile")
 }
