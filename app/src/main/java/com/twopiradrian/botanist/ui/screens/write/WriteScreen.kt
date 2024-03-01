@@ -66,7 +66,7 @@ fun WriteScreen(
 
     LaunchedEffect(postedSuccessfully) {
         if (postedSuccessfully) {
-            navController.navigate(AppScreens.Home.route)
+            navController.navigate(AppScreens.Explore.route)
         }
     }
 

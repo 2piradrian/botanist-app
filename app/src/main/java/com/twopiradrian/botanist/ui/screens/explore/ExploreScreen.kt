@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.explore
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,6 +28,7 @@ import com.twopiradrian.botanist.ui.components.chips.CategoryFilterChip
 import com.twopiradrian.botanist.ui.components.text.TitleLarge
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.twopiradrian.botanist.core.navigation.AppScreens
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.components.card.PostCard
@@ -48,24 +51,39 @@ fun ExploreScreen(
     val userProfile by viewModel.userProfile.collectAsState()
 
     val posts by viewModel.posts.collectAsState()
+    val page by viewModel.page.collectAsState()
     val selectedPost by viewModel.selectedPost.collectAsState()
     val categories by viewModel.categoriesFlow.collectAsState()
     val isShowingMainScreen by viewModel.isShowingMainScreen.collectAsState()
 
+    viewModel.checkIfUserIsLoggedIn(session).also {
+        if (!it) {
+            navController.navigate(AppScreens.Login.route)
+        }
+    }
+
+    DisposableEffect(Unit){
+        onDispose {
+            viewModel.resetPagination()
+        }
+    }
+
+    LaunchedEffect(true){
+        if (userProfile == null) {
+            viewModel.getUserProfile(session)
+        }
+    }
+
     LaunchedEffect(scrollState) {
        scrollState.interactionSource.interactions.collect{
            if (scrollState.firstVisibleItemIndex == posts.size - 2) {
-               viewModel.getPosts(session, categories, posts, selectedPost)
+               viewModel.getPosts(session, categories, posts, selectedPost, page)
            }
        }
     }
 
-    LaunchedEffect(true){
-        viewModel.getUserProfile(session)
-    }
-
     LaunchedEffect(categories){
-        viewModel.getPosts(session, categories, emptyList(), selectedPost)
+        viewModel.getPosts(session, categories, emptyList(), selectedPost, page)
     }
 
     BackHandler {

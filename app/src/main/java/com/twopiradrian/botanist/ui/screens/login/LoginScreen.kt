@@ -57,7 +57,7 @@ fun LoginScreen(
     LaunchedEffect(userLogged) {
         if (userLogged) {
             Toast.makeText(context, context.getString(R.string.login_success), Toast.LENGTH_LONG).show()
-            navController.navigate(AppScreens.Home.route)
+            navController.navigate(AppScreens.Explore.route)
         }
     }
 

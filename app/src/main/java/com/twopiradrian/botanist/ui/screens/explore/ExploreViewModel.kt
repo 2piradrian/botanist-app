@@ -6,7 +6,9 @@ import androidx.lifecycle.viewModelScope
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.domain.entity.PostEntity
+import com.twopiradrian.botanist.domain.entity.TokensEntity
 import com.twopiradrian.botanist.domain.entity.UserEntity
+import com.twopiradrian.botanist.domain.usecase.auth.RefreshTokens
 import com.twopiradrian.botanist.domain.usecase.post.GetByCategories
 import com.twopiradrian.botanist.domain.usecase.user.FollowUser
 import com.twopiradrian.botanist.domain.usecase.user.GetProfile
@@ -17,8 +19,7 @@ import kotlinx.coroutines.launch
 
 class ExploreViewModel : ViewModel() {
 
-    private var page: Int? = 1
-    private val pageSize: Int = 3
+    private val pageSize = 3
 
     private val _isShowingMainScreen = MutableStateFlow(true)
     val isShowingMainScreen: StateFlow<Boolean> = _isShowingMainScreen
@@ -35,12 +36,21 @@ class ExploreViewModel : ViewModel() {
     private val _userProfile = MutableStateFlow<UserEntity?>(null)
     val userProfile: StateFlow<UserEntity?> = _userProfile
 
+    private val _page = MutableStateFlow<Int?>(1)
+    val page: StateFlow<Int?> = _page
+
     fun setIsShowingMainScreen(b: Boolean){
         _isShowingMainScreen.value = b
     }
 
     fun setSelectedPost(post: PostEntity){
         _selectedPost.value = post
+    }
+
+    fun resetPagination() {
+        _posts.value = emptyList()
+        _categories.value = emptyList()
+        _page.value = 1
     }
 
     fun likePost (session: Session, post: PostEntity, user: UserEntity?){
@@ -116,8 +126,7 @@ class ExploreViewModel : ViewModel() {
         } else{
             list.add(category)
         }
-        page = 1 // Reset page
-
+        _page.value = 1
         _categories.value = list
     }
 
@@ -125,15 +134,17 @@ class ExploreViewModel : ViewModel() {
         session: Session,
         categories: List<Categories> = emptyList(),
         postList: List<PostEntity> = emptyList(),
-        selectedPost: PostEntity? = null
+        selectedPost: PostEntity? = null,
+        page: Int?,
     ){
         viewModelScope.launch {
+
             if (page == null) return@launch
 
             val result = try {
                 val request = GetByCategories.Request(
                     categories = categories,
-                    page = page!!,
+                    page = page,
                     pageSize = pageSize
                 )
                 val tokens = session.getTokens()
@@ -147,7 +158,7 @@ class ExploreViewModel : ViewModel() {
 
             result?.response?.let {
                 _posts.value = postList + it.posts
-                page = it.nextPage
+                _page.value = it.nextPage
 
                 if (selectedPost == null) {
                     _selectedPost.value = it.posts.first()
@@ -155,7 +166,7 @@ class ExploreViewModel : ViewModel() {
             }
 
             result?.error?.let {
-                page = null
+                _page.value = null
             }
 
         }
@@ -184,5 +195,40 @@ class ExploreViewModel : ViewModel() {
         }
     }
 
+    fun checkIfUserIsLoggedIn(session: Session): Boolean {
+        val user = session.getUser()
+        val tokens = session.getTokens()
+
+        if (user.id.isEmpty() || tokens.accessToken.isEmpty() || tokens.refreshToken.isEmpty()) {
+            return false
+        }
+        refreshTokens(session)
+        return true
+    }
+
+    private fun refreshTokens(session: Session) {
+        viewModelScope.launch {
+            val result = try {
+                val token = session.getTokens().refreshToken
+                val request = RefreshTokens.Request(token)
+
+                RefreshTokens().invoke(request)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+
+            result?.response?.let {
+                val tokens = TokensEntity(
+                    accessToken = it.accessToken,
+                    refreshToken = it.refreshToken
+                )
+
+                session.saveTokens(tokens)
+
+                return@launch
+            }
+        }
+    }
 
 }

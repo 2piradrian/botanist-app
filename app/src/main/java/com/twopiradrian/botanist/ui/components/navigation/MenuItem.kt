@@ -10,7 +10,6 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.NavigationDrawerItem
-import androidx.compose.material3.NavigationDrawerItemColors
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
@@ -32,13 +31,8 @@ import com.twopiradrian.botanist.core.navigation.AppScreens
 
 sealed class MenuItem(val route: String, val icon: Int, val label: Int ) {
     companion object {
-        val items = listOf(Home, Explore, Write, Settings)
+        val items = listOf(Explore, Write, Settings)
     }
-    data object Home: MenuItem(
-        AppScreens.Home.route,
-        R.drawable.ic_home,
-        R.string.nav_home,
-    )
 
     data object Explore: MenuItem(
         AppScreens.Explore.route,
