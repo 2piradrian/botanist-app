@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.profile
 
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -53,11 +54,19 @@ fun ProfileScreen(
     val posts by viewModel.posts.collectAsState()
     val selectedPost by viewModel.selectedPost.collectAsState()
     val userProfile by viewModel.userProfile.collectAsState()
+    val error by viewModel.error.collectAsState()
 
     val isShowingMainScreen by viewModel.isShowingMainScreen.collectAsState()
 
     LaunchedEffect(true) {
         viewModel.getUserProfile(session)
+    }
+
+    LaunchedEffect(error) {
+        if (error != 0) {
+            Toast.makeText(context, context.getString(error), Toast.LENGTH_LONG).show()
+        }
+        viewModel.changeErrorState()
     }
 
     BackHandler {

@@ -3,6 +3,7 @@ package com.twopiradrian.botanist.ui.screens.profile
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.domain.entity.UserEntity
@@ -24,6 +25,13 @@ class ProfileViewModel: ViewModel() {
 
     private val _userProfile = MutableStateFlow<UserEntity?>(null)
     val userProfile: StateFlow<UserEntity?> = _userProfile
+
+    private val _error = MutableStateFlow(0)
+    val error: StateFlow<Int> = _error
+
+    fun changeErrorState() {
+        _error.value = 0
+    }
 
     fun setIsShowingMainScreen(b: Boolean){
         _isShowingMainScreen.value = b
@@ -56,11 +64,15 @@ class ProfileViewModel: ViewModel() {
                 else{
                     _selectedPost.value = null
                 }
+                return@launch
             }
 
             result?.error?.let {
-                Log.d("ExploreViewModel", "Error getting user profile")
+                _error.value = result.error
+                return@launch
             }
+
+            _error.value = R.string.server_error
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.twopiradrian.botanist.ui.screens.write
 
 import android.content.Context
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -53,6 +54,7 @@ fun WriteScreen(
     val categoryInput by viewModel.category.collectAsState()
     val imageInput by viewModel.image.collectAsState()
     val contentInput by viewModel.content.collectAsState()
+    val error by viewModel.error.collectAsState()
 
     val isButtonEnabled by viewModel.isButtonEnabled.collectAsState()
 
@@ -60,6 +62,13 @@ fun WriteScreen(
         if (isShowingThePost) {
             viewModel.setIsShowingThePost(false)
         }
+    }
+
+    LaunchedEffect(error) {
+        if (error != 0) {
+            Toast.makeText(context, context.getString(error), Toast.LENGTH_LONG).show()
+        }
+        viewModel.changeErrorState()
     }
 
     LaunchedEffect(postedSuccessfully) {

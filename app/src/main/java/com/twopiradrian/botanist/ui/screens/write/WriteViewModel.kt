@@ -92,8 +92,6 @@ class WriteViewModel: ViewModel() {
         viewModelScope.launch {
             val base64Image = image?.let { convertUriToBase64(it, context) } ?: ""
 
-            Log.d("WriteViewModel", "imagen len: ${base64Image.length}")
-
             val result = try {
                 val request = Create.Request(title, description, category, base64Image, content)
                 Create().invoke(tokens.accessToken, request)
@@ -102,15 +100,17 @@ class WriteViewModel: ViewModel() {
                 null
             }
 
-            Log.d("WriteViewModel", "createPost: $result")
-
             result?.response?.let {
                 _postedSuccessfully.value = true
+                return@launch
             }
 
             result?.error?.let {
-                _error.value = it
+                _error.value = result.error
+                return@launch
             }
+
+            _error.value = R.string.server_error
         }
     }
 
