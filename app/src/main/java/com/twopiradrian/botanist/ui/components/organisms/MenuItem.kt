@@ -1,6 +1,5 @@
-package com.twopiradrian.botanist.ui.components.navigation
+package com.twopiradrian.botanist.ui.components.organisms
 
-import android.provider.ContactsContract.Profile
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width

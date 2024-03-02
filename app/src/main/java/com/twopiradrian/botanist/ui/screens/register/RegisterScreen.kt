@@ -23,11 +23,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.core.app.Constants.Companion.MAX_WIDTH
-import com.twopiradrian.botanist.ui.components.button.MainButton
+import com.twopiradrian.botanist.ui.components.atoms.MainButton
 import com.twopiradrian.botanist.ui.app.InputData
 import com.twopiradrian.botanist.ui.app.InputType
-import com.twopiradrian.botanist.ui.components.input.OutlinedInput
-import com.twopiradrian.botanist.ui.components.text.TitleMedium
+import com.twopiradrian.botanist.ui.components.atoms.OutlinedInput
+import com.twopiradrian.botanist.ui.components.atoms.TitleMedium
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.layout.FormLayout
 import androidx.lifecycle.viewmodel.compose.viewModel

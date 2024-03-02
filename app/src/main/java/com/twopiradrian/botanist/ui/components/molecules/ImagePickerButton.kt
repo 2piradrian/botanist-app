@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.components.button
+package com.twopiradrian.botanist.ui.components.molecules
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -17,7 +17,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.ui.app.ImageData
-import com.twopiradrian.botanist.ui.components.text.AnimatedError
+import com.twopiradrian.botanist.ui.components.atoms.SecondaryButton
+import com.twopiradrian.botanist.ui.components.atoms.AnimatedError
 
 @Composable
 fun ImagePickerButton(

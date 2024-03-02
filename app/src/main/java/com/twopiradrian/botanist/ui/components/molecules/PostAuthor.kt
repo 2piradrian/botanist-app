@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.components.text
+package com.twopiradrian.botanist.ui.components.molecules
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

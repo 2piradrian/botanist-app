@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.components.text
+package com.twopiradrian.botanist.ui.components.atoms
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.padding

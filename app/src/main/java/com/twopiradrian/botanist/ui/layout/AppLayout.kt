@@ -12,11 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
-import com.twopiradrian.botanist.ui.components.navigation.AppNavigationBar
-import com.twopiradrian.botanist.ui.components.navigation.AppNavigationRail
-import com.twopiradrian.botanist.ui.components.navigation.AppPermanentNavigation
+import com.twopiradrian.botanist.ui.components.organisms.AppNavigationBar
+import com.twopiradrian.botanist.ui.components.organisms.AppNavigationRail
+import com.twopiradrian.botanist.ui.components.organisms.AppPermanentNavigation
 
 @Composable
 fun AppLayout(

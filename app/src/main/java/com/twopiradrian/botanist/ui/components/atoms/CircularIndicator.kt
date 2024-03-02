@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.components.loading
+package com.twopiradrian.botanist.ui.components.atoms
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

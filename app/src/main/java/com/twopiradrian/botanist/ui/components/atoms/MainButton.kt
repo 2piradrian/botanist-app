@@ -1,5 +1,6 @@
-package com.twopiradrian.botanist.ui.components.button
+package com.twopiradrian.botanist.ui.components.atoms
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,33 +15,27 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun SecondaryButton(
-    isEnabled: Boolean = true,
-    onClick: () -> Unit,
-    text: Int
+fun MainButton(
+    isEnabled: Boolean, @StringRes text: Int, onClick: () -> Unit
 ) {
     Button(
-        onClick = {
-            onClick()
-        },
         enabled = isEnabled,
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
-            contentColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+            containerColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary
         ),
-        elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 0.dp,
-            pressedElevation = 0.dp,
-            disabledElevation = 0.dp
-        ),
-        modifier = Modifier.height(52.dp).fillMaxWidth(),
-        shape = RoundedCornerShape(8.dp)
+        shape = MaterialTheme.shapes.medium,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(45.dp)
     ) {
         Text(
             text = stringResource(text),
             style = MaterialTheme.typography.bodyMedium.copy(
-                color = MaterialTheme.colorScheme.onBackground
+                color = MaterialTheme.colorScheme.onPrimary
             ),
         )
     }
 }
+

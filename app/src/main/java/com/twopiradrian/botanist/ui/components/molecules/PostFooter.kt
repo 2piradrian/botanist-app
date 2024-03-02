@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.screens.post.components
+package com.twopiradrian.botanist.ui.components.molecules
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -11,8 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.twopiradrian.botanist.R
-import com.twopiradrian.botanist.ui.components.button.PlainButton
-import com.twopiradrian.botanist.ui.components.text.PostAuthor
+import com.twopiradrian.botanist.ui.components.atoms.PlainButton
+import com.twopiradrian.botanist.ui.components.molecules.PostAuthor
 
 @Composable
 fun PostFooter(

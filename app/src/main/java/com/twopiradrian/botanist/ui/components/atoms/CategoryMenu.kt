@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.twopiradrian.botanist.ui.components.input
+package com.twopiradrian.botanist.ui.components.atoms
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +22,6 @@ import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.ui.app.InputData
 import com.twopiradrian.botanist.ui.app.InputType
-import com.twopiradrian.botanist.ui.components.text.AnimatedError
 
 @Composable
 fun CategoryMenu(

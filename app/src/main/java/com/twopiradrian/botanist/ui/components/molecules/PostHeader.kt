@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.screens.post.components
+package com.twopiradrian.botanist.ui.components.molecules
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.domain.data.Categories
-import com.twopiradrian.botanist.ui.components.text.TitleLarge
+import com.twopiradrian.botanist.ui.components.atoms.TitleLarge
 
 @Composable
 fun PostHeader(

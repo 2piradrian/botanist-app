@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.components.button
+package com.twopiradrian.botanist.ui.components.atoms
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.PaddingValues

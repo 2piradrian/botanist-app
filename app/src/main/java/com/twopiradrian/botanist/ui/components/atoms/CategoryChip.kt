@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.components.chips
+package com.twopiradrian.botanist.ui.components.atoms
 
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.Text

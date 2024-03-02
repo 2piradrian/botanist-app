@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.components.image
+package com.twopiradrian.botanist.ui.components.atoms
 
 import android.net.Uri
 import androidx.compose.foundation.layout.fillMaxWidth

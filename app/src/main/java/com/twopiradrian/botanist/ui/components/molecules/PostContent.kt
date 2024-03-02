@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.components.text
+package com.twopiradrian.botanist.ui.components.molecules
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -12,12 +12,7 @@ fun PostContent(
     content: String
 ) {
     Text(
-        text = if (content == "") {
-                    stringResource(id = R.string.placeholder_content)
-               }
-               else{
-                    content
-               },
+        text = if (content == "") stringResource(id = R.string.placeholder_content) else content ,
         style = MaterialTheme.typography.bodyMedium
     )
 }

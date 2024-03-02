@@ -23,15 +23,15 @@ import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.ui.app.NavigationType
-import com.twopiradrian.botanist.ui.components.chips.CategoryFilterChip
-import com.twopiradrian.botanist.ui.components.text.TitleLarge
+import com.twopiradrian.botanist.ui.components.atoms.CategoryFilterChip
+import com.twopiradrian.botanist.ui.components.atoms.TitleLarge
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.twopiradrian.botanist.core.navigation.AppScreens
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.ui.app.ContentType
-import com.twopiradrian.botanist.ui.components.card.PostCard
-import com.twopiradrian.botanist.ui.components.loading.CircularIndicator
+import com.twopiradrian.botanist.ui.components.molecules.PostCard
+import com.twopiradrian.botanist.ui.components.atoms.CircularIndicator
 import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
 

@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.components.card
+package com.twopiradrian.botanist.ui.components.molecules
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -23,7 +22,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.twopiradrian.botanist.domain.entity.PostEntity
-import com.twopiradrian.botanist.ui.components.text.PostAuthor
 
 @Composable
 fun PostCard(
@@ -31,19 +29,14 @@ fun PostCard(
     post: PostEntity
 ) {
     Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(400.dp)
-            .padding(vertical = 8.dp),
+        modifier = Modifier.fillMaxWidth().height(400.dp).padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
         ),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 1.dp
         ),
-        onClick = {
-            onClick()
-        }
+        onClick = { onClick() }
     ) {
         Column(
             modifier = Modifier.fillMaxSize().padding(8.dp),
@@ -61,7 +54,7 @@ fun PostCard(
 }
 
 @Composable
-fun CardHeader(
+private fun CardHeader(
     author: String
 ) {
     PostAuthor(
@@ -75,7 +68,7 @@ fun CardHeader(
 }
 
 @Composable
-fun CardContent(
+private fun CardContent(
     title: String,
     description: String,
     imageUrl: String
