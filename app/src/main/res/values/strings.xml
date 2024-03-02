@@ -67,8 +67,18 @@
     // Api Errors
     <string name="server_error">Vuelve a intentarlo más tarde</string>
     <string name="network_error">No se pudo conectar al servidor</string>
-    <string name="user_not_found">Usuario no encontrado</string>
-    <string name="user_already_exists">El usuario ya existe</string>
+    <string name="api_missing_fields">Campos faltantes</string>
+    <string name="api_invalid_fields">Campos inválidos</string>
+    <string name="api_internal_error">Error interno</string>
+    <string name="api_invalid_password">Contraseña inválida</string>
+    <string name="api_unknown_error">Error desconocido</string>
+    <string name="api_user_already_exists">El usuario ya existe</string>
+    <string name="api_user_not_found">Usuario no encontrado</string>
+    <string name="api_post_not_found">Publicación no encontrada</string>
+    <string name="api_unauthorized">No autorizado</string>
+    <string name="api_disconnected">Desconectado</string>
+    <string name="api_cant_follow_yourself">No puedes seguirte a ti mismo</string>
+    <string name="api_cant_like_your_own_post">No puedes darle "me gusta" a tu propia publicación</string>
 
     // Inputs
     <string name="email_label">Correo electrónico</string>
