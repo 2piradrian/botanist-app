@@ -14,9 +14,9 @@ import androidx.compose.ui.unit.dp
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.domain.entity.UserEntity
 import com.twopiradrian.botanist.ui.components.atoms.PostImage
-import com.twopiradrian.botanist.ui.components.molecules.PostContent
-import com.twopiradrian.botanist.ui.components.molecules.PostFooter
-import com.twopiradrian.botanist.ui.components.molecules.PostHeader
+import com.twopiradrian.botanist.ui.components.atoms.PostContent
+import com.twopiradrian.botanist.ui.components.organisms.PostFooter
+import com.twopiradrian.botanist.ui.components.organisms.PostHeader
 
 // This screen have no navController because it's used as a detail screen
 @Composable

@@ -1,4 +1,4 @@
-package com.twopiradrian.botanist.ui.components.molecules
+package com.twopiradrian.botanist.ui.components.atoms
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
