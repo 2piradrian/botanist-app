@@ -168,7 +168,6 @@ class ExploreViewModel : ViewModel() {
             result?.error?.let {
                 _page.value = null
             }
-
         }
     }
 
@@ -177,7 +176,7 @@ class ExploreViewModel : ViewModel() {
             val tokens = session.getTokens()
             val user = session.getUser()
 
-            val request = GetProfile.Request(user.id)
+            val request = GetProfile.Request(profile = user.id, includePosts = false)
             val result = try {
                 GetProfile().invoke(tokens, request)
             } catch (e: Exception) {

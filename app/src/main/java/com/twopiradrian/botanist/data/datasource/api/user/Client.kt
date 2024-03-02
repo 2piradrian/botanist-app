@@ -1,8 +1,6 @@
 package com.twopiradrian.botanist.data.datasource.api.user
 
-import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.domain.usecase.user.FollowUser
-import com.twopiradrian.botanist.domain.usecase.user.GetFeed
 import com.twopiradrian.botanist.domain.usecase.user.GetProfile
 import com.twopiradrian.botanist.domain.usecase.user.LikePost
 import retrofit2.http.Body
@@ -14,17 +12,11 @@ import retrofit2.http.Query
 
 interface Client {
 
-    @GET("user/get-feed")
-    suspend fun getFeed(
-        @Header("Authorization") token: String,
-        @Query("page") page: Int,
-        @Query("pageSize") pageSize: Int,
-    ): GetFeed.Response
-
-    @POST("user/get-profile")
+    @GET("user/get-profile")
     suspend fun getProfile(
         @Header("Authorization") token: String,
-        @Body request: GetProfile.Request
+        @Query ("profile") profile: String,
+        @Query ("includePosts") includePosts: Boolean
     ): GetProfile.Response
 
 

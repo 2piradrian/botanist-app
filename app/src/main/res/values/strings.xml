@@ -54,6 +54,7 @@
     <string name="profile_posts">Posteos</string>
     <string name="profile_followers">Seguidores</string>
     <string name="profile_following">Siguiendo</string>
+    <string name="profile_people">Personas</string>
 
     // Categories
     <string name="category_tools">Herramientas</string>

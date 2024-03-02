@@ -1,16 +1,18 @@
 package com.twopiradrian.botanist.ui.screens.profile
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -30,7 +32,10 @@ import com.twopiradrian.botanist.ui.components.text.TitleLarge
 import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.data.datasource.app.Session
-import com.twopiradrian.botanist.ui.components.text.TitleMedium
+import com.twopiradrian.botanist.domain.entity.PostEntity
+import com.twopiradrian.botanist.ui.components.card.PostCard
+import com.twopiradrian.botanist.ui.components.profile.ProfileCounter
+import com.twopiradrian.botanist.ui.screens.post.PostScreen
 
 @Composable
 fun ProfileScreen(
@@ -42,22 +47,45 @@ fun ProfileScreen(
     val context = LocalContext.current
     val session = Session.also { it.init(context) }
 
+    val scrollState = rememberLazyListState()
+
+    val posts by viewModel.posts.collectAsState()
+    val selectedPost by viewModel.selectedPost.collectAsState()
+    val userProfile by viewModel.userProfile.collectAsState()
+
+    val isShowingMainScreen by viewModel.isShowingMainScreen.collectAsState()
+
     LaunchedEffect(true) {
         viewModel.getUserProfile(session)
     }
 
-    val userProfile by viewModel.userProfile.collectAsState()
+    BackHandler {
+        if (!isShowingMainScreen) {
+            viewModel.setIsShowingMainScreen(true)
+        }
+    }
 
     AppLayout(navController = navController, navigationType = navigationType) {
         AdaptiveLayout(
             screen1 = {
                 Body(
                     viewModel = viewModel,
+                    scrollState = scrollState,
                     userProfile = userProfile,
+                    posts = posts
                 )
             },
-            screen2 = {},
+            screen2 = {
+                PostScreen(
+                    post = selectedPost,
+                    user = userProfile,
+                    isPreview = false,
+                    likeFunction = {},
+                    followFunction = {}
+                )
+            },
             contentType = contentType,
+            isShowingMainScreen = isShowingMainScreen
         )
     }
 }
@@ -66,53 +94,73 @@ fun ProfileScreen(
 fun Body(
     modifier: Modifier = Modifier,
     viewModel: ProfileViewModel,
-    userProfile: UserEntity?
+    scrollState: LazyListState,
+    userProfile: UserEntity?,
+    posts: List<PostEntity>,
 ) {
     Column(
         modifier = modifier.fillMaxSize(),
     ) {
-        TitleLarge(textId = R.string.profile_title)
-        Spacer(modifier = Modifier.height(16.dp))
-        Column(
+        LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_account),
-                contentDescription = null,
-                modifier = Modifier.size(100.dp)
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row (
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(text = "${userProfile?.posts?.size ?: 0}")
-                    Text(text = "Posts")
-                }
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(text = "${userProfile?.followers?.size ?: 0}")
-                    Text(text = "Followers")
-                }
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text(text = "${userProfile?.following?.size ?: 0}")
-                    Text(text = "Following")
+            state = scrollState
+        ){
+            item {
+                TitleLarge(textId = R.string.profile_title)
+                ProfileHeader(
+                    userProfile = userProfile
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+            posts.forEach {
+                item {
+                    PostCard(
+                        onClick = {
+                            viewModel.setSelectedPost(it)
+                            viewModel.setIsShowingMainScreen(false) }, post = it
+                    )
                 }
             }
         }
+    }
+}
 
+@Composable
+fun ProfileHeader(
+    userProfile: UserEntity?
+) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top
+    ) {
+        Icon(
+            painter = painterResource(id = R.drawable.ic_account),
+            contentDescription = null,
+            modifier = Modifier.size(100.dp)
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            ProfileCounter(
+                modifier = Modifier.weight(1f),
+                textId = R.string.profile_posts,
+                count = userProfile?.posts?.size
+            )
+            ProfileCounter(
+                modifier = Modifier.weight(1f),
+                textId = R.string.profile_followers,
+                count = userProfile?.followers?.size
+            )
+            ProfileCounter(
+                modifier = Modifier.weight(1f),
+                textId = R.string.profile_following,
+                count = userProfile?.following?.size
+            )
+        }
     }
 }

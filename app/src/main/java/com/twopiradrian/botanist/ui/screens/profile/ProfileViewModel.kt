@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.twopiradrian.botanist.data.datasource.app.Session
+import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.domain.entity.UserEntity
 import com.twopiradrian.botanist.domain.usecase.user.GetProfile
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,15 +13,32 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel: ViewModel() {
 
+    private val _isShowingMainScreen = MutableStateFlow(true)
+    val isShowingMainScreen: StateFlow<Boolean> = _isShowingMainScreen
+
+    private val _selectedPost = MutableStateFlow<PostEntity?>(null)
+    val selectedPost: StateFlow<PostEntity?> = _selectedPost
+
+    private val _posts = MutableStateFlow(emptyList<PostEntity>())
+    val posts: StateFlow<List<PostEntity>> = _posts
+
     private val _userProfile = MutableStateFlow<UserEntity?>(null)
     val userProfile: StateFlow<UserEntity?> = _userProfile
+
+    fun setIsShowingMainScreen(b: Boolean){
+        _isShowingMainScreen.value = b
+    }
+
+    fun setSelectedPost(post: PostEntity){
+        _selectedPost.value = post
+    }
 
     suspend fun getUserProfile(session: Session) {
         viewModelScope.launch {
             val tokens = session.getTokens()
             val user = session.getUser()
 
-            val request = GetProfile.Request(user.id)
+            val request = GetProfile.Request(profile = user.id, includePosts = true)
             val result = try {
                 GetProfile().invoke(tokens, request)
             } catch (e: Exception) {
@@ -30,6 +48,14 @@ class ProfileViewModel: ViewModel() {
 
             result?.response?.let {
                 _userProfile.value = it.user
+                _posts.value = it.posts
+
+                if (it.posts.isNotEmpty()) {
+                    _selectedPost.value = it.posts[0]
+                }
+                else{
+                    _selectedPost.value = null
+                }
             }
 
             result?.error?.let {
