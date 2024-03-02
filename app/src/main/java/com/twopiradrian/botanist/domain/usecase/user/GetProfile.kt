@@ -1,10 +1,14 @@
 package com.twopiradrian.botanist.domain.usecase.user
 
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
+import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.data.repository.UserRepository
+import com.twopiradrian.botanist.domain.data.HTTPError
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.domain.entity.TokensEntity
 import com.twopiradrian.botanist.domain.entity.UserEntity
+import retrofit2.HttpException
 
 class GetProfile {
     private val repository: UserRepository = UserRepository()
@@ -28,11 +32,27 @@ class GetProfile {
         return try {
             val response = repository.getProfile(tokens.accessToken, request)
             Result(response = Response(user = response.user, posts = response.posts))
-        } catch (e: Exception) {
+        }
+        catch (e: Exception) {
             e.printStackTrace()
+            if (e is HttpException) {
+                val errorResponse = e.response()?.errorBody()?.string()
+                val errorJson = Gson().fromJson(errorResponse, HTTPError::class.java)
 
-            // TODO: Handle error
-            Result(error = 0)
+                if (errorJson != null) {
+                    when (errorJson.error) {
+                        "Internal error"        -> Result(error = R.string.server_error)
+                        else                    -> Result(error = R.string.server_error)
+                    }
+                }
+                else {
+                    Result(error = R.string.server_error)
+                }
+
+            }
+            else {
+                Result(error = R.string.server_error)
+            }
         }
     }
 }
