@@ -1,5 +1,6 @@
 package com.twopiradrian.botanist.ui.screens.explore
 
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -50,6 +51,7 @@ fun ExploreScreen(
     val scrollState = rememberLazyListState()
 
     val userProfile by viewModel.userProfile.collectAsState()
+    val error by viewModel.error.collectAsState()
 
     val posts by viewModel.posts.collectAsState()
     val page by viewModel.page.collectAsState()
@@ -67,6 +69,13 @@ fun ExploreScreen(
         onDispose {
             viewModel.resetPagination()
         }
+    }
+
+    LaunchedEffect(error) {
+        if (error != 0) {
+            Toast.makeText(context, context.getString(error), Toast.LENGTH_LONG).show()
+        }
+        viewModel.changeErrorState()
     }
 
     LaunchedEffect(true){

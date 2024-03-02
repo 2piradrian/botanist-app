@@ -3,6 +3,7 @@ package com.twopiradrian.botanist.ui.screens.explore
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.domain.entity.PostEntity
@@ -38,6 +39,13 @@ class ExploreViewModel : ViewModel() {
 
     private val _page = MutableStateFlow<Int?>(1)
     val page: StateFlow<Int?> = _page
+
+    private val _error = MutableStateFlow(0)
+    val error: StateFlow<Int> = _error
+
+    fun changeErrorState() {
+        _error.value = 0
+    }
 
     fun setIsShowingMainScreen(b: Boolean){
         _isShowingMainScreen.value = b
@@ -77,13 +85,18 @@ class ExploreViewModel : ViewModel() {
                     }
                     _userProfile.value = user.copy(likes = list)
                 }
+                return@launch
             }
 
             result?.error?.let {
-                Log.d("ExploreViewModel", "Error liking post")
+                _error.value = result.error
+                return@launch
             }
+
+            _error.value = R.string.server_error
         }
     }
+
 
     fun followUser(session: Session, post: PostEntity, user: UserEntity?){
         viewModelScope.launch {
@@ -110,11 +123,15 @@ class ExploreViewModel : ViewModel() {
                     }
                     _userProfile.value = user.copy(following = list)
                 }
+                return@launch
             }
 
             result?.error?.let {
-                Log.d("ExploreViewModel", "Error following user")
+                _error.value = result.error
+                return@launch
             }
+
+            _error.value = R.string.server_error
         }
     }
 
@@ -163,11 +180,16 @@ class ExploreViewModel : ViewModel() {
                 if (selectedPost == null) {
                     _selectedPost.value = it.posts.first()
                 }
+                return@launch
             }
 
             result?.error?.let {
+                _error.value = result.error
                 _page.value = null
+                return@launch
             }
+
+            _error.value = R.string.server_error
         }
     }
 
@@ -186,11 +208,16 @@ class ExploreViewModel : ViewModel() {
 
             result?.response?.let {
                 _userProfile.value = it.user
+                return@launch
             }
 
             result?.error?.let {
-                Log.d("ExploreViewModel", "Error getting user profile")
+                _error.value = result.error
+                _page.value = null
+                return@launch
             }
+
+            _error.value = R.string.server_error
         }
     }
 
