@@ -96,7 +96,7 @@ fun ExploreScreen(
     AppLayout(navController = navController, navigationType = navigationType) {
         AdaptiveLayout(
             screen1 = {
-                ExploreList(
+                Body(
                     viewModel = viewModel,
                     scrollState = scrollState,
                     categories = categories,
@@ -127,7 +127,7 @@ fun ExploreScreen(
 }
 
 @Composable
-fun ExploreList(
+private fun Body(
     modifier: Modifier = Modifier,
     scrollState: LazyListState,
     viewModel: ExploreViewModel,
