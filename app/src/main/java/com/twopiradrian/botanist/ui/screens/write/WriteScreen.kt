@@ -71,7 +71,7 @@ fun WriteScreen(
     AppLayout(navController = navController, navigationType = navigationType) {
         AdaptiveLayout(
             screen1 = {
-                PostForm(
+                Body(
                     viewModel = viewModel,
                     context = context,
                     session = session,
@@ -129,7 +129,7 @@ fun WriteScreen(
 }
 
 @Composable
-fun PostForm(
+private fun Body(
     modifier: Modifier = Modifier,
     viewModel: WriteViewModel,
     context: Context,
