@@ -28,7 +28,8 @@ class RefreshTokens {
         return try {
             val response = repository.refreshTokens(request = request)
             Result(response = Response(accessToken = response.accessToken, refreshToken = response.refreshToken))
-        } catch (e: Exception) {
+        }
+        catch (e: Exception) {
             e.printStackTrace()
             if (e is HttpException) {
                 val errorResponse = e.response()?.errorBody()?.string()
@@ -36,7 +37,7 @@ class RefreshTokens {
 
                 if (errorJson != null) {
                     when (errorJson.error) {
-                        "Internal error" -> Result(error = R.string.server_error) // Check all possible errors
+                        "Internal error" -> Result(error = R.string.server_error)
                         else             -> Result(error = R.string.server_error)
                     }
                 } else {

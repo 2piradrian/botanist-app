@@ -29,7 +29,8 @@ class Register {
         return try {
             val response = repository.register(request = request)
             Result(response = Response(message = response.message))
-        } catch (e: Exception) {
+        }
+        catch (e: Exception) {
             e.printStackTrace()
             if (e is HttpException) {
                 val errorResponse = e.response()?.errorBody()?.string()
@@ -37,9 +38,10 @@ class Register {
 
                 if (errorJson != null) {
                     when (errorJson.error) {
-                        "Internal error"        -> Result(error = R.string.server_error)
-                        "User already exists"   -> Result(error = R.string.user_already_exists)
-                        else                    -> Result(error = R.string.server_error)
+                        "Internal error"            -> Result(error = R.string.server_error)
+                        "Username already exists"   -> Result(error = R.string.api_username_already_exists)
+                        "Email already exists"      -> Result(error = R.string.api_email_already_exists)
+                        else                        -> Result(error = R.string.server_error)
                     }
                 } else {
                     Result(error = R.string.server_error)

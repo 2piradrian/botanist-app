@@ -72,7 +72,8 @@
     <string name="api_internal_error">Error interno</string>
     <string name="api_invalid_password">Contraseña inválida</string>
     <string name="api_unknown_error">Error desconocido</string>
-    <string name="api_user_already_exists">El usuario ya existe</string>
+    <string name="api_username_already_exists">El nombre de usuario ya existe</string>
+    <string name="api_email_already_exists">El correo electrónico ya está en uso</string>
     <string name="api_user_not_found">Usuario no encontrado</string>
     <string name="api_post_not_found">Publicación no encontrada</string>
     <string name="api_unauthorized">No autorizado</string>

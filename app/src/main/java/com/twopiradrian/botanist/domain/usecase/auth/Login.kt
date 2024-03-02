@@ -31,7 +31,8 @@ class Login {
         return try {
             val response = repository.login(request = request)
             Result(response = Response(user = response.user, tokens = response.tokens))
-        } catch (e: Exception) {
+        }
+        catch (e: Exception) {
             e.printStackTrace()
             if (e is HttpException) {
                 val errorResponse = e.response()?.errorBody()?.string()
@@ -39,11 +40,13 @@ class Login {
 
                 if (errorJson != null) {
                     when (errorJson.error) {
-                        "Internal error"        -> Result(error = R.string.server_error)
-                        "User already exists"   -> Result(error = R.string.user_already_exists)
-                        else                    -> Result(error = R.string.server_error)
+                        "Internal error"            -> Result(error = R.string.server_error)
+                        "User not found"            -> Result(error = R.string.api_user_not_found)
+                        "Invalid password"          -> Result(error = R.string.api_invalid_password)
+                        else                        -> Result(error = R.string.server_error)
                     }
-                } else {
+                }
+                else {
                     Result(error = R.string.server_error)
                 }
 
