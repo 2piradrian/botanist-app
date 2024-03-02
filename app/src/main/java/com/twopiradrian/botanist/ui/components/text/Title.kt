@@ -23,7 +23,8 @@ fun TitleLarge(
             ),
             modifier = Modifier.fillMaxWidth()
         )
-    } else {
+    }
+    else {
         Text(
             text = stringResource(id = textId ?: 0),
             style = MaterialTheme.typography.titleLarge.copy(
@@ -37,12 +38,23 @@ fun TitleLarge(
 
 @Composable
 fun TitleMedium(
-    @StringRes text: Int
+    @StringRes textId: Int? = null,
+    text: String? = null
+
 ) {
-    Text(
-        text = stringResource(id = text),
-        style = MaterialTheme.typography.titleMedium.copy(
-            color = MaterialTheme.colorScheme.onBackground
+    if (text != null) {
+        Text(
+            text = text,
+            style = MaterialTheme.typography.titleMedium.copy(
+                color = MaterialTheme.colorScheme.onBackground
+            )
         )
-    )
+    }
+    else {
+        Text(
+            text = stringResource(id = textId ?: 0), style = MaterialTheme.typography.titleMedium.copy(
+                color = MaterialTheme.colorScheme.onBackground
+            )
+        )
+    }
 }

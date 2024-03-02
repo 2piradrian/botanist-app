@@ -105,7 +105,7 @@ fun Body(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         FormLayout {
-            TitleMedium(text = R.string.login_title)
+            TitleMedium(textId = R.string.login_title)
             HorizontalDivider(
                 modifier = Modifier.padding(20.dp)
             )

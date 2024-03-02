@@ -51,6 +51,9 @@
 
     // Profile Activity
     <string name="profile_title">Perfil</string>
+    <string name="profile_posts">Posteos</string>
+    <string name="profile_followers">Seguidores</string>
+    <string name="profile_following">Siguiendo</string>
 
     // Categories
     <string name="category_tools">Herramientas</string>

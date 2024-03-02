@@ -105,7 +105,7 @@ fun Body(
         FormLayout(
             modifier = Modifier.fillMaxSize(),
         ) {
-            TitleMedium(text = R.string.register_title)
+            TitleMedium(textId = R.string.register_title)
             HorizontalDivider(
                 modifier = Modifier.padding(20.dp)
             )
