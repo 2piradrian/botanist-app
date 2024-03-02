@@ -35,6 +35,7 @@ import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.ui.components.molecules.PostCard
 import com.twopiradrian.botanist.ui.components.atoms.ProfileCounter
+import com.twopiradrian.botanist.ui.components.organisms.ProfileHeader
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
 
 @Composable
@@ -91,7 +92,7 @@ fun ProfileScreen(
 }
 
 @Composable
-fun Body(
+private fun Body(
     modifier: Modifier = Modifier,
     viewModel: ProfileViewModel,
     scrollState: LazyListState,
@@ -121,46 +122,6 @@ fun Body(
                     )
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun ProfileHeader(
-    userProfile: UserEntity?
-) {
-    Column(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_account),
-            contentDescription = null,
-            modifier = Modifier.size(100.dp)
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            ProfileCounter(
-                modifier = Modifier.weight(1f),
-                textId = R.string.profile_posts,
-                count = userProfile?.posts?.size
-            )
-            ProfileCounter(
-                modifier = Modifier.weight(1f),
-                textId = R.string.profile_followers,
-                count = userProfile?.followers?.size
-            )
-            ProfileCounter(
-                modifier = Modifier.weight(1f),
-                textId = R.string.profile_following,
-                count = userProfile?.following?.size
-            )
         }
     }
 }

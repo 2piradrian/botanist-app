@@ -32,6 +32,8 @@ import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.components.molecules.PostCard
 import com.twopiradrian.botanist.ui.components.atoms.CircularIndicator
+import com.twopiradrian.botanist.ui.components.molecules.ExploreFilters
+import com.twopiradrian.botanist.ui.components.organisms.ExploreHeader
 import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
 
@@ -140,25 +142,10 @@ fun ExploreList(
             state = scrollState
         ){
             item {
-                TitleLarge(
-                    textId = R.string.explore_title
+                ExploreHeader(
+                    categories = categories,
+                    viewModel = viewModel
                 )
-                LazyRow(
-                    modifier = Modifier.fillMaxWidth(),
-                ){
-                    Categories.entries.forEach {
-                        item {
-                            CategoryFilterChip(
-                                category = it,
-                                categories = categories,
-                                onClick = {
-                                    viewModel.setCategories(it)
-                                },
-                                modifier = Modifier.padding(end = 4.dp)
-                            )
-                        }
-                    }
-                }
             }
             if (posts.isEmpty()) {
                 item {

@@ -48,7 +48,7 @@ fun PostScreen(
 }
 
 @Composable
-fun Body(
+private fun Body(
     isPreview: Boolean = false,
     publishButton: @Composable () -> Unit? = {},
     likeFunction: () -> Unit = {},
