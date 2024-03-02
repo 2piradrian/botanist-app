@@ -8,7 +8,6 @@ import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.domain.data.HTTPError
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.domain.entity.TokensEntity
-import com.twopiradrian.botanist.domain.usecase.auth.RefreshTokens
 import retrofit2.HttpException
 
 class GetByCategories {

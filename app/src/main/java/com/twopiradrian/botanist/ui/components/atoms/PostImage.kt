@@ -1,6 +1,5 @@
 package com.twopiradrian.botanist.ui.components.atoms
 
-import android.net.Uri
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -10,7 +9,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.twopiradrian.botanist.R
-import com.twopiradrian.botanist.ui.app.ImageData
 
 @Composable
 fun PostImage(

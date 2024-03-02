@@ -5,11 +5,9 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -19,23 +17,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.core.navigation.AppScreens
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.domain.data.Categories
-import com.twopiradrian.botanist.ui.app.NavigationType
-import com.twopiradrian.botanist.ui.components.atoms.CategoryFilterChip
-import com.twopiradrian.botanist.ui.components.atoms.TitleLarge
-import com.twopiradrian.botanist.ui.layout.AppLayout
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.twopiradrian.botanist.core.navigation.AppScreens
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.ui.app.ContentType
-import com.twopiradrian.botanist.ui.components.molecules.PostCard
+import com.twopiradrian.botanist.ui.app.NavigationType
 import com.twopiradrian.botanist.ui.components.atoms.CircularIndicator
-import com.twopiradrian.botanist.ui.components.molecules.ExploreFilters
+import com.twopiradrian.botanist.ui.components.molecules.PostCard
 import com.twopiradrian.botanist.ui.components.organisms.ExploreHeader
 import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
+import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
 
 @Composable

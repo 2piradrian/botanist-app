@@ -2,9 +2,7 @@
     <string name="app_name">Botanist</string>
 
     // Navigation
-    <string name="nav_home">Inicio</string>
     <string name="nav_explore">Explorar</string>
-    <string name="nav_fav">Favoritos</string>
     <string name="nav_write">Escribir</string>
     <string name="nav_profile">Perfil</string>
 
@@ -20,7 +18,6 @@
     <string name="login_success">¡Hola de nuevo!</string>
 
     // Home Activity
-    <string name="home_title">Botanist</string>
 
     // Post Activity
     <string name="post_like">Me gusta</string>
@@ -41,11 +38,8 @@
     // Write Activity
     <string name="write_title">Escribir un post</string>
     <string name="write_post_title">Título</string>
-    <string name="write_post_category">Categoria</string>
     <string name="write_post_description">Descripción</string>
     <string name="write_post_content">Contenido</string>
-    <string name="write_post_image">Imagen</string>
-    <string name="write_post_image_button">Seleccionar imagen</string>
     <string name="write_post_button">Publicar</string>
     <string name="write_post_preview">Vista previa</string>
 
@@ -54,7 +48,6 @@
     <string name="profile_posts">Posteos</string>
     <string name="profile_followers">Seguidores</string>
     <string name="profile_following">Siguiendo</string>
-    <string name="profile_people">Personas</string>
 
     // Categories
     <string name="category_tools">Herramientas</string>
@@ -66,18 +59,11 @@
 
     // Api Errors
     <string name="server_error">Vuelve a intentarlo más tarde</string>
-    <string name="network_error">No se pudo conectar al servidor</string>
-    <string name="api_missing_fields">Campos faltantes</string>
     <string name="api_invalid_fields">Campos inválidos</string>
-    <string name="api_internal_error">Error interno</string>
     <string name="api_invalid_password">Contraseña inválida</string>
-    <string name="api_unknown_error">Error desconocido</string>
     <string name="api_username_already_exists">El nombre de usuario ya existe</string>
     <string name="api_email_already_exists">El correo electrónico ya está en uso</string>
     <string name="api_user_not_found">Usuario no encontrado</string>
-    <string name="api_post_not_found">Publicación no encontrada</string>
-    <string name="api_unauthorized">No autorizado</string>
-    <string name="api_disconnected">Desconectado</string>
     <string name="api_cant_follow_yourself">No puedes seguirte a ti mismo</string>
     <string name="api_cant_like_your_own_post">No puedes darle "me gusta" a tu propia publicación</string>
 
@@ -98,13 +84,9 @@
     <string name="error_invalid_username">Nombre de usuario inválido</string>
 
     <string name="error_title_short">Título muy corto</string>
-    <string name="error_title_long">Título muy largo</string>
     <string name="error_description_short">Descripción muy corta</string>
-    <string name="error_description_long">Descripción muy larga</string>
     <string name="error_content_short">Contenido muy corto</string>
-    <string name="error_content_long">Contenido muy largo</string>
 
     // UX
-    <string name="loading">Cargando…</string>
 
 </resources>

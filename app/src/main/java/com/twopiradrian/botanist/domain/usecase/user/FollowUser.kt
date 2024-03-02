@@ -6,7 +6,6 @@ import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.data.repository.UserRepository
 import com.twopiradrian.botanist.domain.data.HTTPError
 import com.twopiradrian.botanist.domain.entity.TokensEntity
-import com.twopiradrian.botanist.domain.usecase.auth.RefreshTokens
 import retrofit2.HttpException
 
 class FollowUser {

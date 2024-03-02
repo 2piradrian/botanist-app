@@ -1,7 +1,6 @@
 package com.twopiradrian.botanist.data.datasource.api.post
 
 import com.twopiradrian.botanist.core.helper.RetrofitHelper
-import com.twopiradrian.botanist.domain.data.Categories
 import com.twopiradrian.botanist.domain.usecase.post.Create
 import com.twopiradrian.botanist.domain.usecase.post.GetByCategories
 import kotlinx.coroutines.Dispatchers

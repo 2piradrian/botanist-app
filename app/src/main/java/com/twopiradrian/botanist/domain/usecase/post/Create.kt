@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName
 import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.data.repository.PostRepository
 import com.twopiradrian.botanist.domain.data.HTTPError
-import com.twopiradrian.botanist.domain.usecase.auth.RefreshTokens
 import retrofit2.HttpException
 
 

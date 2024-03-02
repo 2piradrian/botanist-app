@@ -1,6 +1,5 @@
 package com.twopiradrian.botanist.data.repository
 
-import android.util.Log
 import com.twopiradrian.botanist.data.datasource.api.post.PostAPIService
 import com.twopiradrian.botanist.domain.repository.PostRepository
 import com.twopiradrian.botanist.domain.usecase.post.Create

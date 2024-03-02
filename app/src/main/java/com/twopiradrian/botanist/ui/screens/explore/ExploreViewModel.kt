@@ -1,6 +1,5 @@
 package com.twopiradrian.botanist.ui.screens.explore
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.twopiradrian.botanist.R

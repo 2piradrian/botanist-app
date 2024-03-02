@@ -2,41 +2,33 @@ package com.twopiradrian.botanist.ui.screens.profile
 
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.twopiradrian.botanist.R
+import com.twopiradrian.botanist.data.datasource.app.Session
+import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.domain.entity.UserEntity
 import com.twopiradrian.botanist.ui.app.ContentType
 import com.twopiradrian.botanist.ui.app.NavigationType
 import com.twopiradrian.botanist.ui.components.atoms.TitleLarge
+import com.twopiradrian.botanist.ui.components.molecules.PostCard
+import com.twopiradrian.botanist.ui.components.organisms.ProfileHeader
 import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 import com.twopiradrian.botanist.ui.layout.AppLayout
-import com.twopiradrian.botanist.data.datasource.app.Session
-import com.twopiradrian.botanist.domain.entity.PostEntity
-import com.twopiradrian.botanist.ui.components.molecules.PostCard
-import com.twopiradrian.botanist.ui.components.atoms.ProfileCounter
-import com.twopiradrian.botanist.ui.components.organisms.ProfileHeader
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
 
 @Composable

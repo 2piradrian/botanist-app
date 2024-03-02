@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.twopiradrian.botanist.domain.entity.TokensEntity
 import com.twopiradrian.botanist.domain.entity.UserDataEntity
-import com.twopiradrian.botanist.domain.entity.UserEntity
 
 object Session {
     private lateinit var sharedPreferences: SharedPreferences
