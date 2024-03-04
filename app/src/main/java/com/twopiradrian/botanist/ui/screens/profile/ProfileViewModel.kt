@@ -6,6 +6,7 @@ import com.twopiradrian.botanist.R
 import com.twopiradrian.botanist.data.datasource.app.Session
 import com.twopiradrian.botanist.domain.entity.PostEntity
 import com.twopiradrian.botanist.domain.entity.UserEntity
+import com.twopiradrian.botanist.domain.usecase.post.Delete
 import com.twopiradrian.botanist.domain.usecase.user.GetProfile
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -38,6 +39,32 @@ class ProfileViewModel: ViewModel() {
 
     fun setSelectedPost(post: PostEntity){
         _selectedPost.value = post
+    }
+
+    suspend fun deletePost(session: Session, postId: String){
+        viewModelScope.launch {
+            val tokens = session.getTokens()
+            val request = Delete.Request(postId)
+
+            val result = try {
+                Delete().invoke(tokens.accessToken, request)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                null
+            }
+
+            result?.response?.let {
+                getUserProfile(session)
+                return@launch
+            }
+
+            result?.error?.let {
+                _error.value = result.error
+                return@launch
+            }
+
+            _error.value = R.string.server_error
+        }
     }
 
     suspend fun getUserProfile(session: Session) {

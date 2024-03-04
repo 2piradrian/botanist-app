@@ -30,6 +30,8 @@ import com.twopiradrian.botanist.ui.components.organisms.ProfileHeader
 import com.twopiradrian.botanist.ui.layout.AdaptiveLayout
 import com.twopiradrian.botanist.ui.layout.AppLayout
 import com.twopiradrian.botanist.ui.screens.post.PostScreen
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun ProfileScreen(
@@ -82,8 +84,12 @@ fun ProfileScreen(
                     post = selectedPost,
                     user = userProfile,
                     isPreview = false,
-                    likeFunction = {},
-                    followFunction = {}
+                    deleteFunction = {
+                        GlobalScope.launch {
+                            viewModel.deletePost(session, selectedPost?.id ?: "")
+                        }
+                    },
+                    canDelete = true
                 )
             },
             contentType = contentType,
