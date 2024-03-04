@@ -97,6 +97,7 @@ fun WriteScreen(
             screen2 = {
                 PostScreen(
                     isPreview = true,
+                    tabletMode = (contentType == ContentType.LIST_WITH_DETAILS),
                     publishButton = {
                         SecondaryButton(
                             isEnabled = isButtonEnabled,

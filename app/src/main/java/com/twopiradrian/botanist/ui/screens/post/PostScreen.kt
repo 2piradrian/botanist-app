@@ -37,6 +37,7 @@ import com.twopiradrian.botanist.ui.components.organisms.PostHeader
 fun PostScreen(
     modifier: Modifier = Modifier,
     isPreview: Boolean = false,
+    tabletMode: Boolean = false,
     publishButton: @Composable () -> Unit? = {},
     likeFunction: () -> Unit = {},
     followFunction: () -> Unit = {},
@@ -54,6 +55,7 @@ fun PostScreen(
     ) {
         Body(
             isPreview = isPreview,
+            tabletMode = tabletMode,
             publishButton = publishButton,
             likeFunction = likeFunction,
             followFunction = followFunction,
@@ -69,6 +71,7 @@ fun PostScreen(
 @Composable
 private fun Body(
     isPreview: Boolean = false,
+    tabletMode: Boolean = false,
     publishButton: @Composable () -> Unit? = {},
     likeFunction: () -> Unit = {},
     followFunction: () -> Unit = {},
@@ -115,7 +118,7 @@ private fun Body(
                 liked = user?.likes?.contains(post.id) ?: false,
                 author = post.authorUsername,
             )
-            if (isPreview) {
+            if (isPreview && !tabletMode) {
                 Spacer(
                     modifier = Modifier.height(12.dp)
                 )
