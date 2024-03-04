@@ -176,7 +176,7 @@ class ExploreViewModel : ViewModel() {
                 _posts.value = postList + it.posts
                 _page.value = it.nextPage
 
-                if (selectedPost == null) {
+                if (selectedPost == null && it.posts.isNotEmpty()) {
                     _selectedPost.value = it.posts.first()
                 }
                 return@launch
